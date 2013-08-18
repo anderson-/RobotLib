@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Robot: Código-Fonte de Robot.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Robot
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.1.2 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;Arquivos</span></a></li>
+      <li><a href="globals.html"><span>Arquivos&#160;Membros</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Todos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Arquivos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de Tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores enumerados</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigas</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Definições e Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Páginas</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Robot.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="Robot_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef ROBOT_H</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ROBOT_H</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Debug_8h.html">Debug.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Device_8h.html">Device.h</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Connection_8h.html">Connection.h</a>&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="RadioConnection_8h.html">RadioConnection.h</a>&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Clock_8h.html">Clock.h</a>&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="classRobot.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRobot.html" title="A classe Robot representa um robô simples,seja ele autonomo ou não, o mesmo possui dispositivos (Devi...">Robot</a> {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="classRobot.html#a4fc7c70ae20623f05e06f2ecb388b6c4">   46</a></span>&#160;  <a class="code" href="classRobot.html#a4fc7c70ae20623f05e06f2ecb388b6c4" title="Construtor padrão.">Robot</a>() : devices(NULL),</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            state(NULL),</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            nDevices(0), </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            connections(NULL),</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            nConnections(0),</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            busy(false),</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="classRobot.html#aef6f636eb10e6b4998a3b1859ca71500" title="Buffer para o recebimento das mensagens, o mesmo é encaminhado para messageReceived.">buffer</a>(NULL) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="classRobot.html#a3a965a448c5d9d95ecb2bf6c5ee668b9" title="Adiciona um novo dispositivo.">addDevice</a>(<a class="code" href="classRobot.html#a9bc655119fd6d2864c6aca60403c282d">clock</a>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classRobot.html#a6c7ee2437ae5427a19f2de4903ca0df9" title="Inicializa o robô.">begin</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classRobot.html#af59eb38f118092bd3369876a2aaac2d1" title="Adiciona uma nova conexão.">addConnection</a>(<a class="code" href="classConnection.html">Connection</a> &amp; c);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classRobot.html#a3a965a448c5d9d95ecb2bf6c5ee668b9" title="Adiciona um novo dispositivo.">addDevice</a>(<a class="code" href="classDevice.html">Device</a> &amp; d);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classRobot.html#a1c344a898d9da75010438fd78d3827b2" title="Verifica se existe algum dispositivo ocupado.">isBusy</a>();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classRobot.html#aa50d73cd1109a70133af442674ed3a1a" title="Realiza o escalonamento de todas as funções principais do robô.">step</a>(); <span class="comment">//swap</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classRobot.html#aaad55dfa6b3daedd9670bec46dc079f1" title="Realiza todas as ações pendentes e retorna.">perform</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="code" href="classRobot.html#af96d177958b4b3087aba65d1cc4c06b6">  106</a></span>&#160;  <a class="code" href="classClock.html">Clock</a> &amp; <a class="code" href="classRobot.html#af96d177958b4b3087aba65d1cc4c06b6" title="TODO.">getClock</a> (){<span class="keywordflow">return</span> <a class="code" href="classRobot.html#a9bc655119fd6d2864c6aca60403c282d">clock</a>;}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classRobot.html#a8a3ee7a354fd9ce641a4c4ce95c172ac" title="Função executada quando uma mensagem é recebida por alguma conexão.">messageReceived</a>(<span class="keyword">const</span> uint8_t * data, uint8_t size, uint8_t connectionID) = 0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="comment">//virtual void messageReceived(const uint8_t * data, uint8_t size, Connection &amp; c) = 0;</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classRobot.html#aaa0c932d862aed7556b068ebb70a917a" title="Função executada quando um dispositivo anteriormente ocupado torna-se disponível.">deviceReady</a> (<a class="code" href="classDevice.html">Device</a> &amp; d) = 0;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classRobot.html#a75cfdd8e35e007abe24ffae66a8ecf1d" title="Função responsável por tomar novas decisões com base nos sensores e atuadores do robô.">think</a>() = 0;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  uint8_t <a class="code" href="classRobot.html#a6ef66669b08d6c17e249d946eec87f2d" title="Obtem o tamanho da lista de conexões disponiveis.">getConnectionListSize</a>();</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  uint8_t <a class="code" href="classRobot.html#a09b95280d83027439d27749ba2c0bc4a" title="Obtem o tamanho da lista de dispositivos disponiveis.">getDeviceListSize</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <a class="code" href="classConnection.html">Connection</a> * <a class="code" href="classRobot.html#a6e96ee4f33816dd91cd76d950e134b53" title="Obtem uma determinada conexão.">getConnection</a>(uint8_t index);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <a class="code" href="classDevice.html">Device</a> * <a class="code" href="classRobot.html#af5e50d99c051a6b25dfc561535111444" title="Obtem um determinado dispositivo.">getDevice</a>(uint8_t index);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  </div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="code" href="classRobot.html#aef6f636eb10e6b4998a3b1859ca71500">  166</a></span>&#160;  uint8_t * <a class="code" href="classRobot.html#aef6f636eb10e6b4998a3b1859ca71500" title="Buffer para o recebimento das mensagens, o mesmo é encaminhado para messageReceived.">buffer</a>; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="code" href="classRobot.html#a59d051cd870745df59aefaa2cda15b8a">  168</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classTimedDevice.html">TimedDevice</a>;</div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="code" href="classRobot.html#a9bc655119fd6d2864c6aca60403c282d">  169</a></span>&#160;  <span class="keyword">static</span> <a class="code" href="classClock.html">Clock</a> &amp; <a class="code" href="classRobot.html#a9bc655119fd6d2864c6aca60403c282d">clock</a>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <a class="code" href="classDevice.html">Device</a> ** devices;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordtype">bool</span> * state;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  uint8_t nDevices;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <a class="code" href="classConnection.html">Connection</a> ** connections;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  uint8_t nConnections;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordtype">bool</span> busy;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;};</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00184"></a><span class="lineno"><a class="code" href="classQuickRobot.html">  184</a></span>&#160;<span class="keyword">class </span><a class="code" href="classQuickRobot.html" title="A classe QuickRobot.">QuickRobot</a> : <span class="keyword">public</span> <a class="code" href="classRobot.html" title="A classe Robot representa um robô simples,seja ele autonomo ou não, o mesmo possui dispositivos (Devi...">Robot</a> {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00186"></a><span class="lineno"><a class="code" href="classQuickRobot.html#ab571e3c3f3d5e26ac9b3a8b28ad164eb">  186</a></span>&#160;  <a class="code" href="classQuickRobot.html#ab571e3c3f3d5e26ac9b3a8b28ad164eb">QuickRobot</a>(<span class="keywordtype">void</span> (*<a class="code" href="classQuickRobot.html#a936a04970e2fe8694256a70816b697f6" title="Função responsável por tomar novas decisões com base nos sensores e atuadores do robô.">think</a>)(), <span class="keywordtype">void</span> (*devReady)(<a class="code" href="classDevice.html">Device</a> &amp; d), <span class="keywordtype">void</span> (*msgRec)(<span class="keyword">const</span> uint8_t*, uint8_t, uint8_t)) : pthink(<a class="code" href="classQuickRobot.html#a936a04970e2fe8694256a70816b697f6" title="Função responsável por tomar novas decisões com base nos sensores e atuadores do robô.">think</a>), pmrec(msgRec), pdevr(devReady) {};</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  </div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="code" href="classQuickRobot.html#a936a04970e2fe8694256a70816b697f6">  188</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classQuickRobot.html#a936a04970e2fe8694256a70816b697f6" title="Função responsável por tomar novas decisões com base nos sensores e atuadores do robô.">think</a>(){</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">if</span> (pthink){</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;      pthink();</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  };</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  </div>
+<div class="line"><a name="l00194"></a><span class="lineno"><a class="code" href="classQuickRobot.html#a95d490eb2e580d362b99eb6c90927256">  194</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classQuickRobot.html#a95d490eb2e580d362b99eb6c90927256" title="Função executada quando um dispositivo anteriormente ocupado torna-se disponível.">deviceReady</a> (<a class="code" href="classDevice.html">Device</a> &amp; d){</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span> (pdevr){</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      pdevr(d);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  </div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="code" href="classQuickRobot.html#a45d8775809f63483f84138767bc33e1d">  200</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classQuickRobot.html#a45d8775809f63483f84138767bc33e1d" title="Função executada quando uma mensagem é recebida por alguma conexão.">messageReceived</a>(<span class="keyword">const</span> uint8_t * data, uint8_t size, uint8_t connectionID){</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">if</span> (pmrec){</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;      pmrec(data,size,connectionID);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  void (*pthink)();</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  void (*pmrec)(<span class="keyword">const</span> uint8_t*, uint8_t, uint8_t);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  void (*pdevr)(<a class="code" href="classDevice.html">Device</a> &amp; d);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;};</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* ROBOT_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="preprocessor"></span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado em Quinta, 1 de Agosto de 2013 10:42:21 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.1.2
+</small></address>
+</body>
+</html>
