@@ -9,27 +9,22 @@
 #include <RadioRobot.h>
 
 /**
- * Sketch para ser usado no RoboF, com radio, dispositivos basicos
- * e mais serial para debug da comunicaçao.
+ * Sketch para ser usado no RoboF, com dispositivos basicos
+ * e mais serial para debug da comunicaçao. (sem radio)
  */
 
 class RoboF : public RadioRobot {
 public:
-  RoboF() : radio(7,8,false),
-            serial(Serial,9600),
+  RoboF() : serial(Serial,9600),
             hbridge(5,6,9,10),
             compass()
             {
-    addConnection(radio);  //connID = 0
-    addConnection(serial); //connID = 1
-    //adicionado por padrao: 
-    //addDevice(clock)     //devID = 0
-    addDevice(hbridge);    //devID = 1
-    addDevice(compass);    //devID = 2
+    addConnection(serial);
+    addDevice(hbridge);
+    addDevice(compass);
   }
 
 private:
-  RadioConnection radio;
   SerialConnection serial;
   
   HBridge hbridge;

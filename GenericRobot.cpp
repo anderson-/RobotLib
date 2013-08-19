@@ -1,13 +1,11 @@
 /**
- * @file Compass.h
- * @author Diego Lee <diegolee7@gmail.com>
+ * @file GenericRobot.cpp
  * @author Anderson Antunes <anderson.utf@gmail.com>
  * @version 1.0
  *
  * @section LICENSE
  *
- * Copyright (C) 2013 by Diego Lee <diegolee7@gmail.com>
- *                       Anderson Antunes <anderson.utf@gmail.com>
+ * Copyright (C) 2013 by Anderson Antunes <anderson.utf@gmail.com>
  * 
  * RobotLib is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,28 +22,28 @@
  *
  */
 
-#ifndef COMPASS_H
-#define COMPASS_H
+#include "GenericRobot.h"
+#include "LED.h"
+#include "HBridge.h"
+#include "Compass.h"
 
-#include <stdint.h>
-#include "../HMC5883L/HMC5883L.h"
-#include "Device.h"
-
-class Compass : public Device {
-public:
-  Compass();
-  void begin();
-  void stop();
-  void reset();
-  void update();
-  bool isReady();
-  uint8_t get(uint8_t * buffer, uint8_t size);
-  void set (const uint8_t * data, uint8_t size = 1);
-private:
-  HMC5883L compass;
-  int angleInt;
-  int error;
-};
-
-#endif  /* COMPASS_H */
-
+Device * GenericRobot::createNew(uint8_t id, const uint8_t * data, uint8_t size){
+	switch (id){
+		case DEV_LED:
+			{
+				uint8_t pin = data[0];
+				return new LED(pin);
+			}
+		case DEV_HBRIDGE:
+			{
+				if (size == 4){
+					return new HBridge(data[0], data[1], data[2], data[3]);
+				}
+			}
+		case DEV_COMPASS:
+			{
+				return new Compass();
+			}
+	}
+	return NULL;
+}

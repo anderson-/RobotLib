@@ -39,6 +39,9 @@ LED::LED(uint8_t pin) : TimedDevice(false, true),
 
 void LED::begin(){
   pinMode(_pin, OUTPUT);
+  //digitalWrite(_pin, true);
+  //delay(10);
+  digitalWrite(_pin, false);
   clock.add(_timer);
 }
 

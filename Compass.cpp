@@ -1,12 +1,12 @@
 /**
  * @file Compass.cpp
- * @author DiegoLee <diegolee7@gmail.com>
+ * @author Diego Lee <diegolee7@gmail.com>
  * @author Anderson Antunes <anderson.utf@gmail.com>
  * @version 1.0
  *
  * @section LICENSE
  *
- * Copyright (C) 2013 by DiegoLee <diegolee7@gmail.com>
+ * Copyright (C) 2013 by Diego Lee <diegolee7@gmail.com>
  *                       Anderson Antunes <anderson.utf@gmail.com>
  * 
  * RobotLib is free software: you can redistribute it and/or modify

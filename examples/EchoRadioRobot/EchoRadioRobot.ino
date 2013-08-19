@@ -6,15 +6,15 @@
 #include <SerialConnection.h>
 
 /**
- * Sketch para teste da comunicaçao serial entre PC-Arduino.
+ * Sketch para teste da comunicaçao via radio entre PC-Robo.
  * 
- * Tudo que eh recebido pela porta serial eh enviado de volta.
+ * Tudo que eh recebido pelo radio eh enviado de volta.
  */
 
 class MyRobot : public Robot {
 public:
-  MyRobot() : serial(Serial,9600) {
-    addConnection(serial);
+  MyRobot() : radio(7,8,true) {
+    addConnection(radio);
   }
 
   void messageReceived(const uint8_t * data, uint8_t size, Connection & connection){
@@ -29,8 +29,7 @@ public:
     
   }
 private:
-  //Adicionar os dispositivos aqui
-  SerialConnection serial;
+  RadioConnection radio;
 };
 
 MyRobot robot;

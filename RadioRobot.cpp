@@ -177,6 +177,7 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
             tmpBuffer[2] = id;
             tmpBuffer[3] = length;
             connection.sendMessage(tmpBuffer,4);
+            device->begin();
           }
           offset+=length;
         }

@@ -1,13 +1,11 @@
 /**
- * @file Compass.h
- * @author Diego Lee <diegolee7@gmail.com>
+ * @file GenericRobot.h
  * @author Anderson Antunes <anderson.utf@gmail.com>
  * @version 1.0
  *
  * @section LICENSE
  *
- * Copyright (C) 2013 by Diego Lee <diegolee7@gmail.com>
- *                       Anderson Antunes <anderson.utf@gmail.com>
+ * Copyright (C) 2013 by Anderson Antunes <anderson.utf@gmail.com>
  * 
  * RobotLib is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,28 +22,21 @@
  *
  */
 
-#ifndef COMPASS_H
-#define COMPASS_H
+#ifndef GENERIC_ROBOT_H
+#define	GENERIC_ROBOT_H
 
 #include <stdint.h>
-#include "../HMC5883L/HMC5883L.h"
-#include "Device.h"
+#include "RadioRobot.h"
 
-class Compass : public Device {
+typedef enum { DEV_LED = 1, DEV_HBRIDGE, DEV_COMPASS } DEVICE;
+
+class GenericRobot : public RadioRobot {
 public:
-  Compass();
-  void begin();
-  void stop();
-  void reset();
-  void update();
-  bool isReady();
-  uint8_t get(uint8_t * buffer, uint8_t size);
-  void set (const uint8_t * data, uint8_t size = 1);
+  GenericRobot() {};
+  Device * createNew(uint8_t id, const uint8_t * data, uint8_t size);
 private:
-  HMC5883L compass;
-  int angleInt;
-  int error;
+
 };
 
-#endif  /* COMPASS_H */
+#endif	/* GENERIC_ROBOT_H */
 
