@@ -29,7 +29,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Gerado por Doxygen 1.8.1.2 -->
+<!-- Gerado por Doxygen 1.8.2 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 </script>
@@ -85,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <a href="#pub-methods">Métodos Públicos</a> &#124;
 <a href="classConnection-members.html">Lista de todos os Membros</a>  </div>
   <div class="headertitle">
-<div class="title">Referência da Classe Connection</div>  </div>
+<div class="title">Referência da Classe Connection<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -101,18 +101,22 @@ Diagrama de Hierarquia para Connection:</div>
 </map>
  </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Métodos Públicos</h2></td></tr>
 <tr class="memitem:a2e5c7e67928fac5fea45e56c11d1ed31"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnection.html#a2e5c7e67928fac5fea45e56c11d1ed31">begin</a> ()=0</td></tr>
 <tr class="memdesc:a2e5c7e67928fac5fea45e56c11d1ed31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa a conexão.  <a href="#a2e5c7e67928fac5fea45e56c11d1ed31"></a><br/></td></tr>
+<tr class="separator:a2e5c7e67928fac5fea45e56c11d1ed31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd5ee426481b2aca2903d96f6f807341"><td class="memItemLeft" align="right" valign="top">virtual uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnection.html#acd5ee426481b2aca2903d96f6f807341">available</a> ()=0</td></tr>
 <tr class="memdesc:acd5ee426481b2aca2903d96f6f807341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se existe alguma mensagem disponivel.  <a href="#acd5ee426481b2aca2903d96f6f807341"></a><br/></td></tr>
+<tr class="separator:acd5ee426481b2aca2903d96f6f807341"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa03e632ed6b812d915fd40dccd18a080"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnection.html#aa03e632ed6b812d915fd40dccd18a080">sendMessage</a> (const uint8_t *data, uint8_t size)=0</td></tr>
 <tr class="memdesc:aa03e632ed6b812d915fd40dccd18a080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envia uma mensagem.  <a href="#aa03e632ed6b812d915fd40dccd18a080"></a><br/></td></tr>
+<tr class="separator:aa03e632ed6b812d915fd40dccd18a080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a315961bc8327f38e4f4e09b832fc60a1"><td class="memItemLeft" align="right" valign="top">virtual uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnection.html#a315961bc8327f38e4f4e09b832fc60a1">receiveMessage</a> (uint8_t *buffer, uint8_t size)=0</td></tr>
 <tr class="memdesc:a315961bc8327f38e4f4e09b832fc60a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recebe uma mensagem.  <a href="#a315961bc8327f38e4f4e09b832fc60a1"></a><br/></td></tr>
+<tr class="separator:a315961bc8327f38e4f4e09b832fc60a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2>Métodos</h2>
+<h2 class="groupheader">Métodos</h2>
 <a class="anchor" id="acd5ee426481b2aca2903d96f6f807341"></a>
 <div class="memitem">
 <div class="memproto">
@@ -137,7 +141,7 @@ Métodos Públicos</h2></td></tr>
 <p>Verifica se existe alguma mensagem disponivel. </p>
 <dl class="section return"><dt>Retorna</dt><dd>O numero de bytes disponiveis, se possivel. </dd></dl>
 
-<p>Implementado por <a class="el" href="classRadioConnection.html#a970ffcf382ae789c22023857c5c48d83">RadioConnection</a> e <a class="el" href="classSerialConnection.html#a91aa59d8f0b913e91dc4ddcde8e42519">SerialConnection</a>.</p>
+<p>Implementado por <a class="el" href="classSerialConnection.html#a91aa59d8f0b913e91dc4ddcde8e42519">SerialConnection</a> e <a class="el" href="classRadioConnection.html#a970ffcf382ae789c22023857c5c48d83">RadioConnection</a>.</p>
 
 </div>
 </div>
@@ -164,7 +168,7 @@ Métodos Públicos</h2></td></tr>
 
 <p>Inicializa a conexão. </p>
 
-<p>Implementado por <a class="el" href="classRadioConnection.html#a1deb37d098b17cfdf2c5c90e67a279aa">RadioConnection</a> e <a class="el" href="classSerialConnection.html#a6022b91cdd0bc412d8aeda364c32ce21">SerialConnection</a>.</p>
+<p>Implementado por <a class="el" href="classSerialConnection.html#a6022b91cdd0bc412d8aeda364c32ce21">SerialConnection</a> e <a class="el" href="classRadioConnection.html#a1deb37d098b17cfdf2c5c90e67a279aa">RadioConnection</a>.</p>
 
 </div>
 </div>
@@ -210,7 +214,7 @@ Métodos Públicos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Retorna</dt><dd>O tamanho da mensagem recebida. </dd></dl>
 
-<p>Implementado por <a class="el" href="classRadioConnection.html#a6dc7c7b2a7c9b5d754d73f80516a37fc">RadioConnection</a> e <a class="el" href="classSerialConnection.html#ac72ec887122fe08fd389dc8724b31c63">SerialConnection</a>.</p>
+<p>Implementado por <a class="el" href="classSerialConnection.html#ac72ec887122fe08fd389dc8724b31c63">SerialConnection</a> e <a class="el" href="classRadioConnection.html#a6dc7c7b2a7c9b5d754d73f80516a37fc">RadioConnection</a>.</p>
 
 </div>
 </div>
@@ -256,7 +260,7 @@ Métodos Públicos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Retorna</dt><dd><code>TRUE</code> se a mensagem foi entregue corretamente. </dd></dl>
 
-<p>Implementado por <a class="el" href="classRadioConnection.html#a1bc09119403b84463264710ea40f5a4c">RadioConnection</a> e <a class="el" href="classSerialConnection.html#ac98733956090bc3eaa628d156f06ef5d">SerialConnection</a>.</p>
+<p>Implementado por <a class="el" href="classSerialConnection.html#ac98733956090bc3eaa628d156f06ef5d">SerialConnection</a> e <a class="el" href="classRadioConnection.html#a1bc09119403b84463264710ea40f5a4c">RadioConnection</a>.</p>
 
 </div>
 </div>
@@ -266,9 +270,9 @@ Métodos Públicos</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Quinta, 1 de Agosto de 2013 10:42:21 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Sábado, 24 de Agosto de 2013 03:07:44 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.1.2
+</a> 1.8.2
 </small></address>
 </body>
 </html>

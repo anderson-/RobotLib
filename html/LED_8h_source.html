@@ -29,7 +29,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Gerado por Doxygen 1.8.1.2 -->
+<!-- Gerado por Doxygen 1.8.2 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 </script>
@@ -83,60 +83,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="title">LED.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="LED_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* </span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:   LED.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Author: Anderson Antunes</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created on July 18, 2013, 4:09 PM</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef LED_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LED_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Clock_8h.html">Clock.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="code" href="classLED.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLED.html">LED</a> : <span class="keyword">public</span> <a class="code" href="classTimedDevice.html">TimedDevice</a> {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="classLED.html#a4b8692dfdef842d0da59ac0644eb0e97">LED</a>(uint8_t pin);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a62e402841c861af9bb4eb679f5afc7d6" title="Inicializa o dispositivo.">begin</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a11f7b87c240eb671482a7af687b0737c" title="Interrompe o funcionamento do dispositivo.">stop</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a8b85489d7bcfc54252f28abc0a5ba3cf" title="Redefine o estado do dispositivo.">reset</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#ad615d612f5b0c7dac4dde5245f191382" title="Atualiza o estado atual do dispositivo.">update</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classLED.html#a36cc9854b853baba06ee3d1e74339c6f" title="Verifica se o dispositivo está pronto para receber novos comandos ou leituras.">isReady</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  uint8_t <span class="keyword">get</span>(uint8_t * buffer, uint8_t size);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">void</span> <span class="keyword">set</span> (<span class="keyword">const</span> uint8_t * data, uint8_t size = 1);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a126e67dbf18aae87b9e43daed89eb837">setState</a>(uint8_t state);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a27e6e12de55a23dc87644c0c28972e51">toggle</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">/*</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  uint8_t getState();</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">  void blink(uint16_t period, uint8_t times);</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  void setPeriod(uint16_t period);</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  uint16_t getPeriod();</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  void setBlinkTimes(uint8_t times);</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  uint8_t getBlinkTimes();</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  void setPWM(bool pwm);</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">  */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  uint8_t pin;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  uint16_t period;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="Clock_8h.html#ae646ae1606f53892b8112edd8f8ab903">Timer</a> timer;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  uint8_t times;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  uint8_t state;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">bool</span> pwm;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">bool</span> blink;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">bool</span> increase;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* LED_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span></div>
+<a href="LED_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef LED_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LED_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Clock_8h.html">Clock.h</a>&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="classLED.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLED.html">LED</a> : <span class="keyword">public</span> <a class="code" href="classTimedDevice.html">TimedDevice</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="classLED.html#a4b8692dfdef842d0da59ac0644eb0e97">LED</a>(uint8_t pin);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a62e402841c861af9bb4eb679f5afc7d6" title="Inicializa o dispositivo.">begin</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a11f7b87c240eb671482a7af687b0737c" title="Interrompe o funcionamento do dispositivo.">stop</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a8b85489d7bcfc54252f28abc0a5ba3cf" title="Redefine o estado do dispositivo.">reset</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#ad615d612f5b0c7dac4dde5245f191382" title="Atualiza o estado atual do dispositivo.">update</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classLED.html#a36cc9854b853baba06ee3d1e74339c6f" title="Verifica se o dispositivo está pronto para receber novos comandos ou leituras.">isReady</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  uint8_t <span class="keyword">get</span>(uint8_t * buffer, uint8_t size);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">void</span> <span class="keyword">set</span> (<span class="keyword">const</span> uint8_t * data, uint8_t size = 1);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a126e67dbf18aae87b9e43daed89eb837">setState</a>(uint8_t state);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a27e6e12de55a23dc87644c0c28972e51">toggle</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  uint8_t <a class="code" href="classLED.html#ac2003f82c3aa7eafee2e95a790ca8549">getState</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#aae1edcf4dd4a353a867ae0043cf0a7c7">blink</a>(uint16_t period, uint8_t times);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#ab657582648d1b5f488d1a67e615a5e50">setPeriod</a>(uint16_t period);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  uint16_t <a class="code" href="classLED.html#a02184f5f15fac9fd237d7a95d3e8b7ec">getPeriod</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#a3b3d64d836947492ef8f8320327b6674">setBlinkTimes</a>(uint8_t times);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  uint8_t <a class="code" href="classLED.html#a017d73ffbe5db1159e7b7d4e4e8d5370">getBlinkTimes</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLED.html#ab63f595aca673a34fe0c9ae2d94349c1">setPWM</a>(<span class="keywordtype">bool</span> pwm);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  uint8_t _pin;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  uint16_t _period;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="Clock_8h.html#ae646ae1606f53892b8112edd8f8ab903">Timer</a> _timer;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  uint8_t _times;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  uint8_t _state;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">bool</span> _pwm;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">bool</span> _blink;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">bool</span> _increase;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* LED_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Quinta, 1 de Agosto de 2013 10:42:21 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Sábado, 24 de Agosto de 2013 03:07:44 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.1.2
+</a> 1.8.2
 </small></address>
 </body>
 </html>

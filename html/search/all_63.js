@@ -9,5 +9,6 @@ var searchData=
   ['compass_2ecpp',['Compass.cpp',['../Compass_8cpp.html',1,'']]],
   ['compass_2eh',['Compass.h',['../Compass_8h.html',1,'']]],
   ['connection',['Connection',['../classConnection.html',1,'']]],
-  ['connection_2eh',['Connection.h',['../Connection_8h.html',1,'']]]
+  ['connection_2eh',['Connection.h',['../Connection_8h.html',1,'']]],
+  ['createnew',['createNew',['../classGenericRobot.html#a4eac111dafabbfb130ca988e06a18808',1,'GenericRobot::createNew()'],['../classRadioRobot.html#ae52a4b2243df9d55238cfaa7be2e302d',1,'RadioRobot::createNew()']]]
 ];

@@ -28,7 +28,22 @@
 #include <stdint.h>
 #include "Robot.h"
 
-typedef enum { STOP = 1, ECHO, PRINT, GET, SET, ADD, RESET, DONE, NO_OP, ALL = 222, FREE_RAM} CMD;
+/**
+ * Comandos possíveis do protocolo de comunicação.
+ */
+typedef enum {
+	STOP = 1, 	/**< Comando */
+	ECHO,		/**< Comando */
+	PRINT,		/**< Comando */
+	GET,		/**< Comando */
+	SET,		/**< Comando */
+	ADD,		/**< Comando */
+	RESET,		/**< Comando */
+	DONE,		/**< Comando */
+	NO_OP,		/**< Comando */
+	ALL = 222,	/**< ID */
+	FREE_RAM	/**< ID */
+} CMD;
 
 class RadioRobot : public Robot {
 public:
