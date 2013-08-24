@@ -29,7 +29,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Gerado por Doxygen 1.8.1.2 -->
+<!-- Gerado por Doxygen 1.8.2 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 </script>
@@ -83,55 +83,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="title">Device.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="Device_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* </span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:   Device.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Author: Anderson Antunes</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created on July 15, 2013, 1:03 PM</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef DEVICE_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DEVICE_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="classDevice.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDevice.html">Device</a> {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="classDevice.html#a6a343295a9f8df6dd4aa52c622a8e876" title="Construtor padrão.">Device</a>(<span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a463598bce318556c79bfc0f26b38f7d3">isEffector</a>, <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a848bce229a669a4e7531bce2b6b24154">isSensor</a> = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a463598bce318556c79bfc0f26b38f7d3">isEffector</a>();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a848bce229a669a4e7531bce2b6b24154">isSensor</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  uint8_t <a class="code" href="classDevice.html#a7b20d7fdcab77062810a0a254e978c5e">getID</a>();  </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a0dc99b16a220489d787a1cbcef4875d9" title="Inicializa o dispositivo.">begin</a>() = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a22430f274658b04c280b5cc2d53aa1e4" title="Interrompe o funcionamento do dispositivo.">stop</a>() = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a6e43162e890cb40eafb923b0c94d167a" title="Redefine o estado do dispositivo.">reset</a>() = 0;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a7e5226b6341b1cf2ec04a5913b97becc" title="Atualiza o estado atual do dispositivo.">update</a>() = 0;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a30065df084d450dbaae9d68215e01e6f" title="Verifica se o dispositivo está pronto para receber novos comandos ou leituras.">isReady</a>() = 0;</div>
+<a href="Device_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef DEVICE_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DEVICE_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="classDevice.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDevice.html">Device</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classDevice.html#a6a343295a9f8df6dd4aa52c622a8e876" title="Construtor padrão.">Device</a>(<span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a463598bce318556c79bfc0f26b38f7d3">isEffector</a>, <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a848bce229a669a4e7531bce2b6b24154">isSensor</a> = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a463598bce318556c79bfc0f26b38f7d3">isEffector</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a848bce229a669a4e7531bce2b6b24154">isSensor</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  uint8_t <a class="code" href="classDevice.html#a7b20d7fdcab77062810a0a254e978c5e">getID</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a0dc99b16a220489d787a1cbcef4875d9" title="Inicializa o dispositivo.">begin</a>() = 0;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a22430f274658b04c280b5cc2d53aa1e4" title="Interrompe o funcionamento do dispositivo.">stop</a>() = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a6e43162e890cb40eafb923b0c94d167a" title="Redefine o estado do dispositivo.">reset</a>() = 0;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">virtual</span> uint8_t <span class="keyword">get</span>(uint8_t * buffer, uint8_t size) = 0;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <span class="keyword">set</span> (<span class="keyword">const</span> uint8_t * data, uint8_t size = 1) = 0;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keyword">static</span> uint8_t ID;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">bool</span> effector;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordtype">bool</span> sensor;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* DEVICE_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDevice.html#a7e5226b6341b1cf2ec04a5913b97becc" title="Atualiza o estado atual do dispositivo.">update</a>() = 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDevice.html#a30065df084d450dbaae9d68215e01e6f" title="Verifica se o dispositivo está pronto para receber novos comandos ou leituras.">isReady</a>() = 0;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keyword">virtual</span> uint8_t <span class="keyword">get</span>(uint8_t * buffer, uint8_t size) = 0;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <span class="keyword">set</span> (<span class="keyword">const</span> uint8_t * data, uint8_t size = 1) = 0;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keyword">static</span> uint8_t ID;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  uint8_t id;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">bool</span> effector;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordtype">bool</span> sensor;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* DEVICE_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Quinta, 1 de Agosto de 2013 10:42:21 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Sábado, 24 de Agosto de 2013 03:07:44 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.1.2
+</a> 1.8.2
 </small></address>
 </body>
 </html>

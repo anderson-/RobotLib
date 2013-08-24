@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quickrobot',['QuickRobot',['../classQuickRobot.html',1,'QuickRobot'],['../classQuickRobot.html#ab571e3c3f3d5e26ac9b3a8b28ad164eb',1,'QuickRobot::QuickRobot()']]]
+  ['quickrobot',['QuickRobot',['../classQuickRobot.html',1,'QuickRobot'],['../classQuickRobot.html#ab43c04a584a584f332119137f0b51c43',1,'QuickRobot::QuickRobot()']]]
 ];

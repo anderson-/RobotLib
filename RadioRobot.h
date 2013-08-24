@@ -28,7 +28,27 @@
 #include <stdint.h>
 #include "Robot.h"
 
-typedef enum { STOP = 1, ECHO, PRINT, GET, SET, ADD, RESET, DONE, RUN, NO_OP, FAIL, ALL = 222, FREE_RAM, SYSTEM, BEGIN, END } CMD;
+/**
+ * Comandos possíveis do protocolo de comunicação.
+ */
+typedef enum { 
+	STOP = 1,	/**< Comando */
+	ECHO,		/**< Comando */
+	PRINT, 		/**< Comando */
+	GET, 		/**< Comando */
+	SET, 		/**< Comando */
+	ADD, 		/**< Comando */
+	RESET, 		/**< Comando */
+	DONE, 		/**< Comando */
+	RUN, 		/**< Comando */
+	NO_OP, 		/**< Comando */
+	FAIL, 		/**< Comando */
+	ALL = 222, 	/**< ID */
+	FREE_RAM, 	/**< ID */
+	SYSTEM, 	/**< ID */
+	BEGIN, 		/**< ID */
+	END 		/**< ID */
+} CMD;
 
 typedef bool (*ActionFunc)(Device **, uint8_t, Connection &, const uint8_t *, uint8_t);
 
