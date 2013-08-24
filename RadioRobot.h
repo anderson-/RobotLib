@@ -28,17 +28,33 @@
 #include <stdint.h>
 #include "Robot.h"
 
-typedef enum { STOP = 1, ECHO, PRINT, GET, SET, ADD, RESET, DONE, NO_OP, ALL = 222, FREE_RAM} CMD;
+typedef enum { STOP = 1, ECHO, PRINT, GET, SET, ADD, RESET, DONE, RUN, NO_OP, FAIL, ALL = 222, FREE_RAM, SYSTEM, BEGIN, END } CMD;
+
+typedef bool (*ActionFunc)(Device **, uint8_t, Connection &, const uint8_t *, uint8_t);
+
+typedef struct {
+  Device ** devices;
+  uint8_t nDevices;
+  Connection * connection;
+  ActionFunc function;
+} ActionParam;
 
 class RadioRobot : public Robot {
 public:
-  RadioRobot() {};
+  RadioRobot() : actions(NULL), nActions(0), running(NULL), nRunning(0) {};
+  void addAction (ActionFunc action);
   void messageReceived(const uint8_t * data, uint8_t size, Connection & connection);
   void deviceReady (Device & d){};
-  void think(){};
+  void think();
   virtual Device * createNew(uint8_t id, const uint8_t * data, uint8_t size) { return NULL; }
 private:
-
+  void startAction (ActionFunc action, const uint8_t * deviceList, uint8_t size, Connection & c, const uint8_t * data, uint8_t length);
+  void freeParam (ActionParam ** p);
+private:
+  ActionFunc * actions;
+  uint8_t nActions;
+  ActionParam ** running;
+  uint8_t nRunning;
 };
 
 #endif	/* RADIO_ROBOT_H */
