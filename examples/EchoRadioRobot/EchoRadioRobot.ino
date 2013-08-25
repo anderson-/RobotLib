@@ -5,6 +5,8 @@
 #include <HMC5883L.h>
 #include <SerialConnection.h>
 
+#define ROBOT_ID  10
+
 /**
  * Sketch para teste da comunicaçao via radio entre PC-Robo.
  * 
@@ -13,7 +15,7 @@
 
 class MyRobot : public Robot {
 public:
-  MyRobot() : radio(7,8,true) {
+  MyRobot() : radio(7,8,ROBOT_ID,true) {
     addConnection(radio);
   }
 

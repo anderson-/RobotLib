@@ -8,6 +8,9 @@
 #include <Compass.h>
 #include <RadioRobot.h>
 
+#define ROBOT_ID  10
+
+
 /**
  * Sketch para ser usado no RoboF, com radio, dispositivos basicos
  * e mais serial para debug da comunicaçao.
@@ -15,7 +18,7 @@
 
 class RoboF : public RadioRobot {
 public:
-  RoboF() : radio(7,8,false),
+  RoboF() : radio(7,8,ROBOT_ID,false),
             serial(Serial,9600),
             hbridge(5,6,9,10),
             compass()

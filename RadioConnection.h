@@ -33,7 +33,7 @@
 
 class RadioConnection : public Connection {
 public:
-  RadioConnection(uint8_t pin, uint8_t SPI_SS, bool isMaster = false);
+  RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t id, bool isMaster = false);
   bool isMaster();
   
   void begin();
@@ -44,6 +44,7 @@ public:
   uint8_t receiveMessage(uint8_t * buffer, uint8_t size);
 private:
   RF24 radio;
+  uint8_t id;
   bool master;
   bool isAvailable;
 };

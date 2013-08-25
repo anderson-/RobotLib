@@ -6,7 +6,9 @@
 #include <RadioRobot.h>
 #include <LED.h>
 
-RadioConnection rf(9,10,true);
+#define ROBOT_ID  10
+
+RadioConnection rf(7,8,ROBOT_ID,true);
 
 RadioRobot robo;
 
