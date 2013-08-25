@@ -28,7 +28,7 @@
 #include <stdint.h>
 #include "RadioRobot.h"
 
-typedef enum { DEV_LED = 1, DEV_HBRIDGE, DEV_COMPASS } DEVICE;
+typedef enum { DEV_LED = 1, DEV_HBRIDGE, DEV_COMPASS, DEV_REFLECT, DEV_PROX } DEVICE;
 
 class GenericRobot : public RadioRobot {
 public:

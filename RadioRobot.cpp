@@ -275,6 +275,7 @@ void RadioRobot::startAction (ActionFunc action, const uint8_t * deviceList, uin
   uint8_t i, id;
   if (!action) return;
   ActionParam * p = NULL;
+  //verifica se existe um local vazio
   for (i = 0; i < nRunning; i++){
     if (!running[i]){
       p = running[i];
@@ -283,14 +284,17 @@ void RadioRobot::startAction (ActionFunc action, const uint8_t * deviceList, uin
   }
   
   if (!p){
-    running = (ActionParam**)check(realloc(running,(nRunning+1)*sizeof(ActionParam*)));
-    running[nRunning] = (ActionParam*)check(malloc(sizeof(ActionParam)));
-    p = running[nRunning];
-    i = nRunning;
-    nRunning++;
+    //se não tem um local vazio realoca o vetor de ações em execução
+    if (i == nRunning){
+      running = (ActionParam**)check(realloc(running,(nRunning+1)*sizeof(ActionParam*)));
+      nRunning++;
+    }
+    //aloca a struct para a ação
+    running[i] = (ActionParam*)check(malloc(sizeof(ActionParam)));
+    p = running[i];
   }
   id = i;
-  //preenche
+  //preenche a struct
   p->function = action;
   p->connection = &c;
   p->devices = (Device**)check(malloc(size*sizeof(Device*)));
@@ -298,7 +302,9 @@ void RadioRobot::startAction (ActionFunc action, const uint8_t * deviceList, uin
     p->devices[i] = getDevice(deviceList[i]);
   }
   p->nDevices = size;
+  //executa para definir valores estaticos da finção
   p->function(p->devices, p->nDevices, c, data, length);
+  //envia <DONE> <RUN> <id> <1> <BEGIN> TODO melhorar isso =(
   buffer[0] = DONE;
   buffer[1] = RUN;
   buffer[2] = id;
@@ -308,12 +314,12 @@ void RadioRobot::startAction (ActionFunc action, const uint8_t * deviceList, uin
 }
 
 void RadioRobot::freeParam (ActionParam ** p){
-  if (!p) return;
-  *p = NULL;
-  //desaloca devices
-  //free(*p->devices->devices);
+  if (!*p) return;
+  //desaloca vetor de dispositivos
+  free((*p)->devices);
   //desaloca struct
-  
+  free(*p);
+  *p = NULL;
 }
 
 void RadioRobot::addAction (ActionFunc action){

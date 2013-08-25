@@ -32,22 +32,23 @@
  * Comandos possíveis do protocolo de comunicação.
  */
 typedef enum { 
-	STOP = 1,	/**< Comando */
-	ECHO,		/**< Comando */
-	PRINT, 		/**< Comando */
-	GET, 		/**< Comando */
-	SET, 		/**< Comando */
-	ADD, 		/**< Comando */
-	RESET, 		/**< Comando */
-	DONE, 		/**< Comando */
-	RUN, 		/**< Comando */
-	NO_OP, 		/**< Comando */
-	FAIL, 		/**< Comando */
-	ALL = 222, 	/**< ID */
-	FREE_RAM, 	/**< ID */
-	SYSTEM, 	/**< ID */
-	BEGIN, 		/**< ID */
-	END 		/**< ID */
+	STOP = 1,	/**< <1\STOP> <ID/ALL> */
+	ECHO,		/**< <2\ECHO> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	PRINT, 		/**< <3\PRINT> <CONN_ID/ALL> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	GET, 		/**< <4\GET> <DEV_ID/ALL/FREE_RAM> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	SET, 		/**< <5\SET> <DEV_ID> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	ADD, 		/**< <6\ADD> <DEV_SID> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	RESET, 		/**< <7\RESET> <ID/ALL/SYSTEM> */
+	DONE, 		/**< <8\DONE> <CMD> <ID> <LENGTH> || <DONE> <RUN> <ID> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	RUN, 		/**< <9\ECHO> <N_DEVICES> <DEVICE_ID_0> ... <DEVICE_ID_N-1> <LENGTH> <DATA_0> ... <DATA_LEN-1> */
+	NO_OP, 		/**< <10\NO_OP> */
+	FAIL, 		/**< <11\FAIL> <CMD> <ID> <LENGTH> */
+	
+	ALL = 222, 	/**< Command <STOP/PRINT/GET/RESET> arg. */
+	FREE_RAM, 	/**< Command <GET> arg. */
+	SYSTEM, 	/**< Command <RESET> arg. */
+	BEGIN, 		/**< Command <RUN> arg. */
+	END 		/**< Command <RUN> arg. */
 } CMD;
 
 typedef bool (*ActionFunc)(Device **, uint8_t, Connection &, const uint8_t *, uint8_t);
@@ -58,6 +59,8 @@ typedef struct {
   Connection * connection;
   ActionFunc function;
 } ActionParam;
+
+//TODO: passar novas funções para Robot
 
 class RadioRobot : public Robot {
 public:

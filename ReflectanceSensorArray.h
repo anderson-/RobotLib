@@ -22,31 +22,39 @@
  *
  */
 
-#ifndef IR_PROXIMITY_SENSOR_H
-#define IR_PROXIMITY_SENSOR_H
+#ifndef REFLECTANCE_SENSOR_ARRAY_H
+#define	REFLECTANCE_SENSOR_ARRAY_H
 
 #include <stdint.h>
-#include <Arduino.h>
-
 #include "Device.h"
-#include "Debug.h"
 
-class IRProximitySensor: public Device {
+#define ANALOG		1
+#define NUM_SENSORS	5
+
+class ReflectanceSensorArray : public Device {
+  
 public:
-    IRProximitySensor(uint8_t pin);
-    void begin();
-    void stop();
-    void reset();
-    void update();
-    bool isReady();
-    uint8_t get(uint8_t * buffer, uint8_t size);
-    void set (const uint8_t * data, uint8_t size = 1);
-    int getDistance();
+  ReflectanceSensorArray(uint8_t pin_out, const uint8_t pins_sel[], uint16_t thld);
 
-private:
-    uint8_t pin;
-    int distance;
+  ReflectanceSensorArray(const uint8_t pins[]);
+
+  void begin();
+  void stop();
+  void reset();
+  void update();
+  bool isReady();
+  uint8_t get(uint8_t * buffer, uint8_t size);
+  void set (const uint8_t * data, uint8_t size = 1);
+
+  private:
+  uint8_t value;
+  uint8_t pin_out;
+  uint8_t pins_sel[3];
+  uint16_t thld;
+  uint8_t pins[NUM_SENSORS];
+  uint8_t analog;
+
 };
 
-#endif /* IR_PROXIMITY_SENSOR_H */
+#endif	/* REFLECTANCE_SENSOR_ARRAY_H */
 
