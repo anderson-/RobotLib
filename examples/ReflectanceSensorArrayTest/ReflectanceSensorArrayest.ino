@@ -5,7 +5,7 @@
 #include <HMC5883L.h>
 #include <SerialConnection.h>
 #include <RadioRobot.h>
-#include <IRProximitySensor.h>
+#include <ReflectanceSensorArray.h>
 
 /**
  * 
@@ -17,19 +17,19 @@
 class RoboF : public RadioRobot {
 public:
   RoboF() : serial(Serial,9600),
-            //irsensor(A0, (uint8_t[]){16, 3, 4}, 200), // sensor c/ mux
-            irsensor((uint8_t[]){14, 15, 16, 3, 4}), // sensor s/ mux
+            //reflectance(A0, (uint8_t[]){16, 3, 4}, 200), // sensor c/ mux
+            reflectance((uint8_t[]){14, 15, 16, 3, 4}), // sensor s/ mux
             t(1000)
             {
     addConnection(serial);
-    addDevice(irsensor);
+    addDevice(reflectance);
     clock.add(t);
   }
   
   void think(){
     if (t == 0) {
       uint8_t data[] = {0};
-      if (irsensor.get(data, 1)) {
+      if (reflectance.get(data, 1)) {
         int i;
         uint8_t value[10];
         for (i = 0; i < 5; i++) {
@@ -50,7 +50,7 @@ private:
   SerialConnection serial;
   Timer t;
   
-  IRProximitySensor irsensor;
+  ReflectanceSensorArray reflectance;
 };
 
 RoboF robot;

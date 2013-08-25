@@ -1,6 +1,6 @@
 /**
  * @file IRProximitySensor.h
- * @author Fernando Ferreira <fpf.padilha@gmail.com>
+ * @author Diego Lee <diegolee7@gmail.com>
  * @version 1.0
  *
  * @section LICENSE

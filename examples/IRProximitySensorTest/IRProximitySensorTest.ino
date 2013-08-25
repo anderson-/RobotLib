@@ -5,7 +5,7 @@
 #include <HMC5883L.h>
 #include <SerialConnection.h>
 #include <RadioRobot.h>
-#include <Distance.h>
+#include <IRProximitySensor.h>
 
 /**
  * 
@@ -65,7 +65,7 @@ private:
   SerialConnection serial;
   Timer t;
   
-  Distance distance;
+  IRProximitySensor distance;
 };
 
 RoboF robot;
