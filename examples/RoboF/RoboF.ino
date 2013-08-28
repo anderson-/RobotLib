@@ -64,41 +64,52 @@ bool andarAteh (Device ** deviceList, uint8_t deviceListSize, Connection & c, co
   return true;
 }
 
-//atualizado, mas não foi testado!
+//   Funcionando, mas ainda tem o problema de passar um pouco do angulo após encontra-lo.
+//   Essa funcao nao e equivalente a girar(angulo), mas pode ser utilizada/modificada para isso. O que ela faz e
+// posicionar o robo em um angulo determinado.
 bool rotate (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
   static HBridge * hbridge = NULL;
   static Compass * compass = NULL;
   static int16_t angle = 0;
-  static uint8_t error = 0;
-  static uint8_t thld = 0;
+  static int8_t thld = 0;
+  static int8_t iterations = 0;
+  int16_t error;
   if (data != NULL){ //inicializa a funçao
     hbridge = (HBridge *) deviceList[0]; // posiçao 0!
     compass = (Compass *) deviceList[1]; // posiçao 1!
-    angle = ((uint16_t *)data)[0];
+    angle = ((int16_t *)data)[0];
     thld = data[2];
-    error = angle - compass->getAngle();
-    // ajuste do para o menor angulo
-    if(erro > 180) {
-      erro = erro - 360; // (180,360) -> (-180,0)
-    } else if(erro < -180) {
-      erro = erro + 360; // (-360,-180) -> (0,180)
-    }
   }
   if (hbridge && compass && angle <= 360){
+    error = angle - compass->getAngle();
+    // ajuste do para o menor angulo
+    if(error > 180) {
+      error = error - 360; // (180,360) -> (-180,0)
+    } else if(error < -180) {
+      error = error + 360; // (-360,-180) -> (0,180)
+    }
     if ((error >= -thld) && (error <= thld )){ // se ja esta dentro do erro limite
       hbridge->setMotorState(1,0);
       hbridge->setMotorState(0,0);
-      return true; //termina
+      if (iterations >= 5) {
+        return true; //termina
+      }
+      else {
+        iterations++;
+        return false;
+      }
     } else {
       if (error > thld){ // se esta a direita do objetivo
-        int8_t speed = (int8_t) max(20,erro*1.4); // velocidade proporcional ao erro, 1.4 = 180°/128
+        int8_t speed = (int8_t) (30 + error*0.515); // velocidade proporcional ao erro, 0.71 = 128/180°
         hbridge->setMotorState(1,-speed);
         hbridge->setMotorState(0,speed);
+        iterations = 0;
         return false; //repete
       } else { // se esta a esquerda do objetivo
-        int8_t speed = (int8_t) max(20,-erro*1.4); // velocidade proporcional ao erro, 1.4 = 180°/128
+        int8_t speed = (int8_t) (30 - error*0.515); // velocidade proporcional ao erro, 0.515 = (128-35)/180°
         hbridge->setMotorState(1,speed);
         hbridge->setMotorState(0,-speed);
+        iterations = 0;
         return false; //repete
       }
     }
