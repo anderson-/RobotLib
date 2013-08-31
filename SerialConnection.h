@@ -37,7 +37,7 @@
 
 class SerialConnection : public Connection {
 public:
-  SerialConnection(HardwareSerial & theSerial, uint16_t rate);
+  SerialConnection(HardwareSerial & theSerial, uint32_t rate);
   
   void begin();
   uint8_t available();
@@ -46,6 +46,7 @@ public:
   HardwareSerial & getPort();
 private:
   HardwareSerial & serial;
+  uint32_t rate;
 };
 
 #endif	/* SERIAL_CONNECTION_H */

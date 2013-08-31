@@ -25,12 +25,14 @@
 #include "SerialConnection.h"
 #include "Debug.h"
 
-SerialConnection::SerialConnection(HardwareSerial & theSerial, uint16_t rate) : serial(theSerial){
+SerialConnection::SerialConnection(HardwareSerial & theSerial, uint32_t rate) :
+    serial(theSerial),
+    rate(rate){
   
 }
 
 void SerialConnection::begin(){
-  serial.begin(9600);
+  serial.begin(rate);
 }
 
 #define TIMEOUT 10
@@ -54,19 +56,25 @@ bool SerialConnection::sendMessage(const uint8_t * data, uint8_t size){
 
 uint8_t SerialConnection::receiveMessage(uint8_t * buffer, uint8_t size){
   uint8_t i = 0;
+  uint8_t msgLenght = 0;
   uint32_t time = millis();
   while (i < size){ //TODO adicionar timeout
     if (serial.available() > 0){
-      buffer[i] = serial.read();
+      if (i == 0)
+        msgLenght = serial.read();
+      else
+        buffer[i-1] = serial.read();
       time = millis();
       i++;
-    } else if (millis() - time >= TIMEOUT){
+    } else if ( (millis() - time >= TIMEOUT) ){
       break;
     } else {
       delay(1);
     }
+    if (i > msgLenght)
+      break;
   }
-  return i;
+  return (i-1);
 }
 
 HardwareSerial & SerialConnection::getPort(){
