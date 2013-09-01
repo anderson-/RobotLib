@@ -18,6 +18,7 @@ public:
   }
 
   void messageReceived(const uint8_t * data, uint8_t size, Connection & connection){
+    delay(5);
     connection.sendMessage(data,size);
   }
   

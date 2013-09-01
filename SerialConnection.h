@@ -41,6 +41,7 @@ public:
   
   void begin();
   uint8_t available();
+  void println(const char * data);
   bool sendMessage(const uint8_t * data, uint8_t size);
   uint8_t receiveMessage(uint8_t * buffer, uint8_t size);
   HardwareSerial & getPort();

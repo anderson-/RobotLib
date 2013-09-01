@@ -16,7 +16,7 @@ public:
   MyRobot() : radio(9,10,true), // Arduino: 9,10
                                 // MEGA2560: 9,53
                                 // ROBOF: 7,8
-              serial(Serial,9600) {
+              serial(Serial,57600) {
     addConnection(radio);
     addConnection(serial);
   }
@@ -27,7 +27,9 @@ public:
       serial.sendMessage(data,size);
     } else {
       // recebe de serial e envia para radio
-      radio.sendMessage(data,size);
+      if (!radio.sendMessage(data,size)) {
+        serial.println("FALHA");
+      }
     }
   }
   

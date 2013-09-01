@@ -48,6 +48,10 @@ uint8_t SerialConnection::available(){
   return serial.available();
 }
 
+void SerialConnection::println(const char * data) {
+  serial.println(data);
+}
+
 bool SerialConnection::sendMessage(const uint8_t * data, uint8_t size){
   serial.write(data,size);
   serial.println();

@@ -77,10 +77,18 @@ void RadioConnection::stop(){
 
 bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size){
   radio.stopListening();
-  bool received = radio.write(data, size);
+  bool sent = false;
+  int i = 0;
+  while (!sent && i < 5) {
+    sent = radio.write(data, size);
+    i++;
+  }
+  /*while (!sent) {
+    sent = radio.write(data, size);
+  }*/
   //Serial.println((received)? "recebida com sucesso" : "não recebida..");
   radio.startListening();
-  return received;
+  return sent;
 }
 
 uint8_t RadioConnection::receiveMessage(uint8_t * buffer, uint8_t size){
