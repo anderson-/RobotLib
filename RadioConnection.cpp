@@ -40,10 +40,14 @@ bool RadioConnection::isMaster(){
   return master;
 }
 
+void RadioConnection::printDetails() {
+  radio.printDetails();
+}
+
 void RadioConnection::begin(){
   radio.begin();
-  // delay de 15x250us X 15 tentativas = 3.75 ms
-  radio.setRetries(15,15);
+  // delay de (3+1)x250us = 1ms X 15 tentativas = 15 ms
+  radio.setRetries(3,15);
   // define o numero de bytes enviados/recebidos (max 32)
   radio.setPayloadSize(PAYLOAD);
   // abre os canais de escrita e leitura
@@ -78,10 +82,13 @@ void RadioConnection::stop(){
 bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size){
   radio.stopListening();
   bool sent = false;
-  int i = 0;
-  while (!sent && i < 5) {
+  int tries = 0;
+  while (!sent && tries < 5) {
     sent = radio.write(data, size);
-    i++;
+    if(!sent) {
+      delay(5);
+      tries++;
+    }
   }
   /*while (!sent) {
     sent = radio.write(data, size);

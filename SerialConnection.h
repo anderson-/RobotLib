@@ -48,6 +48,8 @@ public:
 private:
   HardwareSerial & serial;
   uint32_t rate;
+  uint8_t newMessage;
+  uint8_t msgLenght;
 };
 
 #endif	/* SERIAL_CONNECTION_H */
