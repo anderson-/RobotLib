@@ -54,7 +54,7 @@ Device * GenericRobot::createNew(uint8_t id, const uint8_t * data, uint8_t size)
 				if (size == 6){
 					uint8_t analog_pin = data[0];
 					const uint8_t pins_sel [3] = {data[1], data[2], data[3]};
-					uint16_t thld = *(uint16_t*)data[4];
+					uint16_t thld = *(uint16_t*)&data[4];
 					return new ReflectanceSensorArray(analog_pin, pins_sel, thld);
 				}
 				break;
