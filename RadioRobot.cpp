@@ -125,7 +125,7 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
                 uint8_t tmpLen = device->get(tmpBuffer +3, BUFFER_SIZE -size -3);
                 //envia set
                 tmpBuffer[0] = SET;
-                tmpBuffer[1] = id;
+                tmpBuffer[1] = i;
                 tmpBuffer[2] = tmpLen;
                 connection.sendMessage(tmpBuffer,tmpLen +3);
               }

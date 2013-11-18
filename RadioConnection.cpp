@@ -46,6 +46,8 @@ void RadioConnection::begin(){
   radio.setRetries(15,15);
   // define o numero de bytes enviados/recebidos (max 32)
   radio.setPayloadSize(PAYLOAD);
+  //define o canal
+  //radio.setChannel(60); //76
   // abre os canais de escrita e leitura
   if (master){
     radio.openWritingPipe(PIPE_A);

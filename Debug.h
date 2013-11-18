@@ -31,11 +31,18 @@
 #include <Arduino.h>
 #include <avr/wdt.h>
 
+#undef SERIAL_DEBUG
+#ifdef SERIAL_DEBUG
+#define IF_SERIAL_DEBUG(x) ({x;})
+#else
+#define IF_SERIAL_DEBUG(x)
+#endif
+
 /**
  * Reseta o microcontrolador;
  */
 
-#define Reset_AVR() wdt_enable(WDTO_30MS); while(1) {}
+#define Reset_AVR() {asm volatile ("jmp 0");}
 
 /**
  * Desativa o robô enviando uma sequência predefinida para o 

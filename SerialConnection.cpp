@@ -35,7 +35,7 @@ void SerialConnection::begin(){
   serial.begin(rate);
 }
 
-#define TIMEOUT 10
+#define TIMEOUT 5
 
 uint8_t SerialConnection::available(){
 //   unsigned long started_waiting_at = millis();
@@ -53,7 +53,18 @@ void SerialConnection::println(const char * data) {
 }
 
 bool SerialConnection::sendMessage(const uint8_t * data, uint8_t size){
-  serial.write(data,size);
+  //serial.write(&size, sizeof(uint8_t));
+  
+  uint8_t * data2 = (uint8_t *) data;
+  
+  uint8_t i;
+  for (i = size; i > 0; i--){
+	  data2[i] = data2[i-1];
+  }
+  
+  data2[0] = size;
+  
+  serial.write(data,size+1);
   serial.println();
   return true;
 }
