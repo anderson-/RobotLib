@@ -44,9 +44,7 @@ private:
 };
 
 
-int16_t destAngle = 0; 
-
-bool andarAteh (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
+bool andar (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
   // variaveis estaticas nao sao redefinidas e guardam seus valores em chamadas consecutivas da mesma funçao
   static HBridge * hbridge = NULL;
   static IRProximitySensor * irpsensor = NULL;
@@ -76,7 +74,7 @@ bool andarAteh (Device ** deviceList, uint8_t deviceListSize, Connection & c, co
 //   Funcionando, mas ainda tem o problema de passar um pouco do angulo após encontra-lo.
 //   Essa funcao nao e equivalente a girar(angulo), mas pode ser utilizada/modificada para isso. O que ela faz e
 // posicionar o robo em um angulo determinado.
-bool rotateAbs (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
+bool headTo (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
   static HBridge * hbridge = NULL;
   static Compass * compass = NULL;
   static int16_t angle = 0;
@@ -91,11 +89,14 @@ bool rotateAbs (Device ** deviceList, uint8_t deviceListSize, Connection & c, co
   }
   if (hbridge && compass && angle <= 360){
     error = angle - compass->getAngle();
-    // ajuste do para o menor angulo
-    if(error > 180) {
-      error = error - 360; // (180,360) -> (-180,0)
-    } else if(error < -180) {
-      error = error + 360; // (-360,-180) -> (0,180)
+		// ajuste do para o menor angulo
+    // exceto quando chamado pela funcao turn
+    if (length < 4) {
+			if(error > 180) {
+				error = error - 360; // (180,360) -> (-180,0)
+			} else if(error < -180) {
+				error = error + 360; // (-360,-180) -> (0,180)
+			}
     }
     if ((error >= -thld) && (error <= thld )){ // se ja esta dentro do erro limite
       hbridge->setMotorState(1,0);
@@ -126,44 +127,36 @@ bool rotateAbs (Device ** deviceList, uint8_t deviceListSize, Connection & c, co
   return true; //termina
 }
 
-bool rotate (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
+bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
   Compass * compass = NULL;
-  int16_t error = 0;
-  int16_t angle = 0;
-  uint8_t data2[length];
+  static int16_t error = 0;
+  static int16_t destAngle = 0;
+  static uint8_t data2[4];
   
   if (data != NULL){ //inicializa a funçao
     compass = (Compass *) deviceList[1]; // posiçao 1!
     error = ((int16_t *)data)[0];
-	  
-	  if (compass) {
-    	memcpy(data2, data, length);
-    	if (destAngle == 0) {
-		  	destAngle = error + compass->getAngle();
-		  	destAngle %= 360;
-		 	}
-	  	((int16_t *)data)[0] = angle;
-	  } else {
-	  	return false;
-	  }
-		  
-	  if ( rotateAbs(deviceList, deviceListSize, c, (const uint8_t *)data2, length) ) {
-	  	destAngle = 0;
-	  	return true;
-	  } else {
-	  	return false;
-	  }
+		if (compass) {
+			memcpy(data2, data, 4);
+			destAngle = error + compass->getAngle();
+			if (destAngle < 0)   destAngle += 360;
+			if (destAngle > 360) destAngle -= 360;
+			((int16_t *)data)[0] = destAngle;
+		} else {
+			return true;
+		}
   }
-  return true;
+
+  return rotateAbs(deviceList, deviceListSize, c, (const uint8_t *)data2, 4)
 }
 
 RoboF robot;
 
 void setup(){
   //adicionando funçoes... 
-  robot.addAction(rotateAbs);  // id = 0
-  robot.addAction(rotate);     // id = 1
-  robot.addAction(andarAteh);  // id = 2
+  robot.addAction(headTo);  	// id = 0
+  robot.addAction(turn);    	// id = 1
+  robot.addAction(andar);  		// id = 2
   robot.begin();
 }
 
