@@ -72,7 +72,6 @@ bool rotate (Device ** deviceList, uint8_t deviceListSize, Connection & c, const
   static Compass * compass = NULL;
   static int16_t angle = 0;
   static int8_t thld = 0;
-  static int8_t iterations = 0;
   int16_t error;
   if (data != NULL){ //inicializa a funçao
     hbridge = (HBridge *) deviceList[0]; // posiçao 0!
@@ -91,13 +90,6 @@ bool rotate (Device ** deviceList, uint8_t deviceListSize, Connection & c, const
     if ((error >= -thld) && (error <= thld )){ // se ja esta dentro do erro limite
       hbridge->setMotorState(1,0);
       hbridge->setMotorState(0,0);
-      if (iterations >= 5) {
-        return true; //termina
-      }
-      else {
-        iterations++;
-        return false;
-      }
     } else {
       if (error > thld){ // se esta a direita do objetivo
         int8_t speed = (int8_t) (30 + error*0.515); // velocidade proporcional ao erro, 0.71 = 128/180°

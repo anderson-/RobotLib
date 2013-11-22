@@ -74,7 +74,6 @@ bool rotate(Device ** deviceList, uint8_t deviceListSize, Connection & c, const 
   static int16_t angle = 0;
   static int16_t last_error = 0;
   static int8_t thld = 0;
-  static int8_t iterations = 0;
   static float P = 0;
   static float D = 0;
   const float Kp = 0.52;
@@ -98,12 +97,6 @@ bool rotate(Device ** deviceList, uint8_t deviceListSize, Connection & c, const 
     if ((error >= -thld) && (error <= thld)) { // se ja esta dentro do erro limite
       hbridge->setMotorState(1, 0);
       hbridge->setMotorState(0, 0);
-      if (iterations >= 5) {
-        return true; //termina
-      } else {
-        iterations++;
-        return false;
-      }
     } else {
       int8_t speed;
       P = error * Kp;
