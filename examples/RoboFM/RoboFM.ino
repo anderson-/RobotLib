@@ -147,7 +147,7 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
 		}
   }
 
-  return rotateAbs(deviceList, deviceListSize, c, (const uint8_t *)data2, 4)
+  return headTo(deviceList, deviceListSize, c, (const uint8_t *)data2, 4);
 }
 
 RoboF robot;
