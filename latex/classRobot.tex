@@ -1,0 +1,331 @@
+\hypertarget{classRobot}{\section{Referência da Classe Robot}
+\label{classRobot}\index{Robot@{Robot}}
+}
+
+
+A classe \hyperlink{classRobot}{Robot} representa um robô simples, seja ele autonomo ou não, o mesmo possui dispositivos (\hyperlink{classDevice}{Device}), que obtem valores do ambiente e realizam ações físicas, e conexões (\hyperlink{classConnection}{Connection}) as quais permitem que ele se comunique com computadores, microcontroladores ou outros robôs.  
+
+
+
+
+{\ttfamily \#include $<$Robot.\-h$>$}
+
+Diagrama de Hierarquia para Robot\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRobot}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRobot_a4fc7c70ae20623f05e06f2ecb388b6c4}{Robot} ()
+\begin{DoxyCompactList}\small\item\em Construtor padrão. \end{DoxyCompactList}\item 
+void \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o robô. \end{DoxyCompactList}\item 
+void \hyperlink{classRobot_af59eb38f118092bd3369876a2aaac2d1}{add\-Connection} (\hyperlink{classConnection}{Connection} \&c)
+\begin{DoxyCompactList}\small\item\em Adiciona uma nova conexão. \end{DoxyCompactList}\item 
+void \hyperlink{classRobot_a3a965a448c5d9d95ecb2bf6c5ee668b9}{add\-Device} (\hyperlink{classDevice}{Device} \&d)
+\begin{DoxyCompactList}\small\item\em Adiciona um novo dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classRobot_a1c344a898d9da75010438fd78d3827b2}{is\-Busy} ()
+\begin{DoxyCompactList}\small\item\em Verifica se existe algum dispositivo ocupado. \end{DoxyCompactList}\item 
+void \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{step} ()
+\begin{DoxyCompactList}\small\item\em Realiza o escalonamento de todas as funções principais do robô. \end{DoxyCompactList}\item 
+void \hyperlink{classRobot_aaad55dfa6b3daedd9670bec46dc079f1}{perform} ()
+\begin{DoxyCompactList}\small\item\em Realiza todas as ações pendentes e retorna. \end{DoxyCompactList}\item 
+\hyperlink{classClock}{Clock} \& \hyperlink{classRobot_af96d177958b4b3087aba65d1cc4c06b6}{get\-Clock} ()
+\begin{DoxyCompactList}\small\item\em T\-O\-D\-O. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classRobot_ab02c09bdea244d38bcfd0010b9554b6f}{message\-Received} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size, \hyperlink{classConnection}{Connection} \&connection)=0
+\begin{DoxyCompactList}\small\item\em Função executada quando uma mensagem é recebida por alguma conexão. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classRobot_aaa0c932d862aed7556b068ebb70a917a}{device\-Ready} (\hyperlink{classDevice}{Device} \&d)=0
+\begin{DoxyCompactList}\small\item\em Função executada quando um dispositivo anteriormente ocupado torna-\/se disponível. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classRobot_a75cfdd8e35e007abe24ffae66a8ecf1d}{think} ()=0
+\begin{DoxyCompactList}\small\item\em Função responsável por tomar novas decisões com base nos sensores e atuadores do robô, em um determinado ciclo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Métodos Protegidos}
+\begin{DoxyCompactItemize}
+\item 
+uint8\-\_\-t \hyperlink{classRobot_a6ef66669b08d6c17e249d946eec87f2d}{get\-Connection\-List\-Size} ()
+\begin{DoxyCompactList}\small\item\em Obtem o tamanho da lista de conexões disponiveis. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classRobot_a09b95280d83027439d27749ba2c0bc4a}{get\-Device\-List\-Size} ()
+\begin{DoxyCompactList}\small\item\em Obtem o tamanho da lista de dispositivos disponiveis. \end{DoxyCompactList}\item 
+\hyperlink{classConnection}{Connection} $\ast$ \hyperlink{classRobot_a6e96ee4f33816dd91cd76d950e134b53}{get\-Connection} (uint8\-\_\-t index)
+\begin{DoxyCompactList}\small\item\em Obtem uma determinada conexão. \end{DoxyCompactList}\item 
+\hyperlink{classDevice}{Device} $\ast$ \hyperlink{classRobot_af5e50d99c051a6b25dfc561535111444}{get\-Device} (uint8\-\_\-t index)
+\begin{DoxyCompactList}\small\item\em Obtem um determinado dispositivo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos Protegidos}
+\begin{DoxyCompactItemize}
+\item 
+uint8\-\_\-t $\ast$ \hyperlink{classRobot_aef6f636eb10e6b4998a3b1859ca71500}{buffer}
+\begin{DoxyCompactList}\small\item\em Buffer para o recebimento das mensagens, o mesmo é encaminhado para {\ttfamily message\-Received}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos Estáticos Protegidos}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classClock}{Clock} \& \hyperlink{classRobot_a9bc655119fd6d2864c6aca60403c282d}{clock} = \hyperlink{Robot_8cpp_aa917eb258987bd1c3d34d4972b7cc783}{\-\_\-g\-Clock}
+\end{DoxyCompactItemize}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classRobot_a59d051cd870745df59aefaa2cda15b8a}{Timed\-Device}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+A classe \hyperlink{classRobot}{Robot} representa um robô simples, seja ele autonomo ou não, o mesmo possui dispositivos (\hyperlink{classDevice}{Device}), que obtem valores do ambiente e realizam ações físicas, e conexões (\hyperlink{classConnection}{Connection}) as quais permitem que ele se comunique com computadores, microcontroladores ou outros robôs. 
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classRobot_a4fc7c70ae20623f05e06f2ecb388b6c4}{\index{Robot@{Robot}!Robot@{Robot}}
+\index{Robot@{Robot}!Robot@{Robot}}
+\subsubsection[{Robot}]{\setlength{\rightskip}{0pt plus 5cm}Robot\-::\-Robot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobot_a4fc7c70ae20623f05e06f2ecb388b6c4}
+
+
+Construtor padrão. 
+
+
+
+\subsection{Métodos}
+\hypertarget{classRobot_af59eb38f118092bd3369876a2aaac2d1}{\index{Robot@{Robot}!add\-Connection@{add\-Connection}}
+\index{add\-Connection@{add\-Connection}!Robot@{Robot}}
+\subsubsection[{add\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-::add\-Connection (
+\begin{DoxyParamCaption}
+\item[{{\bf Connection} \&}]{c}
+\end{DoxyParamCaption}
+)}}\label{classRobot_af59eb38f118092bd3369876a2aaac2d1}
+
+
+Adiciona uma nova conexão. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em c} & Referência da conexão. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classRobot_a3a965a448c5d9d95ecb2bf6c5ee668b9}{\index{Robot@{Robot}!add\-Device@{add\-Device}}
+\index{add\-Device@{add\-Device}!Robot@{Robot}}
+\subsubsection[{add\-Device}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-::add\-Device (
+\begin{DoxyParamCaption}
+\item[{{\bf Device} \&}]{d}
+\end{DoxyParamCaption}
+)}}\label{classRobot_a3a965a448c5d9d95ecb2bf6c5ee668b9}
+
+
+Adiciona um novo dispositivo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em d} & Referência do dispositivo. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{\index{Robot@{Robot}!begin@{begin}}
+\index{begin@{begin}!Robot@{Robot}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}
+
+
+Inicializa o robô. 
+
+Deve ser chamado em {\ttfamily Setup()} apenas uma vez. É responsável por inicializar todas as conexões e dispositivos integrados ao robô. \hypertarget{classRobot_aaa0c932d862aed7556b068ebb70a917a}{\index{Robot@{Robot}!device\-Ready@{device\-Ready}}
+\index{device\-Ready@{device\-Ready}!Robot@{Robot}}
+\subsubsection[{device\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Robot\-::device\-Ready (
+\begin{DoxyParamCaption}
+\item[{{\bf Device} \&}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classRobot_aaa0c932d862aed7556b068ebb70a917a}
+
+
+Função executada quando um dispositivo anteriormente ocupado torna-\/se disponível. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em d} & Referência ao dispositivo em questão. \\
+\hline
+\end{DoxyParams}
+
+
+Implementado por \hyperlink{classQuickRobot_a95d490eb2e580d362b99eb6c90927256}{Quick\-Robot} e \hyperlink{classRadioRobot_a278b37c78b4fd9c4d7b16192e780f6a1}{Radio\-Robot}.
+
+\hypertarget{classRobot_af96d177958b4b3087aba65d1cc4c06b6}{\index{Robot@{Robot}!get\-Clock@{get\-Clock}}
+\index{get\-Clock@{get\-Clock}!Robot@{Robot}}
+\subsubsection[{get\-Clock}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Clock}\& Robot\-::get\-Clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobot_af96d177958b4b3087aba65d1cc4c06b6}
+
+
+T\-O\-D\-O. 
+
+\hypertarget{classRobot_a6e96ee4f33816dd91cd76d950e134b53}{\index{Robot@{Robot}!get\-Connection@{get\-Connection}}
+\index{get\-Connection@{get\-Connection}!Robot@{Robot}}
+\subsubsection[{get\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Connection} $\ast$ Robot\-::get\-Connection (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classRobot_a6e96ee4f33816dd91cd76d950e134b53}
+
+
+Obtem uma determinada conexão. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em index} & Indice do dispositivo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Um ponteiro para a conexão ou {\ttfamily N\-U\-L\-L} 
+\end{DoxyReturn}
+\hypertarget{classRobot_a6ef66669b08d6c17e249d946eec87f2d}{\index{Robot@{Robot}!get\-Connection\-List\-Size@{get\-Connection\-List\-Size}}
+\index{get\-Connection\-List\-Size@{get\-Connection\-List\-Size}!Robot@{Robot}}
+\subsubsection[{get\-Connection\-List\-Size}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Robot\-::get\-Connection\-List\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classRobot_a6ef66669b08d6c17e249d946eec87f2d}
+
+
+Obtem o tamanho da lista de conexões disponiveis. 
+
+\begin{DoxyReturn}{Retorna}
+O tamanho da lista {\ttfamily }(n$>$=0) 
+\end{DoxyReturn}
+\hypertarget{classRobot_af5e50d99c051a6b25dfc561535111444}{\index{Robot@{Robot}!get\-Device@{get\-Device}}
+\index{get\-Device@{get\-Device}!Robot@{Robot}}
+\subsubsection[{get\-Device}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Device} $\ast$ Robot\-::get\-Device (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classRobot_af5e50d99c051a6b25dfc561535111444}
+
+
+Obtem um determinado dispositivo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em index} & Indice do dispositivo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Um ponteiro para o dispositivo ou {\ttfamily N\-U\-L\-L} 
+\end{DoxyReturn}
+\hypertarget{classRobot_a09b95280d83027439d27749ba2c0bc4a}{\index{Robot@{Robot}!get\-Device\-List\-Size@{get\-Device\-List\-Size}}
+\index{get\-Device\-List\-Size@{get\-Device\-List\-Size}!Robot@{Robot}}
+\subsubsection[{get\-Device\-List\-Size}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Robot\-::get\-Device\-List\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classRobot_a09b95280d83027439d27749ba2c0bc4a}
+
+
+Obtem o tamanho da lista de dispositivos disponiveis. 
+
+\begin{DoxyReturn}{Retorna}
+O tamanho da lista {\ttfamily }(n$>$=0) 
+\end{DoxyReturn}
+\hypertarget{classRobot_a1c344a898d9da75010438fd78d3827b2}{\index{Robot@{Robot}!is\-Busy@{is\-Busy}}
+\index{is\-Busy@{is\-Busy}!Robot@{Robot}}
+\subsubsection[{is\-Busy}]{\setlength{\rightskip}{0pt plus 5cm}bool Robot\-::is\-Busy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRobot_a1c344a898d9da75010438fd78d3827b2}
+
+
+Verifica se existe algum dispositivo ocupado. 
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily true} se existe algum dispositivo ocupado. 
+\end{DoxyReturn}
+\hypertarget{classRobot_ab02c09bdea244d38bcfd0010b9554b6f}{\index{Robot@{Robot}!message\-Received@{message\-Received}}
+\index{message\-Received@{message\-Received}!Robot@{Robot}}
+\subsubsection[{message\-Received}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Robot\-::message\-Received (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size, }
+\item[{{\bf Connection} \&}]{connection}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classRobot_ab02c09bdea244d38bcfd0010b9554b6f}
+
+
+Função executada quando uma mensagem é recebida por alguma conexão. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Um vetor de constantes de 8bits (byte) contendo a mensagem. \\
+\hline
+ & {\em size} & O tamanho da mensagem em bytes. \\
+\hline
+ & {\em connection} & O I\-D da conexão que recebeu a mensagem. \\
+\hline
+\end{DoxyParams}
+
+
+Implementado por \hyperlink{classQuickRobot_a96eda0e5288726364f4a02ef7912e21b}{Quick\-Robot} e \hyperlink{classRadioRobot_a5de90c99faa941df35898349b6b148b5}{Radio\-Robot}.
+
+\hypertarget{classRobot_aaad55dfa6b3daedd9670bec46dc079f1}{\index{Robot@{Robot}!perform@{perform}}
+\index{perform@{perform}!Robot@{Robot}}
+\subsubsection[{perform}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-::perform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRobot_aaad55dfa6b3daedd9670bec46dc079f1}
+
+
+Realiza todas as ações pendentes e retorna. 
+
+Útil para programar as ações do robô em uma sequência. \hypertarget{classRobot_aa50d73cd1109a70133af442674ed3a1a}{\index{Robot@{Robot}!step@{step}}
+\index{step@{step}!Robot@{Robot}}
+\subsubsection[{step}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-::step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRobot_aa50d73cd1109a70133af442674ed3a1a}
+
+
+Realiza o escalonamento de todas as funções principais do robô. 
+
+É nessa função que sao executadas \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device\-::update()}, e \hyperlink{classRobot_a75cfdd8e35e007abe24ffae66a8ecf1d}{Robot\-::think()} e é verificado por novas mensagens por meio de \hyperlink{classConnection_acd5ee426481b2aca2903d96f6f807341}{Connection\-::available()}. \hypertarget{classRobot_a75cfdd8e35e007abe24ffae66a8ecf1d}{\index{Robot@{Robot}!think@{think}}
+\index{think@{think}!Robot@{Robot}}
+\subsubsection[{think}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Robot\-::think (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classRobot_a75cfdd8e35e007abe24ffae66a8ecf1d}
+
+
+Função responsável por tomar novas decisões com base nos sensores e atuadores do robô, em um determinado ciclo. 
+
+É executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementado por \hyperlink{classQuickRobot_a936a04970e2fe8694256a70816b697f6}{Quick\-Robot} e \hyperlink{classRadioRobot_a7b58f55a81e816ba5d53fd14bf28a6a5}{Radio\-Robot}.
+
+
+
+\subsection{Amigas e Funções Relacionadas}
+\hypertarget{classRobot_a59d051cd870745df59aefaa2cda15b8a}{\index{Robot@{Robot}!Timed\-Device@{Timed\-Device}}
+\index{Timed\-Device@{Timed\-Device}!Robot@{Robot}}
+\subsubsection[{Timed\-Device}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Timed\-Device}\hspace{0.3cm}{\ttfamily [friend]}}}\label{classRobot_a59d051cd870745df59aefaa2cda15b8a}
+
+
+\subsection{Atributos}
+\hypertarget{classRobot_aef6f636eb10e6b4998a3b1859ca71500}{\index{Robot@{Robot}!buffer@{buffer}}
+\index{buffer@{buffer}!Robot@{Robot}}
+\subsubsection[{buffer}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t$\ast$ Robot\-::buffer\hspace{0.3cm}{\ttfamily [protected]}}}\label{classRobot_aef6f636eb10e6b4998a3b1859ca71500}
+
+
+Buffer para o recebimento das mensagens, o mesmo é encaminhado para {\ttfamily message\-Received}. 
+
+\hypertarget{classRobot_a9bc655119fd6d2864c6aca60403c282d}{\index{Robot@{Robot}!clock@{clock}}
+\index{clock@{clock}!Robot@{Robot}}
+\subsubsection[{clock}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Clock} \& Robot\-::clock = {\bf \-\_\-g\-Clock}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{classRobot_a9bc655119fd6d2864c6aca60403c282d}
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Robot_8h}{Robot.\-h}\item 
+\hyperlink{Robot_8cpp}{Robot.\-cpp}\end{DoxyCompactItemize}

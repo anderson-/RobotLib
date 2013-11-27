@@ -1,0 +1,112 @@
+\hypertarget{RadioRobot_8h}{\section{Referência do Arquivo Radio\-Robot.\-h}
+\label{RadioRobot_8h}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}}
+}
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Robot.\-h\char`\"{}}\\*
+\subsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structActionParam}{Action\-Param}
+\item 
+class \hyperlink{classRadioRobot}{Radio\-Robot}
+\end{DoxyCompactItemize}
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef bool($\ast$ \hyperlink{RadioRobot_8h_a3541f6ba20932adb767c7e0d8bdc6940}{Action\-Func} )(\hyperlink{classDevice}{Device} $\ast$$\ast$, uint8\-\_\-t, \hyperlink{classConnection}{Connection} \&, const uint8\-\_\-t $\ast$, uint8\-\_\-t)
+\end{DoxyCompactItemize}
+\subsection*{Enumerações}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665}{C\-M\-D} \{ \\*
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a679ee5320d66c8322e310daeb2ee99b8}{S\-T\-O\-P} = 1, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a6e074abc1ec6368da315a331ad35c00b}{E\-C\-H\-O}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab107229d44d042caa8ab8df4c8acaa1f}{P\-R\-I\-N\-T}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a12a8dcf59c16b5aadfda3a08ba67d529}{G\-E\-T}, 
+\\*
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab44c8101cc294c074709ec1b14211792}{S\-E\-T}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665acfcf145f2788bf340ff3f3098bc54909}{A\-D\-D}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a589b7d94a3d91d145720e2fed0eb3a05}{R\-E\-S\-E\-T}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a9c954bcf443428c80b0f107b3bc48749}{D\-O\-N\-E}, 
+\\*
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a439c688a4e9ed31638d5922a50680a8e}{R\-U\-N}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ae76c941d2316666913c673a032deb9ba}{N\-O\-\_\-\-O\-P}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a936c4a5547a9360243178f726f6b2715}{F\-A\-I\-L}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab1d5eac4b1dca480c8056eaea7663b7a}{A\-L\-L} = 222, 
+\\*
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a54dbffa2d33d22e4696c0895b7696e58}{F\-R\-E\-E\-\_\-\-R\-A\-M}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a57cc238145ec1361c72c327674c0d754}{S\-Y\-S\-T\-E\-M}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a368db50032da622d4c456ef7eaf9cb67}{B\-E\-G\-I\-N}, 
+\hyperlink{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665adc6f24fd6915a3f2786a1b7045406924}{E\-N\-D}
+ \}
+\begin{DoxyCompactList}\small\item\em Comandos possíveis do protocolo de comunicação. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+\begin{DoxyAuthor}{Autor}
+Anderson Antunes \href{mailto:anderson.utf@gmail.com}{\tt anderson.\-utf@gmail.\-com} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Versão}
+1.\-0
+\end{DoxyVersion}
+\hypertarget{SerialConnection_8h_LICENSE}{}\subsection{L\-I\-C\-E\-N\-S\-E}\label{SerialConnection_8h_LICENSE}
+Copyright (C) 2013 by Anderson Antunes \href{mailto:anderson.utf@gmail.com}{\tt anderson.\-utf@gmail.\-com}
+
+Robot\-Lib is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Robot\-Lib is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with Robot\-Lib. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+\subsection{Definições dos tipos}
+\hypertarget{RadioRobot_8h_a3541f6ba20932adb767c7e0d8bdc6940}{\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!Action\-Func@{Action\-Func}}
+\index{Action\-Func@{Action\-Func}!RadioRobot.h@{Radio\-Robot.\-h}}
+\subsubsection[{Action\-Func}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ Action\-Func)({\bf Device} $\ast$$\ast$, uint8\-\_\-t, {\bf Connection} \&, const uint8\-\_\-t $\ast$, uint8\-\_\-t)}}\label{RadioRobot_8h_a3541f6ba20932adb767c7e0d8bdc6940}
+
+
+\subsection{Enumerações}
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665}{\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!C\-M\-D@{C\-M\-D}}
+\index{C\-M\-D@{C\-M\-D}!RadioRobot.h@{Radio\-Robot.\-h}}
+\subsubsection[{C\-M\-D}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf C\-M\-D}}}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665}
+
+
+Comandos possíveis do protocolo de comunicação. 
+
+\begin{Desc}
+\item[Valores enumerados\-: ]\par
+\begin{description}
+\index{S\-T\-O\-P@{S\-T\-O\-P}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!S\-T\-O\-P@{S\-T\-O\-P}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a679ee5320d66c8322e310daeb2ee99b8}{S\-T\-O\-P}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a679ee5320d66c8322e310daeb2ee99b8}
+}]$<$1$>$ $<$I\-D/\-A\-L\-L$>$ \index{E\-C\-H\-O@{E\-C\-H\-O}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!E\-C\-H\-O@{E\-C\-H\-O}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a6e074abc1ec6368da315a331ad35c00b}{E\-C\-H\-O}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a6e074abc1ec6368da315a331ad35c00b}
+}]$<$2$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{P\-R\-I\-N\-T@{P\-R\-I\-N\-T}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!P\-R\-I\-N\-T@{P\-R\-I\-N\-T}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab107229d44d042caa8ab8df4c8acaa1f}{P\-R\-I\-N\-T}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab107229d44d042caa8ab8df4c8acaa1f}
+}]$<$3$>$ $<$C\-O\-N\-N\-\_\-\-I\-D/\-A\-L\-L$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{G\-E\-T@{G\-E\-T}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!G\-E\-T@{G\-E\-T}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a12a8dcf59c16b5aadfda3a08ba67d529}{G\-E\-T}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a12a8dcf59c16b5aadfda3a08ba67d529}
+}]$<$4$>$ $<$D\-E\-V\-\_\-\-I\-D/\-A\-L\-L/\-F\-R\-E\-E\-\_\-\-R\-A\-M$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{S\-E\-T@{S\-E\-T}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!S\-E\-T@{S\-E\-T}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab44c8101cc294c074709ec1b14211792}{S\-E\-T}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab44c8101cc294c074709ec1b14211792}
+}]$<$5$>$ $<$\-D\-E\-V\-\_\-\-I\-D$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{A\-D\-D@{A\-D\-D}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!A\-D\-D@{A\-D\-D}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665acfcf145f2788bf340ff3f3098bc54909}{A\-D\-D}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665acfcf145f2788bf340ff3f3098bc54909}
+}]$<$6$>$ $<$\-D\-E\-V\-\_\-\-S\-I\-D$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{R\-E\-S\-E\-T@{R\-E\-S\-E\-T}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!R\-E\-S\-E\-T@{R\-E\-S\-E\-T}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a589b7d94a3d91d145720e2fed0eb3a05}{R\-E\-S\-E\-T}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a589b7d94a3d91d145720e2fed0eb3a05}
+}]$<$7$>$ $<$I\-D/\-A\-L\-L/\-S\-Y\-S\-T\-E\-M$>$ \index{D\-O\-N\-E@{D\-O\-N\-E}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!D\-O\-N\-E@{D\-O\-N\-E}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a9c954bcf443428c80b0f107b3bc48749}{D\-O\-N\-E}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a9c954bcf443428c80b0f107b3bc48749}
+}]$<$8$>$ $<$\-C\-M\-D$>$ $<$\-I\-D$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $|$$|$ $<$\-D\-O\-N\-E$>$ $<$\-R\-U\-N$>$ $<$\-I\-D$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{R\-U\-N@{R\-U\-N}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!R\-U\-N@{R\-U\-N}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a439c688a4e9ed31638d5922a50680a8e}{R\-U\-N}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a439c688a4e9ed31638d5922a50680a8e}
+}]$<$9$>$ $<$\-N\-\_\-\-D\-E\-V\-I\-C\-E\-S$>$ $<$\-D\-E\-V\-I\-C\-E\-\_\-\-I\-D\-\_\-0$>$ ... $<$D\-E\-V\-I\-C\-E\-\_\-\-I\-D\-\_\-\-N-\/1$>$ $<$\-L\-E\-N\-G\-T\-H$>$ $<$\-D\-A\-T\-A\-\_\-0$>$ ... $<$D\-A\-T\-A\-\_\-\-L\-E\-N-\/1$>$ \index{N\-O\-\_\-\-O\-P@{N\-O\-\_\-\-O\-P}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!N\-O\-\_\-\-O\-P@{N\-O\-\_\-\-O\-P}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ae76c941d2316666913c673a032deb9ba}{N\-O\-\_\-\-O\-P}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ae76c941d2316666913c673a032deb9ba}
+}]$<$10$>$ \index{F\-A\-I\-L@{F\-A\-I\-L}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!F\-A\-I\-L@{F\-A\-I\-L}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a936c4a5547a9360243178f726f6b2715}{F\-A\-I\-L}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a936c4a5547a9360243178f726f6b2715}
+}]$<$11$>$ $<$\-C\-M\-D$>$ $<$\-I\-D$>$ $<$\-L\-E\-N\-G\-T\-H$>$ \index{A\-L\-L@{A\-L\-L}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!A\-L\-L@{A\-L\-L}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab1d5eac4b1dca480c8056eaea7663b7a}{A\-L\-L}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665ab1d5eac4b1dca480c8056eaea7663b7a}
+}]Command $<$S\-T\-O\-P/\-P\-R\-I\-N\-T/\-G\-E\-T/\-R\-E\-S\-E\-T$>$ arg. \index{F\-R\-E\-E\-\_\-\-R\-A\-M@{F\-R\-E\-E\-\_\-\-R\-A\-M}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!F\-R\-E\-E\-\_\-\-R\-A\-M@{F\-R\-E\-E\-\_\-\-R\-A\-M}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a54dbffa2d33d22e4696c0895b7696e58}{F\-R\-E\-E\-\_\-\-R\-A\-M}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a54dbffa2d33d22e4696c0895b7696e58}
+}]Command $<$\-G\-E\-T$>$ arg. \index{S\-Y\-S\-T\-E\-M@{S\-Y\-S\-T\-E\-M}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!S\-Y\-S\-T\-E\-M@{S\-Y\-S\-T\-E\-M}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a57cc238145ec1361c72c327674c0d754}{S\-Y\-S\-T\-E\-M}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a57cc238145ec1361c72c327674c0d754}
+}]Command $<$\-R\-E\-S\-E\-T$>$ arg. \index{B\-E\-G\-I\-N@{B\-E\-G\-I\-N}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!B\-E\-G\-I\-N@{B\-E\-G\-I\-N}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a368db50032da622d4c456ef7eaf9cb67}{B\-E\-G\-I\-N}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665a368db50032da622d4c456ef7eaf9cb67}
+}]Command $<$\-R\-U\-N$>$ arg. \index{E\-N\-D@{E\-N\-D}!Radio\-Robot.\-h@{Radio\-Robot.\-h}}\index{Radio\-Robot.\-h@{Radio\-Robot.\-h}!E\-N\-D@{E\-N\-D}}\item[{\em 
+\hypertarget{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665adc6f24fd6915a3f2786a1b7045406924}{E\-N\-D}\label{RadioRobot_8h_a04887de32e1f60f8dc157312b8f27665adc6f24fd6915a3f2786a1b7045406924}
+}]Command $<$\-R\-U\-N$>$ arg. \end{description}
+\end{Desc}
+

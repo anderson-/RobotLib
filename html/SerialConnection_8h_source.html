@@ -95,23 +95,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="code" href="classSerialConnection.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSerialConnection.html">SerialConnection</a> : <span class="keyword">public</span> <a class="code" href="classConnection.html">Connection</a> {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="classSerialConnection.html#a0a2127f309616f13927da8243b139bac">SerialConnection</a>(HardwareSerial &amp; theSerial, uint16_t rate);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="classSerialConnection.html#a05e15045efc5ea7098337f9dcd43fc82">SerialConnection</a>(HardwareSerial &amp; theSerial, uint32_t rate);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classSerialConnection.html#a6022b91cdd0bc412d8aeda364c32ce21" title="Inicializa a conexão.">begin</a>();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  uint8_t <a class="code" href="classSerialConnection.html#a91aa59d8f0b913e91dc4ddcde8e42519" title="Verifica se existe alguma mensagem disponivel.">available</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classSerialConnection.html#ac98733956090bc3eaa628d156f06ef5d" title="Envia uma mensagem.">sendMessage</a>(<span class="keyword">const</span> uint8_t * data, uint8_t size);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  uint8_t <a class="code" href="classSerialConnection.html#ac72ec887122fe08fd389dc8724b31c63" title="Recebe uma mensagem.">receiveMessage</a>(uint8_t * buffer, uint8_t size);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  HardwareSerial &amp; <a class="code" href="classSerialConnection.html#af5aff354718e4912d80fcee953d54540">getPort</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  HardwareSerial &amp; serial;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* SERIAL_CONNECTION_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classSerialConnection.html#a85e05ec34dbb4d8d6feaccecf8ae9a72">println</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * data);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classSerialConnection.html#ac98733956090bc3eaa628d156f06ef5d" title="Envia uma mensagem.">sendMessage</a>(<span class="keyword">const</span> uint8_t * data, uint8_t size);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  uint8_t <a class="code" href="classSerialConnection.html#ac72ec887122fe08fd389dc8724b31c63" title="Recebe uma mensagem.">receiveMessage</a>(uint8_t * buffer, uint8_t size);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  HardwareSerial &amp; <a class="code" href="classSerialConnection.html#af5aff354718e4912d80fcee953d54540">getPort</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  HardwareSerial &amp; serial;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  uint32_t rate;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  uint8_t newMessage;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  uint8_t msgLenght;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">/* SERIAL_CONNECTION_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Sábado, 24 de Agosto de 2013 03:07:44 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quarta, 27 de Novembro de 2013 03:27:27 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>

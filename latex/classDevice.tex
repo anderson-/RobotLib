@@ -1,0 +1,220 @@
+\hypertarget{classDevice}{\section{Referência da Classe Device}
+\label{classDevice}\index{Device@{Device}}
+}
+
+
+{\ttfamily \#include $<$Device.\-h$>$}
+
+Diagrama de Hierarquia para Device\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.500000cm]{classDevice}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDevice_a6a343295a9f8df6dd4aa52c622a8e876}{Device} (bool \hyperlink{classDevice_a463598bce318556c79bfc0f26b38f7d3}{is\-Effector}, bool \hyperlink{classDevice_a848bce229a669a4e7531bce2b6b24154}{is\-Sensor}=false)
+\begin{DoxyCompactList}\small\item\em Construtor padrão. \end{DoxyCompactList}\item 
+bool \hyperlink{classDevice_a463598bce318556c79bfc0f26b38f7d3}{is\-Effector} ()
+\item 
+bool \hyperlink{classDevice_a848bce229a669a4e7531bce2b6b24154}{is\-Sensor} ()
+\item 
+uint8\-\_\-t \hyperlink{classDevice_a7b20d7fdcab77062810a0a254e978c5e}{get\-I\-D} ()
+\item 
+virtual void \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{begin} ()=0
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{stop} ()=0
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{reset} ()=0
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{update} ()=0
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{is\-Ready} ()=0
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+virtual uint8\-\_\-t \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)=0
+\item 
+virtual void \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classDevice_a6a343295a9f8df6dd4aa52c622a8e876}{\index{Device@{Device}!Device@{Device}}
+\index{Device@{Device}!Device@{Device}}
+\subsubsection[{Device}]{\setlength{\rightskip}{0pt plus 5cm}Device\-::\-Device (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\-Effector, }
+\item[{bool}]{is\-Sensor = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{classDevice_a6a343295a9f8df6dd4aa52c622a8e876}
+
+
+Construtor padrão. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em is\-Effector} & Define que o dispositivo é um atuador. \\
+\hline
+{\em is\-Sensor} & Define que o dispositivo é um sensor. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Métodos}
+\hypertarget{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{\index{Device@{Device}!begin@{begin}}
+\index{begin@{begin}!Device@{Device}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a0dc99b16a220489d787a1cbcef4875d9}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementado por \hyperlink{classClock_ad9e99b2538716b36b3a8fdc7d753f3a2}{Clock}, \hyperlink{classReflectanceSensorArray_a11602e4c9b93577608b07088f9c0fd3c}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_a987d9ba6c1773c14a0758e46fe4dac9d}{Compass}, \hyperlink{classIRProximitySensor_a84d9a5c841ffd21273762a04d791eb5a}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_ac0bdf510d361688b492206a64d8b2376}{H\-Bridge}, \hyperlink{classDistance_a682c993094f314fe7870813c2693c36b}{Distance} e \hyperlink{classLED_a62e402841c861af9bb4eb679f5afc7d6}{L\-E\-D}.
+
+\hypertarget{classDevice_a0057af09515609c289d5da3be19dcc8d}{\index{Device@{Device}!get@{get}}
+\index{get@{get}!Device@{Device}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint8\-\_\-t Device\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a0057af09515609c289d5da3be19dcc8d}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementado por \hyperlink{classClock_a3027e265e43f1d6e07d390c65aef5ecb}{Clock}, \hyperlink{classReflectanceSensorArray_ad608c5f45ea98fe65162d8c24722bc15}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_a8ed68e06b27567738cd37e4be8d0d342}{Compass}, \hyperlink{classIRProximitySensor_a7137ed31e794212c00e866af8c79b773}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_a87391dc065ea5b5dc6693660226cac39}{H\-Bridge}, \hyperlink{classDistance_a2735c7f7546b7fb0eba7f20940636dcc}{Distance} e \hyperlink{classLED_a70416944b6d3cae4a8dc73859a3df2aa}{L\-E\-D}.
+
+\hypertarget{classDevice_a7b20d7fdcab77062810a0a254e978c5e}{\index{Device@{Device}!get\-I\-D@{get\-I\-D}}
+\index{get\-I\-D@{get\-I\-D}!Device@{Device}}
+\subsubsection[{get\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Device\-::get\-I\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDevice_a7b20d7fdcab77062810a0a254e978c5e}
+\begin{DoxyReturn}{Retorna}
+O identificador exclusivo de cada dispositivo. 
+\end{DoxyReturn}
+\hypertarget{classDevice_a463598bce318556c79bfc0f26b38f7d3}{\index{Device@{Device}!is\-Effector@{is\-Effector}}
+\index{is\-Effector@{is\-Effector}!Device@{Device}}
+\subsubsection[{is\-Effector}]{\setlength{\rightskip}{0pt plus 5cm}bool Device\-::is\-Effector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDevice_a463598bce318556c79bfc0f26b38f7d3}
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo é um atuador. 
+\end{DoxyReturn}
+\hypertarget{classDevice_a30065df084d450dbaae9d68215e01e6f}{\index{Device@{Device}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!Device@{Device}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Device\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a30065df084d450dbaae9d68215e01e6f}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementado por \hyperlink{classClock_a16ee92e4eb0c0e3fcb7880b1256fd5ec}{Clock}, \hyperlink{classReflectanceSensorArray_a7781688e68d77cce4f7c70bbe242113b}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_aec5e3e1aa8472ad7759b048d3b9522d6}{Compass}, \hyperlink{classIRProximitySensor_a4b3faeccd653b259b513a9326c52c8dd}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_a3c43aac5ae38c1f04fdeb148fdfb4820}{H\-Bridge}, \hyperlink{classDistance_a16950b1595399b686fdac3c807c7ea47}{Distance} e \hyperlink{classLED_a36cc9854b853baba06ee3d1e74339c6f}{L\-E\-D}.
+
+\hypertarget{classDevice_a848bce229a669a4e7531bce2b6b24154}{\index{Device@{Device}!is\-Sensor@{is\-Sensor}}
+\index{is\-Sensor@{is\-Sensor}!Device@{Device}}
+\subsubsection[{is\-Sensor}]{\setlength{\rightskip}{0pt plus 5cm}bool Device\-::is\-Sensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDevice_a848bce229a669a4e7531bce2b6b24154}
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo é um sensor. 
+\end{DoxyReturn}
+\hypertarget{classDevice_a6e43162e890cb40eafb923b0c94d167a}{\index{Device@{Device}!reset@{reset}}
+\index{reset@{reset}!Device@{Device}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a6e43162e890cb40eafb923b0c94d167a}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementado por \hyperlink{classClock_a0ab5423b0a997aa13d7b6131c46d1358}{Clock}, \hyperlink{classReflectanceSensorArray_aed9eaebad7add3ac016ea8af942261a5}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_aabf8451561e0748b6de05a2cbd6ab780}{Compass}, \hyperlink{classIRProximitySensor_aca3e197dd2cce038658bb381ad8a2d97}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_ad4d86b71b6ece44b30170b439b5e170f}{H\-Bridge}, \hyperlink{classDistance_a53661de88754833d8d2d26f7f0b4c158}{Distance} e \hyperlink{classLED_a8b85489d7bcfc54252f28abc0a5ba3cf}{L\-E\-D}.
+
+\hypertarget{classDevice_a3b4bf3ff761f93c024675548755586d8}{\index{Device@{Device}!set@{set}}
+\index{set@{set}!Device@{Device}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a3b4bf3ff761f93c024675548755586d8}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementado por \hyperlink{classClock_a296c2478ec80555af73955e09777fa5e}{Clock}, \hyperlink{classReflectanceSensorArray_a023408b8b40cea4a74c5c1837a39d701}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_ab74dbf60e82e054f7a5d35314c89029e}{Compass}, \hyperlink{classIRProximitySensor_afbbfaa05fc2a2bca5b3877f99e6b0a4f}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_a95099e4fbaf37e9ca13de8f6af9605c9}{H\-Bridge}, \hyperlink{classDistance_abcc40ce3c92dc203c282c1d9c15ee0ee}{Distance} e \hyperlink{classLED_aae83a677cee4ee5cb952ccbb22e57781}{L\-E\-D}.
+
+\hypertarget{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{\index{Device@{Device}!stop@{stop}}
+\index{stop@{stop}!Device@{Device}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a22430f274658b04c280b5cc2d53aa1e4}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementado por \hyperlink{classClock_a0b77c3e7f33eb7ae0f018e469d96a250}{Clock}, \hyperlink{classReflectanceSensorArray_ae83ddbd02df0b879bf67c99a02341f2b}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_a1a550ee5183625110a0444e38920723b}{Compass}, \hyperlink{classIRProximitySensor_a796e2f4d29f59393d25de6b3b7e0f70b}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_ad57868053f2f0cc144a8bf80c6090052}{H\-Bridge}, \hyperlink{classDistance_a5154b05bb07f63421d61597f9408ea6c}{Distance} e \hyperlink{classLED_a11f7b87c240eb671482a7af687b0737c}{L\-E\-D}.
+
+\hypertarget{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{\index{Device@{Device}!update@{update}}
+\index{update@{update}!Device@{Device}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementado por \hyperlink{classClock_ae7c6708cf04b233655b501a97bb1e802}{Clock}, \hyperlink{classReflectanceSensorArray_a3a5f7c29c3a72026365df9cf9791e3e5}{Reflectance\-Sensor\-Array}, \hyperlink{classCompass_a9ffa2943fec2ba6154a0f9e21cfb0b73}{Compass}, \hyperlink{classIRProximitySensor_a2e18942667a104cc3aae96dc5724097e}{I\-R\-Proximity\-Sensor}, \hyperlink{classHBridge_aa6f6151443b9e6013fc5691504851e58}{H\-Bridge}, \hyperlink{classDistance_a1bc009e64442db5e875af76ae29ae57f}{Distance} e \hyperlink{classLED_ad615d612f5b0c7dac4dde5245f191382}{L\-E\-D}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Device_8h}{Device.\-h}\item 
+\hyperlink{Device_8cpp}{Device.\-cpp}\end{DoxyCompactItemize}

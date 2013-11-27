@@ -1,0 +1,149 @@
+\hypertarget{classSerialConnection}{\section{Referência da Classe Serial\-Connection}
+\label{classSerialConnection}\index{Serial\-Connection@{Serial\-Connection}}
+}
+
+
+{\ttfamily \#include $<$Serial\-Connection.\-h$>$}
+
+Diagrama de Hierarquia para Serial\-Connection\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSerialConnection}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSerialConnection_a05e15045efc5ea7098337f9dcd43fc82}{Serial\-Connection} (Hardware\-Serial \&the\-Serial, uint32\-\_\-t rate)
+\item 
+void \hyperlink{classSerialConnection_a6022b91cdd0bc412d8aeda364c32ce21}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa a conexão. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classSerialConnection_a91aa59d8f0b913e91dc4ddcde8e42519}{available} ()
+\begin{DoxyCompactList}\small\item\em Verifica se existe alguma mensagem disponivel. \end{DoxyCompactList}\item 
+void \hyperlink{classSerialConnection_a85e05ec34dbb4d8d6feaccecf8ae9a72}{println} (const char $\ast$data)
+\item 
+bool \hyperlink{classSerialConnection_ac98733956090bc3eaa628d156f06ef5d}{send\-Message} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Envia uma mensagem. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classSerialConnection_ac72ec887122fe08fd389dc8724b31c63}{receive\-Message} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Recebe uma mensagem. \end{DoxyCompactList}\item 
+Hardware\-Serial \& \hyperlink{classSerialConnection_af5aff354718e4912d80fcee953d54540}{get\-Port} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classSerialConnection_a05e15045efc5ea7098337f9dcd43fc82}{\index{Serial\-Connection@{Serial\-Connection}!Serial\-Connection@{Serial\-Connection}}
+\index{Serial\-Connection@{Serial\-Connection}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{Serial\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}Serial\-Connection\-::\-Serial\-Connection (
+\begin{DoxyParamCaption}
+\item[{Hardware\-Serial \&}]{the\-Serial, }
+\item[{uint32\-\_\-t}]{rate}
+\end{DoxyParamCaption}
+)}}\label{classSerialConnection_a05e15045efc5ea7098337f9dcd43fc82}
+
+
+\subsection{Métodos}
+\hypertarget{classSerialConnection_a91aa59d8f0b913e91dc4ddcde8e42519}{\index{Serial\-Connection@{Serial\-Connection}!available@{available}}
+\index{available@{available}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{available}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Serial\-Connection\-::available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSerialConnection_a91aa59d8f0b913e91dc4ddcde8e42519}
+
+
+Verifica se existe alguma mensagem disponivel. 
+
+\begin{DoxyReturn}{Retorna}
+O numero de bytes disponiveis, se possivel. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classConnection_acd5ee426481b2aca2903d96f6f807341}{Connection}.
+
+\hypertarget{classSerialConnection_a6022b91cdd0bc412d8aeda364c32ce21}{\index{Serial\-Connection@{Serial\-Connection}!begin@{begin}}
+\index{begin@{begin}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Serial\-Connection\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSerialConnection_a6022b91cdd0bc412d8aeda364c32ce21}
+
+
+Inicializa a conexão. 
+
+
+
+Implementa \hyperlink{classConnection_a2e5c7e67928fac5fea45e56c11d1ed31}{Connection}.
+
+\hypertarget{classSerialConnection_af5aff354718e4912d80fcee953d54540}{\index{Serial\-Connection@{Serial\-Connection}!get\-Port@{get\-Port}}
+\index{get\-Port@{get\-Port}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{get\-Port}]{\setlength{\rightskip}{0pt plus 5cm}Hardware\-Serial \& Serial\-Connection\-::get\-Port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSerialConnection_af5aff354718e4912d80fcee953d54540}
+\hypertarget{classSerialConnection_a85e05ec34dbb4d8d6feaccecf8ae9a72}{\index{Serial\-Connection@{Serial\-Connection}!println@{println}}
+\index{println@{println}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{println}]{\setlength{\rightskip}{0pt plus 5cm}void Serial\-Connection\-::println (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{classSerialConnection_a85e05ec34dbb4d8d6feaccecf8ae9a72}
+\hypertarget{classSerialConnection_ac72ec887122fe08fd389dc8724b31c63}{\index{Serial\-Connection@{Serial\-Connection}!receive\-Message@{receive\-Message}}
+\index{receive\-Message@{receive\-Message}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{receive\-Message}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Serial\-Connection\-::receive\-Message (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSerialConnection_ac72ec887122fe08fd389dc8724b31c63}
+
+
+Recebe uma mensagem. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Um array de bytes usado para armazenar a mensagem recebida. \\
+\hline
+ & {\em size} & O tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O tamanho da mensagem recebida. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classConnection_a315961bc8327f38e4f4e09b832fc60a1}{Connection}.
+
+\hypertarget{classSerialConnection_ac98733956090bc3eaa628d156f06ef5d}{\index{Serial\-Connection@{Serial\-Connection}!send\-Message@{send\-Message}}
+\index{send\-Message@{send\-Message}!SerialConnection@{Serial\-Connection}}
+\subsubsection[{send\-Message}]{\setlength{\rightskip}{0pt plus 5cm}bool Serial\-Connection\-::send\-Message (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSerialConnection_ac98733956090bc3eaa628d156f06ef5d}
+
+
+Envia uma mensagem. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Um array de bytes contendo a mensagem. \\
+\hline
+ & {\em size} & O tamanho do array {\ttfamily data}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se a mensagem foi entregue corretamente. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classConnection_aa03e632ed6b812d915fd40dccd18a080}{Connection}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{SerialConnection_8h}{Serial\-Connection.\-h}\item 
+\hyperlink{SerialConnection_8cpp}{Serial\-Connection.\-cpp}\end{DoxyCompactItemize}

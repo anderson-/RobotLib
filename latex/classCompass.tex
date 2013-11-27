@@ -1,0 +1,181 @@
+\hypertarget{classCompass}{\section{Referência da Classe Compass}
+\label{classCompass}\index{Compass@{Compass}}
+}
+
+
+{\ttfamily \#include $<$Compass.\-h$>$}
+
+Diagrama de Hierarquia para Compass\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCompass}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCompass_a68bd2a073cc0d461b2b46529aae04765}{Compass} ()
+\item 
+void \hyperlink{classCompass_a987d9ba6c1773c14a0758e46fe4dac9d}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classCompass_a1a550ee5183625110a0444e38920723b}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classCompass_aabf8451561e0748b6de05a2cbd6ab780}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classCompass_a9ffa2943fec2ba6154a0f9e21cfb0b73}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classCompass_aec5e3e1aa8472ad7759b048d3b9522d6}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classCompass_a8ed68e06b27567738cd37e4be8d0d342}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classCompass_ab74dbf60e82e054f7a5d35314c89029e}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)
+\item 
+int \hyperlink{classCompass_ae431d3e75f104dab21c72968fbbd6c89}{get\-Angle} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classCompass_a68bd2a073cc0d461b2b46529aae04765}{\index{Compass@{Compass}!Compass@{Compass}}
+\index{Compass@{Compass}!Compass@{Compass}}
+\subsubsection[{Compass}]{\setlength{\rightskip}{0pt plus 5cm}Compass\-::\-Compass (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCompass_a68bd2a073cc0d461b2b46529aae04765}
+
+
+\subsection{Métodos}
+\hypertarget{classCompass_a987d9ba6c1773c14a0758e46fe4dac9d}{\index{Compass@{Compass}!begin@{begin}}
+\index{begin@{begin}!Compass@{Compass}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Compass\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_a987d9ba6c1773c14a0758e46fe4dac9d}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classCompass_a8ed68e06b27567738cd37e4be8d0d342}{\index{Compass@{Compass}!get@{get}}
+\index{get@{get}!Compass@{Compass}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Compass\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_a8ed68e06b27567738cd37e4be8d0d342}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classCompass_ae431d3e75f104dab21c72968fbbd6c89}{\index{Compass@{Compass}!get\-Angle@{get\-Angle}}
+\index{get\-Angle@{get\-Angle}!Compass@{Compass}}
+\subsubsection[{get\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}int Compass\-::get\-Angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCompass_ae431d3e75f104dab21c72968fbbd6c89}
+\hypertarget{classCompass_aec5e3e1aa8472ad7759b048d3b9522d6}{\index{Compass@{Compass}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!Compass@{Compass}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool Compass\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_aec5e3e1aa8472ad7759b048d3b9522d6}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classCompass_aabf8451561e0748b6de05a2cbd6ab780}{\index{Compass@{Compass}!reset@{reset}}
+\index{reset@{reset}!Compass@{Compass}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Compass\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_aabf8451561e0748b6de05a2cbd6ab780}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classCompass_ab74dbf60e82e054f7a5d35314c89029e}{\index{Compass@{Compass}!set@{set}}
+\index{set@{set}!Compass@{Compass}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void Compass\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_ab74dbf60e82e054f7a5d35314c89029e}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classCompass_a1a550ee5183625110a0444e38920723b}{\index{Compass@{Compass}!stop@{stop}}
+\index{stop@{stop}!Compass@{Compass}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void Compass\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_a1a550ee5183625110a0444e38920723b}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classCompass_a9ffa2943fec2ba6154a0f9e21cfb0b73}{\index{Compass@{Compass}!update@{update}}
+\index{update@{update}!Compass@{Compass}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Compass\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCompass_a9ffa2943fec2ba6154a0f9e21cfb0b73}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Compass_8h}{Compass.\-h}\item 
+\hyperlink{Compass_8cpp}{Compass.\-cpp}\end{DoxyCompactItemize}

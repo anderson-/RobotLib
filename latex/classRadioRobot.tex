@@ -1,0 +1,129 @@
+\hypertarget{classRadioRobot}{\section{Referência da Classe Radio\-Robot}
+\label{classRadioRobot}\index{Radio\-Robot@{Radio\-Robot}}
+}
+
+
+{\ttfamily \#include $<$Radio\-Robot.\-h$>$}
+
+Diagrama de Hierarquia para Radio\-Robot\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRadioRobot}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRadioRobot_ad28a59e73e546d15004efda03525c143}{Radio\-Robot} ()
+\item 
+void \hyperlink{classRadioRobot_a1470b91c7a534545bdc6126c3065d4b8}{add\-Action} (\hyperlink{RadioRobot_8h_a3541f6ba20932adb767c7e0d8bdc6940}{Action\-Func} action)
+\item 
+void \hyperlink{classRadioRobot_a5de90c99faa941df35898349b6b148b5}{message\-Received} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size, \hyperlink{classConnection}{Connection} \&connection)
+\begin{DoxyCompactList}\small\item\em Função executada quando uma mensagem é recebida por alguma conexão. \end{DoxyCompactList}\item 
+void \hyperlink{classRadioRobot_a278b37c78b4fd9c4d7b16192e780f6a1}{device\-Ready} (\hyperlink{classDevice}{Device} \&d)
+\begin{DoxyCompactList}\small\item\em Função executada quando um dispositivo anteriormente ocupado torna-\/se disponível. \end{DoxyCompactList}\item 
+void \hyperlink{classRadioRobot_a7b58f55a81e816ba5d53fd14bf28a6a5}{think} ()
+\begin{DoxyCompactList}\small\item\em Função responsável por tomar novas decisões com base nos sensores e atuadores do robô, em um determinado ciclo. \end{DoxyCompactList}\item 
+virtual \hyperlink{classDevice}{Device} $\ast$ \hyperlink{classRadioRobot_ae52a4b2243df9d55238cfaa7be2e302d}{create\-New} (uint8\-\_\-t id, const uint8\-\_\-t $\ast$data, uint8\-\_\-t size)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classRadioRobot_ad28a59e73e546d15004efda03525c143}{\index{Radio\-Robot@{Radio\-Robot}!Radio\-Robot@{Radio\-Robot}}
+\index{Radio\-Robot@{Radio\-Robot}!RadioRobot@{Radio\-Robot}}
+\subsubsection[{Radio\-Robot}]{\setlength{\rightskip}{0pt plus 5cm}Radio\-Robot\-::\-Radio\-Robot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRadioRobot_ad28a59e73e546d15004efda03525c143}
+
+
+\subsection{Métodos}
+\hypertarget{classRadioRobot_a1470b91c7a534545bdc6126c3065d4b8}{\index{Radio\-Robot@{Radio\-Robot}!add\-Action@{add\-Action}}
+\index{add\-Action@{add\-Action}!RadioRobot@{Radio\-Robot}}
+\subsubsection[{add\-Action}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Robot\-::add\-Action (
+\begin{DoxyParamCaption}
+\item[{{\bf Action\-Func}}]{action}
+\end{DoxyParamCaption}
+)}}\label{classRadioRobot_a1470b91c7a534545bdc6126c3065d4b8}
+\hypertarget{classRadioRobot_ae52a4b2243df9d55238cfaa7be2e302d}{\index{Radio\-Robot@{Radio\-Robot}!create\-New@{create\-New}}
+\index{create\-New@{create\-New}!RadioRobot@{Radio\-Robot}}
+\subsubsection[{create\-New}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Device}$\ast$ Radio\-Robot\-::create\-New (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{id, }
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classRadioRobot_ae52a4b2243df9d55238cfaa7be2e302d}
+
+
+Reimplementado por \hyperlink{classGenericRobot_a4eac111dafabbfb130ca988e06a18808}{Generic\-Robot}.
+
+\hypertarget{classRadioRobot_a278b37c78b4fd9c4d7b16192e780f6a1}{\index{Radio\-Robot@{Radio\-Robot}!device\-Ready@{device\-Ready}}
+\index{device\-Ready@{device\-Ready}!RadioRobot@{Radio\-Robot}}
+\subsubsection[{device\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Robot\-::device\-Ready (
+\begin{DoxyParamCaption}
+\item[{{\bf Device} \&}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classRadioRobot_a278b37c78b4fd9c4d7b16192e780f6a1}
+
+
+Função executada quando um dispositivo anteriormente ocupado torna-\/se disponível. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em d} & Referência ao dispositivo em questão. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classRobot_aaa0c932d862aed7556b068ebb70a917a}{Robot}.
+
+\hypertarget{classRadioRobot_a5de90c99faa941df35898349b6b148b5}{\index{Radio\-Robot@{Radio\-Robot}!message\-Received@{message\-Received}}
+\index{message\-Received@{message\-Received}!RadioRobot@{Radio\-Robot}}
+\subsubsection[{message\-Received}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Robot\-::message\-Received (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size, }
+\item[{{\bf Connection} \&}]{connection}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRadioRobot_a5de90c99faa941df35898349b6b148b5}
+
+
+Função executada quando uma mensagem é recebida por alguma conexão. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Um vetor de constantes de 8bits (byte) contendo a mensagem. \\
+\hline
+ & {\em size} & O tamanho da mensagem em bytes. \\
+\hline
+ & {\em connection} & O I\-D da conexão que recebeu a mensagem. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classRobot_ab02c09bdea244d38bcfd0010b9554b6f}{Robot}.
+
+\hypertarget{classRadioRobot_a7b58f55a81e816ba5d53fd14bf28a6a5}{\index{Radio\-Robot@{Radio\-Robot}!think@{think}}
+\index{think@{think}!RadioRobot@{Radio\-Robot}}
+\subsubsection[{think}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Robot\-::think (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRadioRobot_a7b58f55a81e816ba5d53fd14bf28a6a5}
+
+
+Função responsável por tomar novas decisões com base nos sensores e atuadores do robô, em um determinado ciclo. 
+
+É executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classRobot_a75cfdd8e35e007abe24ffae66a8ecf1d}{Robot}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{RadioRobot_8h}{Radio\-Robot.\-h}\item 
+\hyperlink{RadioRobot_8cpp}{Radio\-Robot.\-cpp}\end{DoxyCompactItemize}

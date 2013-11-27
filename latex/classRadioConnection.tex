@@ -1,0 +1,168 @@
+\hypertarget{classRadioConnection}{\section{Referência da Classe Radio\-Connection}
+\label{classRadioConnection}\index{Radio\-Connection@{Radio\-Connection}}
+}
+
+
+{\ttfamily \#include $<$Radio\-Connection.\-h$>$}
+
+Diagrama de Hierarquia para Radio\-Connection\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRadioConnection}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRadioConnection_ab901c79237a74d39f756b497140c9256}{Radio\-Connection} (uint8\-\_\-t pin, uint8\-\_\-t S\-P\-I\-\_\-\-S\-S, bool \hyperlink{classRadioConnection_a1e47d7b5f29f786ff2c90bf7446ac145}{is\-Master}=false)
+\item 
+bool \hyperlink{classRadioConnection_a1e47d7b5f29f786ff2c90bf7446ac145}{is\-Master} ()
+\item 
+void \hyperlink{classRadioConnection_a1deb37d098b17cfdf2c5c90e67a279aa}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa a conexão. \end{DoxyCompactList}\item 
+void \hyperlink{classRadioConnection_a50c54a480bbb37df2ecefb82aa9aa2a9}{start} ()
+\item 
+void \hyperlink{classRadioConnection_aa351758992987f76f2f14700c35daf04}{stop} ()
+\item 
+void \hyperlink{classRadioConnection_a170cffba8c7b427948429b41e6014ea3}{print\-Details} ()
+\item 
+uint8\-\_\-t \hyperlink{classRadioConnection_a970ffcf382ae789c22023857c5c48d83}{available} ()
+\begin{DoxyCompactList}\small\item\em Verifica se existe alguma mensagem disponivel. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classRadioConnection_a6dc7c7b2a7c9b5d754d73f80516a37fc}{receive\-Message} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Recebe uma mensagem. \end{DoxyCompactList}\item 
+bool \hyperlink{classRadioConnection_a1bc09119403b84463264710ea40f5a4c}{send\-Message} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Envia uma mensagem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classRadioConnection_ab901c79237a74d39f756b497140c9256}{\index{Radio\-Connection@{Radio\-Connection}!Radio\-Connection@{Radio\-Connection}}
+\index{Radio\-Connection@{Radio\-Connection}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{Radio\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}Radio\-Connection\-::\-Radio\-Connection (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{pin, }
+\item[{uint8\-\_\-t}]{S\-P\-I\-\_\-\-S\-S, }
+\item[{bool}]{is\-Master = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{classRadioConnection_ab901c79237a74d39f756b497140c9256}
+
+
+\subsection{Métodos}
+\hypertarget{classRadioConnection_a970ffcf382ae789c22023857c5c48d83}{\index{Radio\-Connection@{Radio\-Connection}!available@{available}}
+\index{available@{available}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{available}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Radio\-Connection\-::available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRadioConnection_a970ffcf382ae789c22023857c5c48d83}
+
+
+Verifica se existe alguma mensagem disponivel. 
+
+\begin{DoxyReturn}{Retorna}
+O numero de bytes disponiveis, se possivel. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classConnection_acd5ee426481b2aca2903d96f6f807341}{Connection}.
+
+\hypertarget{classRadioConnection_a1deb37d098b17cfdf2c5c90e67a279aa}{\index{Radio\-Connection@{Radio\-Connection}!begin@{begin}}
+\index{begin@{begin}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Connection\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRadioConnection_a1deb37d098b17cfdf2c5c90e67a279aa}
+
+
+Inicializa a conexão. 
+
+
+
+Implementa \hyperlink{classConnection_a2e5c7e67928fac5fea45e56c11d1ed31}{Connection}.
+
+\hypertarget{classRadioConnection_a1e47d7b5f29f786ff2c90bf7446ac145}{\index{Radio\-Connection@{Radio\-Connection}!is\-Master@{is\-Master}}
+\index{is\-Master@{is\-Master}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{is\-Master}]{\setlength{\rightskip}{0pt plus 5cm}bool Radio\-Connection\-::is\-Master (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRadioConnection_a1e47d7b5f29f786ff2c90bf7446ac145}
+\hypertarget{classRadioConnection_a170cffba8c7b427948429b41e6014ea3}{\index{Radio\-Connection@{Radio\-Connection}!print\-Details@{print\-Details}}
+\index{print\-Details@{print\-Details}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{print\-Details}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Connection\-::print\-Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRadioConnection_a170cffba8c7b427948429b41e6014ea3}
+\hypertarget{classRadioConnection_a6dc7c7b2a7c9b5d754d73f80516a37fc}{\index{Radio\-Connection@{Radio\-Connection}!receive\-Message@{receive\-Message}}
+\index{receive\-Message@{receive\-Message}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{receive\-Message}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Radio\-Connection\-::receive\-Message (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRadioConnection_a6dc7c7b2a7c9b5d754d73f80516a37fc}
+
+
+Recebe uma mensagem. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Um array de bytes usado para armazenar a mensagem recebida. \\
+\hline
+ & {\em size} & O tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O tamanho da mensagem recebida. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classConnection_a315961bc8327f38e4f4e09b832fc60a1}{Connection}.
+
+\hypertarget{classRadioConnection_a1bc09119403b84463264710ea40f5a4c}{\index{Radio\-Connection@{Radio\-Connection}!send\-Message@{send\-Message}}
+\index{send\-Message@{send\-Message}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{send\-Message}]{\setlength{\rightskip}{0pt plus 5cm}bool Radio\-Connection\-::send\-Message (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRadioConnection_a1bc09119403b84463264710ea40f5a4c}
+
+
+Envia uma mensagem. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Um array de bytes contendo a mensagem. \\
+\hline
+ & {\em size} & O tamanho do array {\ttfamily data}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se a mensagem foi entregue corretamente. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classConnection_aa03e632ed6b812d915fd40dccd18a080}{Connection}.
+
+\hypertarget{classRadioConnection_a50c54a480bbb37df2ecefb82aa9aa2a9}{\index{Radio\-Connection@{Radio\-Connection}!start@{start}}
+\index{start@{start}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Connection\-::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRadioConnection_a50c54a480bbb37df2ecefb82aa9aa2a9}
+\hypertarget{classRadioConnection_aa351758992987f76f2f14700c35daf04}{\index{Radio\-Connection@{Radio\-Connection}!stop@{stop}}
+\index{stop@{stop}!RadioConnection@{Radio\-Connection}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void Radio\-Connection\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRadioConnection_aa351758992987f76f2f14700c35daf04}
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{RadioConnection_8h}{Radio\-Connection.\-h}\item 
+\hyperlink{RadioConnection_8cpp}{Radio\-Connection.\-cpp}\end{DoxyCompactItemize}
