@@ -1,13 +1,26 @@
+
+#define LIBRARY_RF24 0
+#define LIBRARY_MIRF 1
+
 #include <SPI.h>
-#include <RF24_config.h>
-#include <Robot.h>
+
+#if LIBRARY_RF24
+  #include <RF24_config.h>
+  #include <RadioConnection.h>
+#elif LIBRARY_MIRF
+  #include <Mirf.h>
+  #include <nRF24L01.h>
+  #include <MirfHardwareSpiDriver.h>
+  #include <RadioConnectionM.h>
+#endif
+
 #include <Wire.h>
 #include <HMC5883L.h>
+#include <GenericRobot.h>
 #include <SerialConnection.h>
 #include <HBridge.h>
 #include <Compass.h>
 #include <IRProximitySensor.h>
-#include <GenericRobot.h>
 
 /**
  * Sketch para ser usado no RoboF, com radio, dispositivos basicos,
@@ -19,15 +32,19 @@ class RoboF : public GenericRobot {
 public:
   RoboF() : radio(7,8,false),
             hbridge(5,6,9,10),
-            compass()
+            compass(),
+            irsensor(17),
+            reflectance(A0, (uint8_t[]){4, 3, 16}, 400)
             {
     addConnection(radio);  //connID = 0
     //adicionado por padrao: 
-    //addDevice(clock)     //devID = 0
-    addDevice(hbridge);    //devID = 1
-    addDevice(compass);    //devID = 2
-    //tem que adiciona o sensor de distancia enviando {6, 5, 1, 17}
-    //<ADD> <SENSOR_SID> <TAMANHO1BYTE> <PINO>
+    //addDevice(clock)      //devID = 0
+    addDevice(hbridge);     //devID = 1
+    addDevice(compass);     //devID = 2
+    addDevice(irsensor);    //devID = 3
+    addDevice(reflectance); //devID = 4
+    // para adicionar novo sensor
+    // <ADD> <SENSOR_ID> <TAMANHO1BYTE> <PINO>
   }
   
 private:
@@ -35,85 +52,142 @@ private:
   
   HBridge hbridge;
   Compass compass;
+  IRProximitySensor irsensor;
+  ReflectanceSensorArray reflectance;
 };
 
-bool andarAteh (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
-  // variaveis estaticas nao sao redefinidas e guardam seus valores em chamadas consecutivas da mesma funçao
-  static HBridge * hbridge = NULL;
-  static IRProximitySensor * irpsensor = NULL;
-  static uint8_t dist = 0;
-  
-  if (data != NULL){ //inicializa as variaveis estaticas
-    hbridge = (HBridge *) deviceList[0]; // posiçao 0!
-    irpsensor = (IRProximitySensor *) deviceList[1]; // posiçao 1!
-    dist = data[0];
-  }
-  
-  //fazem a açao
-  if (hbridge && irpsensor){
-    if (irpsensor->getDistance() <= dist){
-      hbridge->setMotorState(1,0);
-      hbridge->setMotorState(0,0);
-      return true; //termina
-    } else {
-      hbridge->setMotorState(1,-50);//ARRUMAR!!
-      hbridge->setMotorState(0,-50);
-      return false; //repete
-    }
-  }
-  return true;
-}
+/**
+ * Posiciona o robo em um determinado angulo da bussola.
+ *
+ * Entrada:
+ *  1. (int16) - angulo desejado
+ *  2. (int8)  - erro maximo (threshold)
+ **/
+bool head (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
+  static HBridge *  hbridge     = NULL;
+  static Compass *  compass     = NULL;
+  static int16_t    angle;
+  static int8_t     thld;
+  static uint8_t    iterations;
 
-//   Funcionando, mas ainda tem o problema de passar um pouco do angulo após encontra-lo.
-//   Essa funcao nao e equivalente a girar(angulo), mas pode ser utilizada/modificada para isso. O que ela faz e
-// posicionar o robo em um angulo determinado.
-bool rotate (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length){
-  static HBridge * hbridge = NULL;
-  static Compass * compass = NULL;
-  static int16_t angle = 0;
-  static int8_t thld = 0;
-  static int8_t iterations = 0;
-  int16_t error;
-  if (data != NULL){ //inicializa a funçao
+  //inicializa a funçao
+  if (data != NULL){
     hbridge = (HBridge *) deviceList[0]; // posiçao 0!
     compass = (Compass *) deviceList[1]; // posiçao 1!
     angle = ((int16_t *)data)[0];
     thld = data[2];
+    iterations = 0;
   }
-  if (hbridge && compass && angle <= 360){
-    error = angle - compass->getAngle();
-    // ajuste do para o menor angulo
-    if(error > 180) {
-      error = error - 360; // (180,360) -> (-180,0)
-    } else if(error < -180) {
-      error = error + 360; // (-360,-180) -> (0,180)
-    }
-    if ((error >= -thld) && (error <= thld )){ // se ja esta dentro do erro limite
+
+  if (hbridge && compass && angle < 360) {
+    // erro entre o angulo desejado e o atual
+    int16_t error = angle - compass->getAngle();
+
+    // ajuste para o menor angulo
+    if(error > 180)       error -= 360; // (180,360) -> (-180,0)
+    else if(error < -180) error += 360; // (-360,-180) -> (0,180)
+
+    // verifica se esta dentro do erro limite
+    if ((error >= -thld) && (error <= thld )) {
+      // se esta dentro do limite, para
       hbridge->setMotorState(1,0);
       hbridge->setMotorState(0,0);
+
+      // conta 5 iteracoes no angulo desejado,
+      // para evitar que ele desvie do angulo pela inercia
       if (iterations >= 5) {
         return true; //termina
-      }
-      else {
+      } else {
         iterations++;
-        return false;
+        return false; //repete
       }
+
     } else {
-      if (error > thld){ // se esta a direita do objetivo
-        int8_t speed = (int8_t) (30 + error*0.515); // velocidade proporcional ao erro, 0.71 = 128/180°
-        hbridge->setMotorState(1,-speed);
-        hbridge->setMotorState(0,speed);
-        iterations = 0;
-        return false; //repete
-      } else { // se esta a esquerda do objetivo
-        int8_t speed = (int8_t) (30 - error*0.515); // velocidade proporcional ao erro, 0.515 = (128-35)/180°
-        hbridge->setMotorState(1,speed);
-        hbridge->setMotorState(0,-speed);
-        iterations = 0;
-        return false; //repete
+      // senao, calcula uma velocidade e direcao de giro proporcional ao erro
+      int8_t speed;
+      if (error > thld) {
+        speed = (int8_t) max(40, min(127, error*0.71));
+      } else {
+        speed = (int8_t) min(-40, max(-127, -error*0.71));
       }
+      hbridge->setMotorState(1, speed);
+      hbridge->setMotorState(0,-speed);
+      iterations = 0;
+
+      return false; //repete
     }
   }
+
+  return true; //termina
+}
+
+
+/**
+ * Rotaciona o robo em um determinado angulo.
+ *
+ * Entrada:
+ *  1. (int16) - angulo desejado
+ *  2. (int8)  - erro maximo (threshold)
+ **/
+bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
+  static HBridge *  hbridge       = NULL;
+  static Compass *  compass       = NULL;
+  static int8_t     thld;
+  static int16_t    turnRemaining;
+  static int16_t    lastAngle;
+  static uint8_t    iterations;
+
+  //inicializa a funçao
+  if (data != NULL){
+    hbridge = (HBridge *) deviceList[0]; // posiçao 0!
+    compass = (Compass *) deviceList[1]; // posiçao 1!
+    turnRemaining = ((int16_t *)data)[0];
+    thld = data[2];
+    iterations = 0;
+    lastAngle = compass->getAngle();
+  }
+
+  if (hbridge && compass) {
+    // mede a rotacao feita nessa iteracao e subtrai da rotacao total
+    int16_t currAngle = compass->getAngle();
+    int16_t currTurn = currAngle - lastAngle;
+    // ajuste para o menor angulo
+    if (currTurn > 180)       currTurn -= 360;
+    else if (currTurn < -180) currTurn += 360;
+    turnRemaining -= currTurn;
+    lastAngle = currAngle;
+
+    // verifica se esta dentro do erro limite
+    if ((turnRemaining >= -thld) && (turnRemaining <= thld )) {
+      // se esta dentro do limite, para
+      hbridge->setMotorState(1,0);
+      hbridge->setMotorState(0,0);
+
+      // conta 5 iteracoes no angulo desejado,
+      // para evitar que ele desvie do angulo pela inercia
+      if (iterations >= 5) {
+        return true; //termina
+      } else {
+        iterations++;
+        return false; //repete
+      }
+
+    } else {
+      // senao, calcula uma velocidade e direcao de giro proporcional ao erro
+      int8_t speed;
+      if (turnRemaining > thld) {
+        speed = (int8_t) max(40, min(127, turnRemaining*0.71));
+      } else {
+        speed = (int8_t) min(-40, max(-127, -turnRemaining*0.71));
+      }
+      hbridge->setMotorState(1, speed);
+      hbridge->setMotorState(0,-speed);
+      iterations = 0;
+
+      return false; //repete
+    }
+  }
+
   return true; //termina
 }
 
@@ -121,8 +195,8 @@ RoboF robot;
 
 void setup(){
   //adicionando funçoes... 
-  robot.addAction(rotate);     // id = 0
-  robot.addAction(andarAteh);  // id = 1
+  robot.addAction(head);  // id = 0
+  robot.addAction(turn);  // id = 1
   robot.begin();
 }
 

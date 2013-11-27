@@ -1,9 +1,23 @@
+
+#define LIBRARY_RF24 0
+#define LIBRARY_MIRF 1
+
 #include <SPI.h>
-#include <RF24_config.h>
+
+#if LIBRARY_RF24
+  #include <RF24_config.h>
+  #include <RadioConnection.h>
+#elif LIBRARY_MIRF
+  #include <Mirf.h>
+  #include <nRF24L01.h>
+  #include <MirfHardwareSpiDriver.h>
+  #include <RadioConnectionM.h>
+#endif
+
 #include <Wire.h>
 #include <HMC5883L.h>
-#include <Robot.h>
 #include <SerialConnection.h>
+#include <Robot.h>
 
 /**
  * Sketch para comunicaçao PC-Robo via radio.
@@ -27,9 +41,7 @@ public:
       serial.sendMessage(data,size);
     } else {
       // recebe de serial e envia para radio
-      if (!radio.sendMessage(data,size)) {
-        serial.println("FALHA");
-      }
+      radio.sendMessage(data,size);
     }
   }
   
