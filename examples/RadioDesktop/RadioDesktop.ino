@@ -1,11 +1,23 @@
 
+#define LIBRARY_RF24 0
+#define LIBRARY_MIRF 1
+
 #include <SPI.h>
-#include <RF24_config.h>
+
+#if LIBRARY_RF24
+  #include <RF24_config.h>
+  #include <RadioConnection.h>
+#elif LIBRARY_MIRF
+  #include <Mirf.h>
+  #include <nRF24L01.h>
+  #include <MirfHardwareSpiDriver.h>
+  #include <RadioConnectionM.h>
+#endif
+
 #include <Wire.h>
 #include <HMC5883L.h>
-#include <Robot.h>
 #include <SerialConnection.h>
-#include <printf.h>
+#include <Robot.h>
 
 /**
  * Sketch para comunicaçao PC-Robo via radio.
@@ -15,7 +27,7 @@
 
 class MyRobot : public Robot {
 public:
-  MyRobot() : radio(9,10,false), // Arduino: 9,10
+  MyRobot() : radio(9,10,true), // Arduino: 9,10
                                 // MEGA2560: 9,53
                                 // ROBOF: 7,8
               serial(Serial,57600) {
@@ -26,18 +38,10 @@ public:
   void messageReceived(const uint8_t * data, uint8_t size, Connection & connection){
     if (&connection == &radio){
       // recebe de radio e envia para serial
-      //delay(5);
       serial.sendMessage(data,size);
     } else {
       // recebe de serial e envia para radio
-      //serial.sendMessage(data,size);
-      if (!radio.sendMessage(data,size)) {
-        uint8_t resp[] = {11, data[0]};
-        serial.sendMessage(resp, size);
-      } else {
-        uint8_t resp[] = {3, 'o', 'k'};
-        serial.sendMessage(resp, size);
-      }
+      radio.sendMessage(data,size);
     }
   }
   
@@ -47,10 +51,6 @@ public:
   
   void think(){
     
-  }
-
-  void printDetails() {
-    radio.printDetails();
   }
 private:
   //Adicionar os dispositivos aqui
@@ -62,8 +62,6 @@ MyRobot robot;
 
 void setup(){
   robot.begin();
-  //printf_begin();
-  //robot.printDetails();
 }
 
 void loop(){

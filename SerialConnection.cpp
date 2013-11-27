@@ -54,7 +54,7 @@ void SerialConnection::println(const char * data) {
 bool SerialConnection::sendMessage(const uint8_t * data, uint8_t size){
   serial.write(size);
   serial.write(data,size);
-  //serial.println();
+  serial.println();
   return true;
 }
 
