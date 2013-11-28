@@ -21,12 +21,14 @@
 #include <HBridge.h>
 #include <Compass.h>
 #include <IRProximitySensor.h>
+#include <ReflectanceSensorArray.h>
 
 /**
  * Sketch para ser usado no RoboF, com radio, dispositivos basicos,
  * sem serial, com funçoes complexas, e suporte a adiçao de 
  * novos dispositivos *dinamicamente*
  */
+const uint8_t pin_sel[] = {4, 3, 16};
 
 class RoboF : public GenericRobot {
 public:
@@ -34,7 +36,7 @@ public:
             hbridge(5,6,9,10),
             compass(),
             irsensor(17),
-            reflectance(A0, (uint8_t[]){4, 3, 16}, 400)
+            reflectance(A0, pin_sel, 400)
             {
     addConnection(radio);  //connID = 0
     //adicionado por padrao: 
@@ -48,7 +50,11 @@ public:
   }
   
 private:
+#if LIBRARY_RF24
   RadioConnection radio;
+#elif LIBRARY_MIRF
+  RadioConnectionM radio;
+#endif
   
   HBridge hbridge;
   Compass compass;

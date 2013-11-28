@@ -54,7 +54,11 @@ public:
   }
 private:
   //Adicionar os dispositivos aqui
+#if LIBRARY_RF24
   RadioConnection radio;
+#elif LIBRARY_MIRF
+  RadioConnectionM radio;
+#endif
   SerialConnection serial;
 };
 
