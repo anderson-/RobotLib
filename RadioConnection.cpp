@@ -27,13 +27,18 @@
 #include "RadioConnection.h"
 #include "Debug.h"
 
-#define PAYLOAD 10
+#define PAYLOAD 16
 #define PIPE_A 0xF0F0F0F0E1LL
 #define PIPE_B 0xF0F0F0F0D2LL
 
-RadioConnection::RadioConnection(uint8_t pin, uint8_t SPI_SS, bool isMaster) : radio(pin,SPI_SS), 
-                                                                              master(isMaster), 
-                                                                              isAvailable(false){
+RadioConnection::RadioConnection(uint8_t pin, uint8_t SPI_SS, bool isMaster) :
+#ifdef LIBRARY_RF24
+		radio(pin,SPI_SS),
+#else
+		pin(pin),
+		SPI_SS(SPI_SS),
+#endif
+    master(isMaster) {
 }
 
 bool RadioConnection::isMaster(){
@@ -41,10 +46,14 @@ bool RadioConnection::isMaster(){
 }
 
 void RadioConnection::printDetails() {
+#ifdef LIBRARY_RF24
   radio.printDetails();
+#else
+#endif
 }
 
-void RadioConnection::begin(){
+void RadioConnection::begin() {
+#ifdef LIBRARY_RF24
   radio.begin();
   // delay de (3+1)x250us = 1ms X 15 tentativas = 15 ms
   radio.setRetries(3,15);
@@ -65,21 +74,49 @@ void RadioConnection::begin(){
    * isAvailable() to check for incoming traffic, and read() to get it.
    */
   radio.startListening();
+#else
+  Mirf.cePin = pin;
+	Mirf.csnPin = SPI_SS;
+
+	Mirf.spi = &MirfHardwareSpi;
+	Mirf.init();
+
+	if (master){
+		Mirf.setRADDR((byte *)"pipe1");
+	} else {
+		Mirf.setRADDR((byte *)"pipe2");
+	}
+
+	Mirf.payload = PAYLOAD;
+
+	Mirf.config();
+#endif
 }
 
-uint8_t RadioConnection::available(){
+uint8_t RadioConnection::available() {
+#ifdef LIBRARY_RF24
   return radio.available();
+#else
+  return (!Mirf.isSending() && Mirf.dataReady());
+#endif
 }
 
-void RadioConnection::start(){
+void RadioConnection::start() {
+#ifdef LIBRARY_RF24
   radio.startListening();
+#else
+#endif
 }
 
-void RadioConnection::stop(){
+void RadioConnection::stop() {
+#ifdef LIBRARY_RF24
   radio.stopListening();
+#else
+#endif
 }
 
-bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size){
+bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size) {
+#ifdef LIBRARY_RF24
   radio.stopListening();
   bool sent = false;
   int tries = 0;
@@ -90,15 +127,36 @@ bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size){
       tries++;
     }
   }
-  /*while (!sent) {
-    sent = radio.write(data, size);
-  }*/
-  //Serial.println((received)? "recebida com sucesso" : "não recebida..");
   radio.startListening();
   return sent;
+#else
+  if (size < PAYLOAD){
+		((uint8_t *)data)[size] = 0; //TODO
+	}
+
+	if (master){
+		Mirf.setTADDR((byte *)"pipe2");
+	} else {
+		Mirf.setTADDR((byte *)"pipe1");
+	}
+
+	Mirf.send((uint8_t *)data);
+
+	//while (Mirf.getStatus() & (1 << MAX_RT)){
+		////Envia novamente..
+		//Mirf.send((uint8_t *)data);
+	//}
+
+	while(Mirf.isSending()){
+	 //Wait.
+	}
+
+	return Mirf.error;
+#endif
 }
 
-uint8_t RadioConnection::receiveMessage(uint8_t * buffer, uint8_t size){
+uint8_t RadioConnection::receiveMessage(uint8_t * buffer, uint8_t size) {
+#ifdef LIBRARY_RF24
   bool done = false;
   uint8_t timeout = 5; //evita loop infinito
   while (true){
@@ -113,4 +171,9 @@ uint8_t RadioConnection::receiveMessage(uint8_t * buffer, uint8_t size){
     delay(1);
   }
   return PAYLOAD;
+#else
+	Mirf.getData(buffer);
+
+	return PAYLOAD;
+#endif
 }

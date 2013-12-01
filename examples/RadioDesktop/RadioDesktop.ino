@@ -1,21 +1,20 @@
 
-#define LIBRARY_RF24 0
-#define LIBRARY_MIRF 1
+// Descomente a linha abaixo para utilizar a biblioteca RF_24
+// #define LIBRARY_RF24
 
 #include <SPI.h>
 
 #if LIBRARY_RF24
   #include <RF24_config.h>
-  #include <RadioConnection.h>
-#elif LIBRARY_MIRF
+#else
   #include <Mirf.h>
   #include <nRF24L01.h>
   #include <MirfHardwareSpiDriver.h>
-  #include <RadioConnectionM.h>
 #endif
 
 #include <Wire.h>
 #include <HMC5883L.h>
+#include <RadioConnection.h>
 #include <SerialConnection.h>
 #include <Robot.h>
 
@@ -54,11 +53,7 @@ public:
   }
 private:
   //Adicionar os dispositivos aqui
-#if LIBRARY_RF24
   RadioConnection radio;
-#elif LIBRARY_MIRF
-  RadioConnectionM radio;
-#endif
   SerialConnection serial;
 };
 

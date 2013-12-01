@@ -1,23 +1,22 @@
 
-#define LIBRARY_RF24 0
-#define LIBRARY_MIRF 1
+// Descomente a linha abaixo para utilizar a biblioteca RF_24
+// #define LIBRARY_RF24
 
 #include <SPI.h>
 
 #if LIBRARY_RF24
   #include <RF24_config.h>
-  #include <RadioConnection.h>
-#elif LIBRARY_MIRF
+#else
   #include <Mirf.h>
   #include <nRF24L01.h>
   #include <MirfHardwareSpiDriver.h>
-  #include <RadioConnectionM.h>
 #endif
 
 #include <Wire.h>
 #include <HMC5883L.h>
 #include <GenericRobot.h>
 #include <SerialConnection.h>
+#include <RadioConnection.h>
 #include <HBridge.h>
 #include <Compass.h>
 #include <IRProximitySensor.h>
@@ -50,11 +49,7 @@ public:
   }
   
 private:
-#if LIBRARY_RF24
   RadioConnection radio;
-#elif LIBRARY_MIRF
-  RadioConnectionM radio;
-#endif
   
   HBridge hbridge;
   Compass compass;
@@ -112,9 +107,9 @@ bool head (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
       // senao, calcula uma velocidade e direcao de giro proporcional ao erro
       int8_t speed;
       if (error > thld) {
-        speed = (int8_t) max(40, min(127, error*0.71));
+        speed = (int8_t) max(30, min(127, error*0.515));
       } else {
-        speed = (int8_t) min(-40, max(-127, -error*0.71));
+        speed = (int8_t) min(-30, max(-127, -error*0.515));
       }
       hbridge->setMotorState(1, speed);
       hbridge->setMotorState(0,-speed);
