@@ -89,18 +89,10 @@ bool ReflectanceSensorArray::isReady() {
 }
 
 uint8_t ReflectanceSensorArray::get(uint8_t * buffer, uint8_t size) {
-  if(buffer[0] == 0) {
+  if(size > 0) {
     buffer[0] = value;
     return 1;
-  } else if(buffer[0] == 1) {
-	if (analog) {
-		uint8_t * p = (uint8_t *) &thld;
-		buffer[0] = p[0];
-		buffer[1] = p[1];
-		return 2;
-	}
   }
-  return 0;
 }
 
 void ReflectanceSensorArray::set(const uint8_t * data, uint8_t size) {
