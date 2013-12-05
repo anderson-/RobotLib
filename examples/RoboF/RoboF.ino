@@ -111,8 +111,8 @@ bool head (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
       } else {
         speed = (int8_t) min(-30, max(-127, -error*0.515));
       }
-      hbridge->setMotorState(1, speed);
-      hbridge->setMotorState(0,-speed);
+      hbridge->setMotorState(0, speed);
+      hbridge->setMotorState(1,-speed);
       iterations = 0;
 
       return false; //repete
@@ -181,8 +181,8 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
       } else {
         speed = (int8_t) min(-40, max(-127, -turnRemaining*0.71));
       }
-      hbridge->setMotorState(1, speed);
-      hbridge->setMotorState(0,-speed);
+      hbridge->setMotorState(0, speed);
+      hbridge->setMotorState(1,-speed);
       iterations = 0;
 
       return false; //repete
