@@ -35,7 +35,7 @@ public:
             hbridge(5,6,9,10),
             compass(),
             irsensor(17),
-            reflectance(A0, pin_sel, 400)
+            reflectance(A0, pin_sel, 200)
             {
     addConnection(radio);  //connID = 0
     //adicionado por padrao: 
