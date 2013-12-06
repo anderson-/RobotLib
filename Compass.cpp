@@ -119,3 +119,7 @@ uint8_t Compass::get(uint8_t * buffer, uint8_t size){
 void Compass::set(const uint8_t * data, uint8_t size){
 
 }
+
+int Compass::getAngle(){
+	return angleInt;
+}

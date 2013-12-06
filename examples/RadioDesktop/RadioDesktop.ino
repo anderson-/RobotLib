@@ -1,9 +1,22 @@
+
+// Descomente a linha abaixo para utilizar a biblioteca RF_24
+// #define LIBRARY_RF24
+
 #include <SPI.h>
-#include <RF24_config.h>
+
+#if LIBRARY_RF24
+  #include <RF24_config.h>
+#else
+  #include <Mirf.h>
+  #include <nRF24L01.h>
+  #include <MirfHardwareSpiDriver.h>
+#endif
+
 #include <Wire.h>
 #include <HMC5883L.h>
-#include <Robot.h>
+#include <RadioConnection.h>
 #include <SerialConnection.h>
+#include <Robot.h>
 
 #define ROBOT_ID  10
 
@@ -18,7 +31,7 @@ public:
   MyRobot() : radio(9,10,ROBOT_ID,true),  // Arduino: 9,10
                                           // MEGA2560: 9,53
                                           // ROBOF: 7,8
-              serial(Serial,9600) {
+              serial(Serial,57600) {
     addConnection(radio);
     addConnection(serial);
   }

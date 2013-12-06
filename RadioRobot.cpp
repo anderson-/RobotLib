@@ -42,6 +42,11 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
             for (i = 0; i < getDeviceListSize(); i++){
               getDevice(i)->stop();
             }
+            for (i = 0; i < nRunning; i++){
+              if (running[i]){
+                freeParam(&running[i]);
+              }
+            }
           } else {
             Device * d = getDevice(id);
             if (d){
@@ -190,6 +195,19 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
             for (i = 0; i < getDeviceListSize(); i++){
               getDevice(i)->reset();
             }
+            for (i = 0; i < nRunning; i++){
+              if (running[i]){
+                freeParam(&running[i]);
+              }
+            }
+          } else if (id == SYSTEM) {
+            uint8_t * tmpBuffer = buffer +size;
+            tmpBuffer[0] = DONE;
+            tmpBuffer[1] = RESET;
+            tmpBuffer[2] = SYSTEM;
+            tmpBuffer[3] = 0;
+            connection.sendMessage(tmpBuffer,4);
+            Reset_AVR();
           } else {
             Device * d = getDevice(id);
             if (d){
@@ -208,10 +226,104 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
       case DONE:
         offset+=4; //avança o tamanho do comando DONE (4 bytes)
         break;
+      case RUN:
+        {
+          id = data[offset];
+          offset++;
+          uint8_t deviceListSize = data[offset];
+          offset++;
+          const uint8_t * deviceList = data+offset;
+          offset+=deviceListSize;
+          length = data[offset];
+          offset++;
+          //aloca espaço para os argumentos da ação, coloa a ação na lista de execução e excecuta a ação pela primeira vez
+          //com data != null
+          startAction(actions[id], deviceList, deviceListSize, connection, data+offset, length);
+          offset+=length;
+        }
+        break;
       case NO_OP:
         break;
       default:
         return;
     }
   }
+}
+
+void RadioRobot::think(){
+  uint8_t i,j;
+  for (i = 0; i < nRunning; i++){
+    if (running[i]){
+      if (running[i]->function(running[i]->devices, running[i]->nDevices, *(running[i]->connection), NULL, 0) == true){
+        buffer[0] = DONE;
+        buffer[1] = RUN;
+        for (j = 0; j < nActions; j++){
+          if (actions[j] == running[i]->function){
+            buffer[2] = j;
+          }
+        }
+        buffer[3] = 1;
+        buffer[4] = END;
+        running[i]->connection->sendMessage(buffer,5);
+        freeParam(&running[i]);
+      }
+    }
+  }
+}
+
+void RadioRobot::startAction (ActionFunc action, const uint8_t * deviceList, uint8_t size, Connection & c, const uint8_t * data, uint8_t length){
+  uint8_t i, id;
+  if (!action) return;
+  ActionParam * p = NULL;
+  //verifica se existe um local vazio
+  for (i = 0; i < nRunning; i++){
+    if (!running[i]){
+      p = running[i];
+      break;
+    }
+  }
+  
+  if (!p){
+    //se não tem um local vazio realoca o vetor de ações em execução
+    if (i == nRunning){
+      running = (ActionParam**)check(realloc(running,(nRunning+1)*sizeof(ActionParam*)));
+      nRunning++;
+    }
+    //aloca a struct para a ação
+    running[i] = (ActionParam*)check(malloc(sizeof(ActionParam)));
+    p = running[i];
+  }
+  id = i;
+  //preenche a struct
+  p->function = action;
+  p->connection = &c;
+  p->devices = (Device**)check(malloc(size*sizeof(Device*)));
+  for (i = 0; i < size; i++){
+    p->devices[i] = getDevice(deviceList[i]);
+  }
+  p->nDevices = size;
+  //executa para definir valores estaticos da finção
+  p->function(p->devices, p->nDevices, c, data, length);
+  //envia <DONE> <RUN> <id> <1> <BEGIN> TODO melhorar isso =(
+  buffer[0] = DONE;
+  buffer[1] = RUN;
+  buffer[2] = id;
+  buffer[3] = 1;
+  buffer[4] = BEGIN;
+  c.sendMessage(buffer,5);
+}
+
+void RadioRobot::freeParam (ActionParam ** p){
+  if (!*p) return;
+  //desaloca vetor de dispositivos
+  free((*p)->devices);
+  //desaloca struct
+  free(*p);
+  *p = NULL;
+}
+
+void RadioRobot::addAction (ActionFunc action){
+  actions = (ActionFunc*)check(realloc(actions,(nActions+1)*sizeof(ActionFunc)));
+  actions[nActions] = action;
+  nActions++;
 }

@@ -1,0 +1,132 @@
+\documentclass{book}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{makeidx}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{ifthen}
+\usepackage[table]{xcolor}
+\usepackage{textcomp}
+\usepackage{alltt}
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\else
+\usepackage[ps2pdf,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\usepackage{pspicture}
+\fi
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{sectsty}
+\usepackage{amssymb}
+\usepackage[titles]{tocloft}
+\usepackage{doxygen}
+\lstset{language=C++,inputencoding=utf8,basicstyle=\footnotesize,breaklines=true,breakatwhitespace=true,tabsize=8,numbers=left }
+\makeindex
+\setcounter{tocdepth}{3}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\familydefault}{\sfdefault}
+\hfuzz=15pt
+\setlength{\emergencystretch}{15pt}
+\hbadness=750
+\tolerance=750
+\begin{document}
+\hypersetup{pageanchor=false,citecolor=blue}
+\begin{titlepage}
+\vspace*{7cm}
+\begin{center}
+{\Large Robot F \\[1ex]\large 1.\-0 }\\
+\vspace*{1cm}
+{\large Gerado por Doxygen 1.8.2}\\
+\vspace*{0.5cm}
+{\small Quarta, 27 de Novembro de 2013 04:14:49}\\
+\end{center}
+\end{titlepage}
+\clearemptydoublepage
+\pagenumbering{roman}
+\tableofcontents
+\clearemptydoublepage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true,citecolor=blue}
+\chapter{Robot}
+\label{index}\hypertarget{index}{}\input{index}
+\chapter{Lista de Futuras Atividades}
+\label{todo}
+\hypertarget{todo}{}
+\input{todo}
+\chapter{Índice Hierárquico}
+\input{hierarchy}
+\chapter{Índice dos Componentes}
+\input{annotated}
+\chapter{Índice dos Arquivos}
+\input{files}
+\chapter{Classes}
+\input{structActionParam}
+\input{classClock}
+\input{classCompass}
+\input{classConnection}
+\input{classDevice}
+\input{classDistance}
+\input{classGenericRobot}
+\input{classHBridge}
+\input{classIRProximitySensor}
+\input{classLED}
+\input{classQuickRobot}
+\input{classRadioConnection}
+\input{classRadioConnectionM}
+\input{classRadioRobot}
+\input{classReflectanceSensorArray}
+\input{classRobot}
+\input{classSerialConnection}
+\input{classTimedDevice}
+\chapter{Arquivos}
+\input{Clock_8cpp}
+\input{Clock_8h}
+\input{Compass_8cpp}
+\input{Compass_8h}
+\input{Connection_8h}
+\input{Debug_8cpp}
+\input{Debug_8h}
+\input{Device_8cpp}
+\input{Device_8h}
+\input{Distance_8cpp}
+\input{Distance_8h}
+\input{GenericRobot_8cpp}
+\input{GenericRobot_8h}
+\input{HBridge_8cpp}
+\input{HBridge_8h}
+\input{IRProximitySensor_8cpp}
+\input{IRProximitySensor_8h}
+\input{LED_8cpp}
+\input{LED_8h}
+\input{RadioConnection_8cpp}
+\input{RadioConnection_8h}
+\input{RadioConnectionM_8cpp}
+\input{RadioConnectionM_8h}
+\input{RadioRobot_8cpp}
+\input{RadioRobot_8h}
+\input{ReflectanceSensorArray_8cpp}
+\input{ReflectanceSensorArray_8h}
+\input{Robot_8cpp}
+\input{Robot_8h}
+\input{SerialConnection_8cpp}
+\input{SerialConnection_8h}
+\addcontentsline{toc}{part}{Índice}
+\printindex
+\end{document}

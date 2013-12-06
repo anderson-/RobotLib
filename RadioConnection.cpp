@@ -27,28 +27,37 @@
 #include "RadioConnection.h"
 #include "Debug.h"
 
-#define PAYLOAD 20
-#define TIMEOUT 50
+#define PAYLOAD 16
 #define PIPE_A 0xF0F0F0F000LL
 #define PIPE_B 0xF0F0F0F100LL
 
 RadioConnection::RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t id, bool isMaster) :
-	radio(pin_ce,pin_ss),
 	id(id),
-	master(isMaster),
-    isAvailable(false) {
-  //buffer = (uint8_t*)malloc(PAYLOAD*sizeof(uint8_t));
-  //check(buffer);
+  #ifdef LIBRARY_RF24
+		radio(pin_ce,pin_ss),
+#else
+		pin(pin_ce),
+		pin_ss(pin_ss),
+#endif
+    master(isMaster) {
 }
 
 bool RadioConnection::isMaster(){
   return master;
 }
 
-void RadioConnection::begin(){
+void RadioConnection::printDetails() {
+#ifdef LIBRARY_RF24
+  radio.printDetails();
+#else
+#endif
+}
+
+void RadioConnection::begin() {
+#ifdef LIBRARY_RF24
   radio.begin();
-  // delay de (15+1)x250us = 4 ms X 15 tentativas
-  radio.setRetries(15,15);
+  // delay de (3+1)x250us = 1ms X 15 tentativas = 15 ms
+  radio.setRetries(3,15);
   // define o numero de bytes enviados/recebidos (max 32)
   radio.setPayloadSize(PAYLOAD);
   // abre os canais de escrita e leitura
@@ -67,54 +76,108 @@ void RadioConnection::begin(){
    * isAvailable() to check for incoming traffic, and read() to get it.
    */
   radio.startListening();
+#else
+  Mirf.cePin = pin_ce;
+	Mirf.csnPin = pin_ss;
+
+	Mirf.spi = &MirfHardwareSpi;
+	Mirf.init();
+
+	if (master){
+		Mirf.setRADDR((byte *)"pipe1");
+	} else {
+		char addr[8];
+		snprintf(addr, 8, "pipe%hhu", id);
+		Mirf.setRADDR(addr);
+	}
+
+	Mirf.payload = PAYLOAD;
+
+	Mirf.config();
+#endif
 }
 
-uint8_t RadioConnection::available(){
-  /*unsigned long started_waiting_at = millis();
-  bool timeout = false;
-  while (!radio.available() && !timeout){
-    if (millis() - started_waiting_at > TIMEOUT){
-      timeout = true;
+uint8_t RadioConnection::available() {
+#ifdef LIBRARY_RF24
+  return radio.available();
+#else
+  return (!Mirf.isSending() && Mirf.dataReady());
+#endif
+}
+
+void RadioConnection::start() {
+#ifdef LIBRARY_RF24
+  radio.startListening();
+#else
+#endif
+}
+
+void RadioConnection::stop() {
+#ifdef LIBRARY_RF24
+  radio.stopListening();
+#else
+#endif
+}
+
+bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size) {
+#ifdef LIBRARY_RF24
+  radio.stopListening();
+  bool sent = false;
+  int tries = 0;
+  while (!sent && tries < 5) {
+    sent = radio.write(data, size);
+    if(!sent) {
+      delay(5);
+      tries++;
     }
   }
-  isAvailable = !timeout;
-  return (timeout)? 0 : PAYLOAD;*/
-  isAvailable = radio.available();
-  return (isAvailable)? PAYLOAD : 0;
-}
-
-void RadioConnection::start(){
   radio.startListening();
+  return sent;
+#else
+  if (size < PAYLOAD){
+		((uint8_t *)data)[size] = 0; //TODO
+	}
+
+	if (master){
+		Mirf.setTADDR((byte *)"pipe2");
+	} else {
+		Mirf.setTADDR((byte *)"pipe1");
+	}
+
+	Mirf.send((uint8_t *)data);
+
+	//while (Mirf.getStatus() & (1 << MAX_RT)){
+		////Envia novamente..
+		//Mirf.send((uint8_t *)data);
+	//}
+
+	while(Mirf.isSending()){
+	 //Wait.
+	}
+
+	return Mirf.error;
+#endif
 }
 
-void RadioConnection::stop(){
-  radio.stopListening();
-}
-
-bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size){
-  radio.stopListening();
-  bool received = radio.write(data, size);
-  //Serial.println((received)? "recebida com sucesso" : "não recebida..");
-  radio.startListening();
-  return received;
-}
-
-uint8_t RadioConnection::receiveMessage(uint8_t * buffer, uint8_t size){
-  if (isAvailable){
-    bool done = false;
-    uint8_t timeout = 3; // tentativas, RF24L01 tem 3 FIFOs
-    while (!done){
-      done = radio.read(buffer, size);
-      //Serial.print("Tentativas: ");
-      //Serial.println(timeout);
-      delay(1);
-      if (timeout > 0){
-        timeout--;
-      } else {
-        return 0;
-      }
+uint8_t RadioConnection::receiveMessage(uint8_t * buffer, uint8_t size) {
+#ifdef LIBRARY_RF24
+  bool done = false;
+  uint8_t timeout = 5; //evita loop infinito
+  while (true){
+    done = radio.read(buffer, size);
+    if (done){ // normalmente entra de primeira
+      break;
     }
-    return PAYLOAD;
+    if (timeout == 0){
+      return 0;
+    }
+    timeout--;
+    delay(1);
   }
-  return 0;
+  return PAYLOAD;
+#else
+	Mirf.getData(buffer);
+
+	return PAYLOAD;
+#endif
 }

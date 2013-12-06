@@ -29,9 +29,18 @@
 
 #include <stdint.h>
 #include "Connection.h"
-#include "../RF24/RF24.h"
+
+
+#ifdef LIBRARY_RF24
+	#include <RF24.h>
+#else
+	#include <Mirf.h>
+	#include <nRF24L01.h>
+	#include <MirfHardwareSpiDriver.h>
+#endif
 
 class RadioConnection : public Connection {
+
 public:
   RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t id, bool isMaster = false);
   bool isMaster();
@@ -39,14 +48,21 @@ public:
   void begin();
   void start();
   void stop();
+  void printDetails();
   uint8_t available();
-  bool sendMessage(const uint8_t * data, uint8_t size);
   uint8_t receiveMessage(uint8_t * buffer, uint8_t size);
+  bool sendMessage(const uint8_t * data, uint8_t size);
+
 private:
+#ifdef LIBRARY_RF24
   RF24 radio;
+#else
+  uint8_t pin_ce;
+  uint8_t pin_ss;
+#endif
   uint8_t id;
   bool master;
-  bool isAvailable;
+
 };
 
 #endif	/* RADIO_CONNECTION_H */

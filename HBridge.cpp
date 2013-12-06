@@ -45,11 +45,11 @@ void HBridge::setMotorState(uint8_t motor, int8_t speed){ //speed de -128 até 1
 }
 
 void HBridge::stop(){
-	
+	begin();
 }
 
 void HBridge::reset(){
-	
+	begin();
 }
 
 void HBridge::begin(){
@@ -57,6 +57,8 @@ void HBridge::begin(){
   pinMode(leftMotor2,OUTPUT);
   pinMode(rightMotor1,OUTPUT);
   pinMode(rightMotor2,OUTPUT);
+  speedLeftMotor = 0;
+  speedRightMotor = 0;
 }
 
 void HBridge::update(){

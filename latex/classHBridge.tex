@@ -1,0 +1,185 @@
+\hypertarget{classHBridge}{\section{Referência da Classe H\-Bridge}
+\label{classHBridge}\index{H\-Bridge@{H\-Bridge}}
+}
+
+
+{\ttfamily \#include $<$H\-Bridge.\-h$>$}
+
+Diagrama de Hierarquia para H\-Bridge\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHBridge}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHBridge_a7030e8d12de11cc71ab9945191fafa1c}{H\-Bridge} (uint8\-\_\-t pin1, uint8\-\_\-t pin2, uint8\-\_\-t pin3, uint8\-\_\-t pin4)
+\item 
+void \hyperlink{classHBridge_ac0bdf510d361688b492206a64d8b2376}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classHBridge_ad57868053f2f0cc144a8bf80c6090052}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classHBridge_ad4d86b71b6ece44b30170b439b5e170f}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classHBridge_aa6f6151443b9e6013fc5691504851e58}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classHBridge_a3c43aac5ae38c1f04fdeb148fdfb4820}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classHBridge_a87391dc065ea5b5dc6693660226cac39}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classHBridge_a95099e4fbaf37e9ca13de8f6af9605c9}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)
+\item 
+void \hyperlink{classHBridge_a9d7b4166a7455698137031928926aed7}{set\-Motor\-State} (uint8\-\_\-t motor, int8\-\_\-t speed)
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classHBridge_a7030e8d12de11cc71ab9945191fafa1c}{\index{H\-Bridge@{H\-Bridge}!H\-Bridge@{H\-Bridge}}
+\index{H\-Bridge@{H\-Bridge}!HBridge@{H\-Bridge}}
+\subsubsection[{H\-Bridge}]{\setlength{\rightskip}{0pt plus 5cm}H\-Bridge\-::\-H\-Bridge (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{pin1, }
+\item[{uint8\-\_\-t}]{pin2, }
+\item[{uint8\-\_\-t}]{pin3, }
+\item[{uint8\-\_\-t}]{pin4}
+\end{DoxyParamCaption}
+)}}\label{classHBridge_a7030e8d12de11cc71ab9945191fafa1c}
+
+
+\subsection{Métodos}
+\hypertarget{classHBridge_ac0bdf510d361688b492206a64d8b2376}{\index{H\-Bridge@{H\-Bridge}!begin@{begin}}
+\index{begin@{begin}!HBridge@{H\-Bridge}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void H\-Bridge\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_ac0bdf510d361688b492206a64d8b2376}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classHBridge_a87391dc065ea5b5dc6693660226cac39}{\index{H\-Bridge@{H\-Bridge}!get@{get}}
+\index{get@{get}!HBridge@{H\-Bridge}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t H\-Bridge\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_a87391dc065ea5b5dc6693660226cac39}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classHBridge_a3c43aac5ae38c1f04fdeb148fdfb4820}{\index{H\-Bridge@{H\-Bridge}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!HBridge@{H\-Bridge}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool H\-Bridge\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_a3c43aac5ae38c1f04fdeb148fdfb4820}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classHBridge_ad4d86b71b6ece44b30170b439b5e170f}{\index{H\-Bridge@{H\-Bridge}!reset@{reset}}
+\index{reset@{reset}!HBridge@{H\-Bridge}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void H\-Bridge\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_ad4d86b71b6ece44b30170b439b5e170f}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classHBridge_a95099e4fbaf37e9ca13de8f6af9605c9}{\index{H\-Bridge@{H\-Bridge}!set@{set}}
+\index{set@{set}!HBridge@{H\-Bridge}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void H\-Bridge\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_a95099e4fbaf37e9ca13de8f6af9605c9}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classHBridge_a9d7b4166a7455698137031928926aed7}{\index{H\-Bridge@{H\-Bridge}!set\-Motor\-State@{set\-Motor\-State}}
+\index{set\-Motor\-State@{set\-Motor\-State}!HBridge@{H\-Bridge}}
+\subsubsection[{set\-Motor\-State}]{\setlength{\rightskip}{0pt plus 5cm}void H\-Bridge\-::set\-Motor\-State (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{motor, }
+\item[{int8\-\_\-t}]{speed}
+\end{DoxyParamCaption}
+)}}\label{classHBridge_a9d7b4166a7455698137031928926aed7}
+\hypertarget{classHBridge_ad57868053f2f0cc144a8bf80c6090052}{\index{H\-Bridge@{H\-Bridge}!stop@{stop}}
+\index{stop@{stop}!HBridge@{H\-Bridge}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void H\-Bridge\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_ad57868053f2f0cc144a8bf80c6090052}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classHBridge_aa6f6151443b9e6013fc5691504851e58}{\index{H\-Bridge@{H\-Bridge}!update@{update}}
+\index{update@{update}!HBridge@{H\-Bridge}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void H\-Bridge\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classHBridge_aa6f6151443b9e6013fc5691504851e58}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{HBridge_8h}{H\-Bridge.\-h}\item 
+\hyperlink{HBridge_8cpp}{H\-Bridge.\-cpp}\end{DoxyCompactItemize}

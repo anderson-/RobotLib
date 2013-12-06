@@ -1,0 +1,181 @@
+\hypertarget{classIRProximitySensor}{\section{Referência da Classe I\-R\-Proximity\-Sensor}
+\label{classIRProximitySensor}\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}}
+}
+
+
+{\ttfamily \#include $<$I\-R\-Proximity\-Sensor.\-h$>$}
+
+Diagrama de Hierarquia para I\-R\-Proximity\-Sensor\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIRProximitySensor}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIRProximitySensor_a8a69e6f2fd9489e3d06be8421dd2d541}{I\-R\-Proximity\-Sensor} (uint8\-\_\-t pin)
+\item 
+void \hyperlink{classIRProximitySensor_a84d9a5c841ffd21273762a04d791eb5a}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classIRProximitySensor_a796e2f4d29f59393d25de6b3b7e0f70b}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classIRProximitySensor_aca3e197dd2cce038658bb381ad8a2d97}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classIRProximitySensor_a2e18942667a104cc3aae96dc5724097e}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classIRProximitySensor_a4b3faeccd653b259b513a9326c52c8dd}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classIRProximitySensor_a7137ed31e794212c00e866af8c79b773}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classIRProximitySensor_afbbfaa05fc2a2bca5b3877f99e6b0a4f}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)
+\item 
+int \hyperlink{classIRProximitySensor_ab9bdeff4396b6a28bb2e1717e4f3f96e}{get\-Distance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classIRProximitySensor_a8a69e6f2fd9489e3d06be8421dd2d541}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}}
+\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{I\-R\-Proximity\-Sensor}]{\setlength{\rightskip}{0pt plus 5cm}I\-R\-Proximity\-Sensor\-::\-I\-R\-Proximity\-Sensor (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{pin}
+\end{DoxyParamCaption}
+)}}\label{classIRProximitySensor_a8a69e6f2fd9489e3d06be8421dd2d541}
+
+
+\subsection{Métodos}
+\hypertarget{classIRProximitySensor_a84d9a5c841ffd21273762a04d791eb5a}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!begin@{begin}}
+\index{begin@{begin}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void I\-R\-Proximity\-Sensor\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_a84d9a5c841ffd21273762a04d791eb5a}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classIRProximitySensor_a7137ed31e794212c00e866af8c79b773}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!get@{get}}
+\index{get@{get}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t I\-R\-Proximity\-Sensor\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_a7137ed31e794212c00e866af8c79b773}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classIRProximitySensor_ab9bdeff4396b6a28bb2e1717e4f3f96e}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!get\-Distance@{get\-Distance}}
+\index{get\-Distance@{get\-Distance}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{get\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}int I\-R\-Proximity\-Sensor\-::get\-Distance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classIRProximitySensor_ab9bdeff4396b6a28bb2e1717e4f3f96e}
+\hypertarget{classIRProximitySensor_a4b3faeccd653b259b513a9326c52c8dd}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool I\-R\-Proximity\-Sensor\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_a4b3faeccd653b259b513a9326c52c8dd}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classIRProximitySensor_aca3e197dd2cce038658bb381ad8a2d97}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!reset@{reset}}
+\index{reset@{reset}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void I\-R\-Proximity\-Sensor\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_aca3e197dd2cce038658bb381ad8a2d97}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classIRProximitySensor_afbbfaa05fc2a2bca5b3877f99e6b0a4f}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!set@{set}}
+\index{set@{set}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void I\-R\-Proximity\-Sensor\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_afbbfaa05fc2a2bca5b3877f99e6b0a4f}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classIRProximitySensor_a796e2f4d29f59393d25de6b3b7e0f70b}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!stop@{stop}}
+\index{stop@{stop}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void I\-R\-Proximity\-Sensor\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_a796e2f4d29f59393d25de6b3b7e0f70b}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classIRProximitySensor_a2e18942667a104cc3aae96dc5724097e}{\index{I\-R\-Proximity\-Sensor@{I\-R\-Proximity\-Sensor}!update@{update}}
+\index{update@{update}!IRProximitySensor@{I\-R\-Proximity\-Sensor}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void I\-R\-Proximity\-Sensor\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classIRProximitySensor_a2e18942667a104cc3aae96dc5724097e}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{IRProximitySensor_8h}{I\-R\-Proximity\-Sensor.\-h}\item 
+\hyperlink{IRProximitySensor_8cpp}{I\-R\-Proximity\-Sensor.\-cpp}\end{DoxyCompactItemize}

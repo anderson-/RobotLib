@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Robot: Referência da Classe SerialConnection</title>
+<title>Robot F: Referência da Classe SerialConnection</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Robot
+   <div id="projectname">Robot F
+   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -102,14 +103,16 @@ Diagrama de Hierarquia para SerialConnection:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Métodos Públicos</h2></td></tr>
-<tr class="memitem:a0a2127f309616f13927da8243b139bac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialConnection.html#a0a2127f309616f13927da8243b139bac">SerialConnection</a> (HardwareSerial &amp;theSerial, uint16_t rate)</td></tr>
-<tr class="separator:a0a2127f309616f13927da8243b139bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05e15045efc5ea7098337f9dcd43fc82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialConnection.html#a05e15045efc5ea7098337f9dcd43fc82">SerialConnection</a> (HardwareSerial &amp;theSerial, uint32_t rate)</td></tr>
+<tr class="separator:a05e15045efc5ea7098337f9dcd43fc82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6022b91cdd0bc412d8aeda364c32ce21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialConnection.html#a6022b91cdd0bc412d8aeda364c32ce21">begin</a> ()</td></tr>
 <tr class="memdesc:a6022b91cdd0bc412d8aeda364c32ce21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa a conexão.  <a href="#a6022b91cdd0bc412d8aeda364c32ce21"></a><br/></td></tr>
 <tr class="separator:a6022b91cdd0bc412d8aeda364c32ce21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91aa59d8f0b913e91dc4ddcde8e42519"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialConnection.html#a91aa59d8f0b913e91dc4ddcde8e42519">available</a> ()</td></tr>
 <tr class="memdesc:a91aa59d8f0b913e91dc4ddcde8e42519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se existe alguma mensagem disponivel.  <a href="#a91aa59d8f0b913e91dc4ddcde8e42519"></a><br/></td></tr>
 <tr class="separator:a91aa59d8f0b913e91dc4ddcde8e42519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85e05ec34dbb4d8d6feaccecf8ae9a72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialConnection.html#a85e05ec34dbb4d8d6feaccecf8ae9a72">println</a> (const char *data)</td></tr>
+<tr class="separator:a85e05ec34dbb4d8d6feaccecf8ae9a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac98733956090bc3eaa628d156f06ef5d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialConnection.html#ac98733956090bc3eaa628d156f06ef5d">sendMessage</a> (const uint8_t *data, uint8_t size)</td></tr>
 <tr class="memdesc:ac98733956090bc3eaa628d156f06ef5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envia uma mensagem.  <a href="#ac98733956090bc3eaa628d156f06ef5d"></a><br/></td></tr>
 <tr class="separator:ac98733956090bc3eaa628d156f06ef5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,7 +123,7 @@ Métodos Públicos</h2></td></tr>
 <tr class="separator:af5aff354718e4912d80fcee953d54540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Construtores &amp; Destrutores</h2>
-<a class="anchor" id="a0a2127f309616f13927da8243b139bac"></a>
+<a class="anchor" id="a05e15045efc5ea7098337f9dcd43fc82"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -133,7 +136,7 @@ Métodos Públicos</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>rate</em>&#160;</td>
         </tr>
         <tr>
@@ -210,6 +213,22 @@ Métodos Públicos</h2></td></tr>
           <td class="memname">HardwareSerial &amp; SerialConnection::getPort </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a85e05ec34dbb4d8d6feaccecf8ae9a72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SerialConnection::println </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -316,7 +335,7 @@ Métodos Públicos</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Sábado, 24 de Agosto de 2013 03:07:44 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quarta, 27 de Novembro de 2013 04:14:48 para Robot F por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>

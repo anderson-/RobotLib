@@ -1,0 +1,231 @@
+\hypertarget{classClock}{\section{Referência da Classe Clock}
+\label{classClock}\index{Clock@{Clock}}
+}
+
+
+{\ttfamily \#include $<$Clock.\-h$>$}
+
+Diagrama de Hierarquia para Clock\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classClock}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClock_adbc370eb6b5f8d01645cf440188160a8}{Clock} ()
+\item 
+void \hyperlink{classClock_ad9e99b2538716b36b3a8fdc7d753f3a2}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classClock_a0b77c3e7f33eb7ae0f018e469d96a250}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classClock_a0ab5423b0a997aa13d7b6131c46d1358}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classClock_ae7c6708cf04b233655b501a97bb1e802}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classClock_a16ee92e4eb0c0e3fcb7880b1256fd5ec}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classClock_a3027e265e43f1d6e07d390c65aef5ecb}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classClock_a296c2478ec80555af73955e09777fa5e}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size)
+\item 
+void \hyperlink{classClock_ada8bcb5827416803dc9c7379604c18d1}{add} (\hyperlink{Clock_8h_ae646ae1606f53892b8112edd8f8ab903}{Timer} \&timer)
+\begin{DoxyCompactList}\small\item\em Adiciona um novo timer. \end{DoxyCompactList}\item 
+void \hyperlink{classClock_a0142f038c534c87fd38a3424c933a4c4}{remove} (\hyperlink{Clock_8h_ae646ae1606f53892b8112edd8f8ab903}{Timer} \&timer)
+\begin{DoxyCompactList}\small\item\em Remove um timer. \end{DoxyCompactList}\item 
+float \hyperlink{classClock_a7344905a062d17ed3d2aaa0a3a16aeb9}{get\-Accuracy} ()
+\item 
+uint16\-\_\-t \hyperlink{classClock_aa310ea26ad86941a3bd7ff0c2c9e4c64}{get\-Last\-Delta\-T} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classClock_adbc370eb6b5f8d01645cf440188160a8}{\index{Clock@{Clock}!Clock@{Clock}}
+\index{Clock@{Clock}!Clock@{Clock}}
+\subsubsection[{Clock}]{\setlength{\rightskip}{0pt plus 5cm}Clock\-::\-Clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classClock_adbc370eb6b5f8d01645cf440188160a8}
+
+
+\subsection{Métodos}
+\hypertarget{classClock_ada8bcb5827416803dc9c7379604c18d1}{\index{Clock@{Clock}!add@{add}}
+\index{add@{add}!Clock@{Clock}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Timer} \&}]{timer}
+\end{DoxyParamCaption}
+)}}\label{classClock_ada8bcb5827416803dc9c7379604c18d1}
+
+
+Adiciona um novo timer. 
+
+O relógio global decrementa o valor de \hyperlink{classClock_aa310ea26ad86941a3bd7ff0c2c9e4c64}{Clock\-::get\-Last\-Delta\-T()} para cada \hyperlink{classClock_ae7c6708cf04b233655b501a97bb1e802}{Clock\-::update()}.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em timer} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classClock_ad9e99b2538716b36b3a8fdc7d753f3a2}{\index{Clock@{Clock}!begin@{begin}}
+\index{begin@{begin}!Clock@{Clock}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_ad9e99b2538716b36b3a8fdc7d753f3a2}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classClock_a3027e265e43f1d6e07d390c65aef5ecb}{\index{Clock@{Clock}!get@{get}}
+\index{get@{get}!Clock@{Clock}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Clock\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_a3027e265e43f1d6e07d390c65aef5ecb}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classClock_a7344905a062d17ed3d2aaa0a3a16aeb9}{\index{Clock@{Clock}!get\-Accuracy@{get\-Accuracy}}
+\index{get\-Accuracy@{get\-Accuracy}!Clock@{Clock}}
+\subsubsection[{get\-Accuracy}]{\setlength{\rightskip}{0pt plus 5cm}float Clock\-::get\-Accuracy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classClock_a7344905a062d17ed3d2aaa0a3a16aeb9}
+\hypertarget{classClock_aa310ea26ad86941a3bd7ff0c2c9e4c64}{\index{Clock@{Clock}!get\-Last\-Delta\-T@{get\-Last\-Delta\-T}}
+\index{get\-Last\-Delta\-T@{get\-Last\-Delta\-T}!Clock@{Clock}}
+\subsubsection[{get\-Last\-Delta\-T}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t Clock\-::get\-Last\-Delta\-T (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classClock_aa310ea26ad86941a3bd7ff0c2c9e4c64}
+\begin{DoxyReturn}{Retorna}
+O tempo gasto durante o ultimo \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+\end{DoxyReturn}
+\hypertarget{classClock_a16ee92e4eb0c0e3fcb7880b1256fd5ec}{\index{Clock@{Clock}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!Clock@{Clock}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool Clock\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_a16ee92e4eb0c0e3fcb7880b1256fd5ec}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classClock_a0142f038c534c87fd38a3424c933a4c4}{\index{Clock@{Clock}!remove@{remove}}
+\index{remove@{remove}!Clock@{Clock}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Timer} \&}]{timer}
+\end{DoxyParamCaption}
+)}}\label{classClock_a0142f038c534c87fd38a3424c933a4c4}
+
+
+Remove um timer. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em timer} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classClock_a0ab5423b0a997aa13d7b6131c46d1358}{\index{Clock@{Clock}!reset@{reset}}
+\index{reset@{reset}!Clock@{Clock}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_a0ab5423b0a997aa13d7b6131c46d1358}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classClock_a296c2478ec80555af73955e09777fa5e}{\index{Clock@{Clock}!set@{set}}
+\index{set@{set}!Clock@{Clock}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_a296c2478ec80555af73955e09777fa5e}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classClock_a0b77c3e7f33eb7ae0f018e469d96a250}{\index{Clock@{Clock}!stop@{stop}}
+\index{stop@{stop}!Clock@{Clock}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_a0b77c3e7f33eb7ae0f018e469d96a250}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classClock_ae7c6708cf04b233655b501a97bb1e802}{\index{Clock@{Clock}!update@{update}}
+\index{update@{update}!Clock@{Clock}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Clock\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classClock_ae7c6708cf04b233655b501a97bb1e802}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Clock_8h}{Clock.\-h}\item 
+\hyperlink{Clock_8cpp}{Clock.\-cpp}\end{DoxyCompactItemize}

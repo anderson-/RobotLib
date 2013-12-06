@@ -1,0 +1,172 @@
+\hypertarget{classDistance}{\section{Referência da Classe Distance}
+\label{classDistance}\index{Distance@{Distance}}
+}
+
+
+{\ttfamily \#include $<$Distance.\-h$>$}
+
+Diagrama de Hierarquia para Distance\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDistance}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDistance_a2c4329362399da0e97f431f97757cf1d}{Distance} (uint8\-\_\-t pin)
+\item 
+void \hyperlink{classDistance_a682c993094f314fe7870813c2693c36b}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classDistance_a5154b05bb07f63421d61597f9408ea6c}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classDistance_a53661de88754833d8d2d26f7f0b4c158}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classDistance_a1bc009e64442db5e875af76ae29ae57f}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classDistance_a16950b1595399b686fdac3c807c7ea47}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classDistance_a2735c7f7546b7fb0eba7f20940636dcc}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classDistance_abcc40ce3c92dc203c282c1d9c15ee0ee}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classDistance_a2c4329362399da0e97f431f97757cf1d}{\index{Distance@{Distance}!Distance@{Distance}}
+\index{Distance@{Distance}!Distance@{Distance}}
+\subsubsection[{Distance}]{\setlength{\rightskip}{0pt plus 5cm}Distance\-::\-Distance (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{pin}
+\end{DoxyParamCaption}
+)}}\label{classDistance_a2c4329362399da0e97f431f97757cf1d}
+
+
+\subsection{Métodos}
+\hypertarget{classDistance_a682c993094f314fe7870813c2693c36b}{\index{Distance@{Distance}!begin@{begin}}
+\index{begin@{begin}!Distance@{Distance}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Distance\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_a682c993094f314fe7870813c2693c36b}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classDistance_a2735c7f7546b7fb0eba7f20940636dcc}{\index{Distance@{Distance}!get@{get}}
+\index{get@{get}!Distance@{Distance}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Distance\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_a2735c7f7546b7fb0eba7f20940636dcc}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classDistance_a16950b1595399b686fdac3c807c7ea47}{\index{Distance@{Distance}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!Distance@{Distance}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool Distance\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_a16950b1595399b686fdac3c807c7ea47}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classDistance_a53661de88754833d8d2d26f7f0b4c158}{\index{Distance@{Distance}!reset@{reset}}
+\index{reset@{reset}!Distance@{Distance}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Distance\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_a53661de88754833d8d2d26f7f0b4c158}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classDistance_abcc40ce3c92dc203c282c1d9c15ee0ee}{\index{Distance@{Distance}!set@{set}}
+\index{set@{set}!Distance@{Distance}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void Distance\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_abcc40ce3c92dc203c282c1d9c15ee0ee}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classDistance_a5154b05bb07f63421d61597f9408ea6c}{\index{Distance@{Distance}!stop@{stop}}
+\index{stop@{stop}!Distance@{Distance}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void Distance\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_a5154b05bb07f63421d61597f9408ea6c}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classDistance_a1bc009e64442db5e875af76ae29ae57f}{\index{Distance@{Distance}!update@{update}}
+\index{update@{update}!Distance@{Distance}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Distance\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDistance_a1bc009e64442db5e875af76ae29ae57f}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Distance_8h}{Distance.\-h}\item 
+\hyperlink{Distance_8cpp}{Distance.\-cpp}\end{DoxyCompactItemize}

@@ -37,15 +37,19 @@
 
 class SerialConnection : public Connection {
 public:
-  SerialConnection(HardwareSerial & theSerial, uint16_t rate);
+  SerialConnection(HardwareSerial & theSerial, uint32_t rate);
   
   void begin();
   uint8_t available();
+  void println(const char * data);
   bool sendMessage(const uint8_t * data, uint8_t size);
   uint8_t receiveMessage(uint8_t * buffer, uint8_t size);
   HardwareSerial & getPort();
 private:
   HardwareSerial & serial;
+  uint32_t rate;
+  uint8_t newMessage;
+  uint8_t msgLenght;
 };
 
 #endif	/* SERIAL_CONNECTION_H */

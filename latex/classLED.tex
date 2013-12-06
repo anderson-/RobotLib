@@ -1,0 +1,255 @@
+\hypertarget{classLED}{\section{Referência da Classe L\-E\-D}
+\label{classLED}\index{L\-E\-D@{L\-E\-D}}
+}
+
+
+{\ttfamily \#include $<$L\-E\-D.\-h$>$}
+
+Diagrama de Hierarquia para L\-E\-D\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classLED}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLED_a4b8692dfdef842d0da59ac0644eb0e97}{L\-E\-D} (uint8\-\_\-t pin)
+\item 
+void \hyperlink{classLED_a62e402841c861af9bb4eb679f5afc7d6}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classLED_a11f7b87c240eb671482a7af687b0737c}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classLED_a8b85489d7bcfc54252f28abc0a5ba3cf}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classLED_ad615d612f5b0c7dac4dde5245f191382}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classLED_a36cc9854b853baba06ee3d1e74339c6f}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classLED_a70416944b6d3cae4a8dc73859a3df2aa}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classLED_aae83a677cee4ee5cb952ccbb22e57781}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)
+\item 
+void \hyperlink{classLED_a126e67dbf18aae87b9e43daed89eb837}{set\-State} (uint8\-\_\-t state)
+\item 
+void \hyperlink{classLED_a27e6e12de55a23dc87644c0c28972e51}{toggle} ()
+\item 
+uint8\-\_\-t \hyperlink{classLED_ac2003f82c3aa7eafee2e95a790ca8549}{get\-State} ()
+\item 
+void \hyperlink{classLED_aae1edcf4dd4a353a867ae0043cf0a7c7}{blink} (uint16\-\_\-t period, uint8\-\_\-t times)
+\item 
+void \hyperlink{classLED_ab657582648d1b5f488d1a67e615a5e50}{set\-Period} (uint16\-\_\-t period)
+\item 
+uint16\-\_\-t \hyperlink{classLED_a02184f5f15fac9fd237d7a95d3e8b7ec}{get\-Period} ()
+\item 
+void \hyperlink{classLED_a3b3d64d836947492ef8f8320327b6674}{set\-Blink\-Times} (uint8\-\_\-t times)
+\item 
+uint8\-\_\-t \hyperlink{classLED_a017d73ffbe5db1159e7b7d4e4e8d5370}{get\-Blink\-Times} ()
+\item 
+void \hyperlink{classLED_ab63f595aca673a34fe0c9ae2d94349c1}{set\-P\-W\-M} (bool pwm)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classLED_a4b8692dfdef842d0da59ac0644eb0e97}{\index{L\-E\-D@{L\-E\-D}!L\-E\-D@{L\-E\-D}}
+\index{L\-E\-D@{L\-E\-D}!LED@{L\-E\-D}}
+\subsubsection[{L\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}L\-E\-D\-::\-L\-E\-D (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{pin}
+\end{DoxyParamCaption}
+)}}\label{classLED_a4b8692dfdef842d0da59ac0644eb0e97}
+
+
+\subsection{Métodos}
+\hypertarget{classLED_a62e402841c861af9bb4eb679f5afc7d6}{\index{L\-E\-D@{L\-E\-D}!begin@{begin}}
+\index{begin@{begin}!LED@{L\-E\-D}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_a62e402841c861af9bb4eb679f5afc7d6}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classLED_aae1edcf4dd4a353a867ae0043cf0a7c7}{\index{L\-E\-D@{L\-E\-D}!blink@{blink}}
+\index{blink@{blink}!LED@{L\-E\-D}}
+\subsubsection[{blink}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::blink (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{period, }
+\item[{uint8\-\_\-t}]{times}
+\end{DoxyParamCaption}
+)}}\label{classLED_aae1edcf4dd4a353a867ae0043cf0a7c7}
+\hypertarget{classLED_a70416944b6d3cae4a8dc73859a3df2aa}{\index{L\-E\-D@{L\-E\-D}!get@{get}}
+\index{get@{get}!LED@{L\-E\-D}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-E\-D\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_a70416944b6d3cae4a8dc73859a3df2aa}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classLED_a017d73ffbe5db1159e7b7d4e4e8d5370}{\index{L\-E\-D@{L\-E\-D}!get\-Blink\-Times@{get\-Blink\-Times}}
+\index{get\-Blink\-Times@{get\-Blink\-Times}!LED@{L\-E\-D}}
+\subsubsection[{get\-Blink\-Times}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-E\-D\-::get\-Blink\-Times (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLED_a017d73ffbe5db1159e7b7d4e4e8d5370}
+\hypertarget{classLED_a02184f5f15fac9fd237d7a95d3e8b7ec}{\index{L\-E\-D@{L\-E\-D}!get\-Period@{get\-Period}}
+\index{get\-Period@{get\-Period}!LED@{L\-E\-D}}
+\subsubsection[{get\-Period}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t L\-E\-D\-::get\-Period (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLED_a02184f5f15fac9fd237d7a95d3e8b7ec}
+\hypertarget{classLED_ac2003f82c3aa7eafee2e95a790ca8549}{\index{L\-E\-D@{L\-E\-D}!get\-State@{get\-State}}
+\index{get\-State@{get\-State}!LED@{L\-E\-D}}
+\subsubsection[{get\-State}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-E\-D\-::get\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLED_ac2003f82c3aa7eafee2e95a790ca8549}
+\hypertarget{classLED_a36cc9854b853baba06ee3d1e74339c6f}{\index{L\-E\-D@{L\-E\-D}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!LED@{L\-E\-D}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool L\-E\-D\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_a36cc9854b853baba06ee3d1e74339c6f}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classLED_a8b85489d7bcfc54252f28abc0a5ba3cf}{\index{L\-E\-D@{L\-E\-D}!reset@{reset}}
+\index{reset@{reset}!LED@{L\-E\-D}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_a8b85489d7bcfc54252f28abc0a5ba3cf}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classLED_aae83a677cee4ee5cb952ccbb22e57781}{\index{L\-E\-D@{L\-E\-D}!set@{set}}
+\index{set@{set}!LED@{L\-E\-D}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_aae83a677cee4ee5cb952ccbb22e57781}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classLED_a3b3d64d836947492ef8f8320327b6674}{\index{L\-E\-D@{L\-E\-D}!set\-Blink\-Times@{set\-Blink\-Times}}
+\index{set\-Blink\-Times@{set\-Blink\-Times}!LED@{L\-E\-D}}
+\subsubsection[{set\-Blink\-Times}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::set\-Blink\-Times (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{times}
+\end{DoxyParamCaption}
+)}}\label{classLED_a3b3d64d836947492ef8f8320327b6674}
+\hypertarget{classLED_ab657582648d1b5f488d1a67e615a5e50}{\index{L\-E\-D@{L\-E\-D}!set\-Period@{set\-Period}}
+\index{set\-Period@{set\-Period}!LED@{L\-E\-D}}
+\subsubsection[{set\-Period}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::set\-Period (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{period}
+\end{DoxyParamCaption}
+)}}\label{classLED_ab657582648d1b5f488d1a67e615a5e50}
+\hypertarget{classLED_ab63f595aca673a34fe0c9ae2d94349c1}{\index{L\-E\-D@{L\-E\-D}!set\-P\-W\-M@{set\-P\-W\-M}}
+\index{set\-P\-W\-M@{set\-P\-W\-M}!LED@{L\-E\-D}}
+\subsubsection[{set\-P\-W\-M}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::set\-P\-W\-M (
+\begin{DoxyParamCaption}
+\item[{bool}]{pwm}
+\end{DoxyParamCaption}
+)}}\label{classLED_ab63f595aca673a34fe0c9ae2d94349c1}
+\hypertarget{classLED_a126e67dbf18aae87b9e43daed89eb837}{\index{L\-E\-D@{L\-E\-D}!set\-State@{set\-State}}
+\index{set\-State@{set\-State}!LED@{L\-E\-D}}
+\subsubsection[{set\-State}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::set\-State (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{state}
+\end{DoxyParamCaption}
+)}}\label{classLED_a126e67dbf18aae87b9e43daed89eb837}
+\hypertarget{classLED_a11f7b87c240eb671482a7af687b0737c}{\index{L\-E\-D@{L\-E\-D}!stop@{stop}}
+\index{stop@{stop}!LED@{L\-E\-D}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_a11f7b87c240eb671482a7af687b0737c}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classLED_a27e6e12de55a23dc87644c0c28972e51}{\index{L\-E\-D@{L\-E\-D}!toggle@{toggle}}
+\index{toggle@{toggle}!LED@{L\-E\-D}}
+\subsubsection[{toggle}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::toggle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLED_a27e6e12de55a23dc87644c0c28972e51}
+\hypertarget{classLED_ad615d612f5b0c7dac4dde5245f191382}{\index{L\-E\-D@{L\-E\-D}!update@{update}}
+\index{update@{update}!LED@{L\-E\-D}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void L\-E\-D\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classLED_ad615d612f5b0c7dac4dde5245f191382}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{LED_8h}{L\-E\-D.\-h}\item 
+\hyperlink{LED_8cpp}{L\-E\-D.\-cpp}\end{DoxyCompactItemize}

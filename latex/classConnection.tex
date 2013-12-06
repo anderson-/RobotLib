@@ -1,0 +1,117 @@
+\hypertarget{classConnection}{\section{Referência da Classe Connection}
+\label{classConnection}\index{Connection@{Connection}}
+}
+
+
+{\ttfamily \#include $<$Connection.\-h$>$}
+
+Diagrama de Hierarquia para Connection\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classConnection}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classConnection_a2e5c7e67928fac5fea45e56c11d1ed31}{begin} ()=0
+\begin{DoxyCompactList}\small\item\em Inicializa a conexão. \end{DoxyCompactList}\item 
+virtual uint8\-\_\-t \hyperlink{classConnection_acd5ee426481b2aca2903d96f6f807341}{available} ()=0
+\begin{DoxyCompactList}\small\item\em Verifica se existe alguma mensagem disponivel. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classConnection_aa03e632ed6b812d915fd40dccd18a080}{send\-Message} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size)=0
+\begin{DoxyCompactList}\small\item\em Envia uma mensagem. \end{DoxyCompactList}\item 
+virtual uint8\-\_\-t \hyperlink{classConnection_a315961bc8327f38e4f4e09b832fc60a1}{receive\-Message} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)=0
+\begin{DoxyCompactList}\small\item\em Recebe uma mensagem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Métodos}
+\hypertarget{classConnection_acd5ee426481b2aca2903d96f6f807341}{\index{Connection@{Connection}!available@{available}}
+\index{available@{available}!Connection@{Connection}}
+\subsubsection[{available}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint8\-\_\-t Connection\-::available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classConnection_acd5ee426481b2aca2903d96f6f807341}
+
+
+Verifica se existe alguma mensagem disponivel. 
+
+\begin{DoxyReturn}{Retorna}
+O numero de bytes disponiveis, se possivel. 
+\end{DoxyReturn}
+
+
+Implementado por \hyperlink{classRadioConnectionM_adfdbc2eb940e3a2a3798a76f02ea048a}{Radio\-Connection\-M}, \hyperlink{classRadioConnection_a970ffcf382ae789c22023857c5c48d83}{Radio\-Connection} e \hyperlink{classSerialConnection_a91aa59d8f0b913e91dc4ddcde8e42519}{Serial\-Connection}.
+
+\hypertarget{classConnection_a2e5c7e67928fac5fea45e56c11d1ed31}{\index{Connection@{Connection}!begin@{begin}}
+\index{begin@{begin}!Connection@{Connection}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Connection\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classConnection_a2e5c7e67928fac5fea45e56c11d1ed31}
+
+
+Inicializa a conexão. 
+
+
+
+Implementado por \hyperlink{classSerialConnection_a6022b91cdd0bc412d8aeda364c32ce21}{Serial\-Connection}, \hyperlink{classRadioConnectionM_acbfe7d993586efe2681e8fc07dcda463}{Radio\-Connection\-M} e \hyperlink{classRadioConnection_a1deb37d098b17cfdf2c5c90e67a279aa}{Radio\-Connection}.
+
+\hypertarget{classConnection_a315961bc8327f38e4f4e09b832fc60a1}{\index{Connection@{Connection}!receive\-Message@{receive\-Message}}
+\index{receive\-Message@{receive\-Message}!Connection@{Connection}}
+\subsubsection[{receive\-Message}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint8\-\_\-t Connection\-::receive\-Message (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classConnection_a315961bc8327f38e4f4e09b832fc60a1}
+
+
+Recebe uma mensagem. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Um array de bytes usado para armazenar a mensagem recebida. \\
+\hline
+ & {\em size} & O tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O tamanho da mensagem recebida. 
+\end{DoxyReturn}
+
+
+Implementado por \hyperlink{classRadioConnectionM_a28ee1d2377f4d280723ce679b9f3db39}{Radio\-Connection\-M}, \hyperlink{classSerialConnection_ac72ec887122fe08fd389dc8724b31c63}{Serial\-Connection} e \hyperlink{classRadioConnection_a6dc7c7b2a7c9b5d754d73f80516a37fc}{Radio\-Connection}.
+
+\hypertarget{classConnection_aa03e632ed6b812d915fd40dccd18a080}{\index{Connection@{Connection}!send\-Message@{send\-Message}}
+\index{send\-Message@{send\-Message}!Connection@{Connection}}
+\subsubsection[{send\-Message}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Connection\-::send\-Message (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classConnection_aa03e632ed6b812d915fd40dccd18a080}
+
+
+Envia uma mensagem. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Um array de bytes contendo a mensagem. \\
+\hline
+ & {\em size} & O tamanho do array {\ttfamily data}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se a mensagem foi entregue corretamente. 
+\end{DoxyReturn}
+
+
+Implementado por \hyperlink{classRadioConnection_a1bc09119403b84463264710ea40f5a4c}{Radio\-Connection}, \hyperlink{classRadioConnectionM_a8a4b19506bf383a0426023bef888e5a5}{Radio\-Connection\-M} e \hyperlink{classSerialConnection_ac98733956090bc3eaa628d156f06ef5d}{Serial\-Connection}.
+
+
+
+A documentação para esta classe foi gerada a partir do seguinte arquivo\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Connection_8h}{Connection.\-h}\end{DoxyCompactItemize}

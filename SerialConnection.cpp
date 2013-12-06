@@ -25,15 +25,16 @@
 #include "SerialConnection.h"
 #include "Debug.h"
 
-SerialConnection::SerialConnection(HardwareSerial & theSerial, uint16_t rate) : serial(theSerial){
+SerialConnection::SerialConnection(HardwareSerial & theSerial, uint32_t rate) :
+    serial(theSerial),
+    rate(rate),
+    newMessage(1) {
   
 }
 
 void SerialConnection::begin(){
-  serial.begin(9600);
+  serial.begin(rate);
 }
-
-#define TIMEOUT 10
 
 uint8_t SerialConnection::available(){
 //   unsigned long started_waiting_at = millis();
@@ -46,27 +47,35 @@ uint8_t SerialConnection::available(){
   return serial.available();
 }
 
+void SerialConnection::println(const char * data) {
+  serial.println(data);
+}
+
 bool SerialConnection::sendMessage(const uint8_t * data, uint8_t size){
+  serial.write(size);
   serial.write(data,size);
   serial.println();
   return true;
 }
 
 uint8_t SerialConnection::receiveMessage(uint8_t * buffer, uint8_t size){
-  uint8_t i = 0;
-  uint32_t time = millis();
-  while (i < size){ //TODO adicionar timeout
-    if (serial.available() > 0){
-      buffer[i] = serial.read();
-      time = millis();
-      i++;
-    } else if (millis() - time >= TIMEOUT){
-      break;
-    } else {
-      delay(1);
-    }
+
+  if (newMessage) {
+    msgLenght = serial.read();
+    newMessage = 0;
   }
-  return i;
+
+  if (serial.available() >= msgLenght) {
+    uint8_t i;
+    //uint32_t time = millis();
+    uint8_t lenght = (size < msgLenght) ? size : msgLenght;
+    serial.readBytes((char *) buffer, lenght);
+    newMessage = 1;
+    return lenght;
+
+  } else {
+    return 0;
+  }
 }
 
 HardwareSerial & SerialConnection::getPort(){

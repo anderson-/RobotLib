@@ -1,95 +1,65 @@
-/* 
- * File:   IRProximitySensor.cpp
- * Author: Anderson Antunes
+/**
+ * @file IRProximitySensor.cpp
+ * @author Diego Lee <diegolee7@gmail.com>
+ * @version 1.0
  *
- * Created on July 18, 2013, 4:04 PM
+ * @section LICENSE
+ *
+ * Copyright (C) 2013 by Fernando Ferreira <fpf.padilha@gmail.com>
+ * 
+ * RobotLib is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * RobotLib is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with RobotLib.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include "IRProximitySensor.h"
-#include "Debug.h"
 
+IRProximitySensor::IRProximitySensor(uint8_t pin) : Device(false, true),
+                                  pin(pin){}
 
-IRProximitySensor::IRProximitySensor(uint8_t pin_out, const uint8_t pins_sel[], uint16_t thld) : Device(true),
-            pin_out(pin_out),
-            thld(thld),
-            value(0) {
-  uint8_t i;
-  this->pins_sel[0] = pins_sel[0];
-  this->pins_sel[1] = pins_sel[1];
-  this->pins_sel[2] = pins_sel[2];
-  analog = 1;
-}
+void IRProximitySensor::begin(){}
 
-IRProximitySensor::IRProximitySensor(const uint8_t pins[]) : Device(true),
-            value(0) {
-  uint8_t i;
-  for (i = 0; i < NUM_SENSORS; i++) {
-    this->pins[i] = pins[i];
-  }
-  analog = 0;
-}
+void IRProximitySensor::stop(){}
 
-void IRProximitySensor::begin() {
-  uint8_t i;
-  if (analog) {
-	  pinMode(pin_out, INPUT);
-	  pinMode(pins_sel[0], OUTPUT);
-	  pinMode(pins_sel[1], OUTPUT);
-	  pinMode(pins_sel[2], OUTPUT);
-  } else {
-	  for (i = 0; i < NUM_SENSORS; i++) {
-		pinMode(pins[i],INPUT);
-	  }
-  }
-}
-
-void IRProximitySensor::stop() {
-  
-}
-
-void IRProximitySensor::reset() {
-  value = 0;
-  begin();
-}
+void IRProximitySensor::reset(){}
 
 void IRProximitySensor::update(){
-  uint8_t i;
-  value = 0;
-  for (i = 0; i < NUM_SENSORS; i++) {
-	if (analog) {
-		digitalWrite(pins_sel[0], (i & 1));
-		digitalWrite(pins_sel[1], ((i >> 1) & 1));
-		digitalWrite(pins_sel[2], ((i >> 2) & 1));
-		delayMicroseconds(100);
-		value |= ((analogRead(pin_out) > thld) << i);
-	} else {
-		value |= (digitalRead(pins[i]) << i);
-	}
-  }
+    int leitura = analogRead(pin);
+    float tensao = (float)leitura*(5.0 / 1024.0);
+    distance = (int)(16.2537*tensao*tensao*tensao*tensao - 129.893*tensao*tensao*tensao
+                    + 382.268*tensao*tensao- 512.611*tensao + 306.439);
 }
 
-bool IRProximitySensor::isReady() {
+bool IRProximitySensor::isReady(){
   return true;
 }
 
-uint8_t IRProximitySensor::get(uint8_t * buffer, uint8_t size) {
-  if(buffer[0] == 0) {
-    buffer[0] = value;
-    return 1;
-  } else if(buffer[0] == 1) {
-	if (analog) {
-		uint8_t * p = (uint8_t *) &thld;
-		buffer[0] = p[0];
-		buffer[1] = p[1];
-		return 2;
-	}
-  }
-  return 0;
+uint8_t IRProximitySensor::get(uint8_t * buffer, uint8_t size){
+
+    uint8_t *temp = (uint8_t*)&distance;
+    uint8_t i;
+    for(i = 0; i<sizeof(distance);i++)
+    {
+        buffer[i] = temp[i];
+    }
+    return 2;
+
 }
 
-void IRProximitySensor::set(const uint8_t * data, uint8_t size) {
-  if (size == 2) {
-    //thld = (data[1] << 8) | data[0];
-    thld = *((uint16_t *) data);
-  }
+int IRProximitySensor::getDistance(){
+	return distance;
+}
+
+void IRProximitySensor::set(const uint8_t * data, uint8_t size){
+
 }

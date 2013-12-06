@@ -1,0 +1,115 @@
+\hypertarget{Debug_8h}{\section{Referência do Arquivo Debug.\-h}
+\label{Debug_8h}\index{Debug.\-h@{Debug.\-h}}
+}
+{\ttfamily \#include $<$Arduino.\-h$>$}\\*
+{\ttfamily \#include $<$avr/wdt.\-h$>$}\\*
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Debug_8h_a4b86784c25c7fd1b5ae95ddf5831254a}{Reset\-\_\-\-A\-V\-R}()~wdt\-\_\-enable(W\-D\-T\-O\-\_\-30\-M\-S); while(1) \{\}
+\begin{DoxyCompactList}\small\item\em Reseta o microcontrolador;. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Debug_8h_aae9d52caad9fb2892deeb25596cfd2ab}{kill} ()
+\begin{DoxyCompactList}\small\item\em Desativa o robô enviando uma sequência predefinida para o \hyperlink{classLED}{L\-E\-D} de debug em um loop infinito. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{Debug_8h_a44004265ee55099761200d8956b600e8}{check} (void $\ast$p)
+\begin{DoxyCompactList}\small\item\em Verifica de o ponteiro {\ttfamily p} é válido, caso contrário executa {\ttfamily kill}. \end{DoxyCompactList}\item 
+void \hyperlink{Debug_8h_a39ad5f2cf0013ae6eca89f0c8ebfcbb6}{blink} (int n, int pulse\-\_\-time)
+\begin{DoxyCompactList}\small\item\em Pisca o \hyperlink{classLED}{L\-E\-D} de debug {\ttfamily n} vezes por {\ttfamily pulse\-\_\-time} ms. \end{DoxyCompactList}\item 
+int \hyperlink{Debug_8h_aac7b29dc45caaaca67299571f6a2dcc0}{free\-Ram} ()
+\begin{DoxyCompactList}\small\item\em Retorna a quantidade de memoria R\-A\-M disponível. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+\begin{DoxyAuthor}{Autor}
+Anderson Antunes \href{mailto:anderson.utf@gmail.com}{\tt anderson.\-utf@gmail.\-com} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Versão}
+1.\-0
+\end{DoxyVersion}
+\hypertarget{SerialConnection_8h_LICENSE}{}\subsection{L\-I\-C\-E\-N\-S\-E}\label{SerialConnection_8h_LICENSE}
+Copyright (C) 2013 by Anderson Antunes \href{mailto:anderson.utf@gmail.com}{\tt anderson.\-utf@gmail.\-com}
+
+Robot\-Lib is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Robot\-Lib is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with Robot\-Lib. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}.\hypertarget{Debug_8h_DESCRIPTION}{}\subsection{D\-E\-S\-C\-R\-I\-P\-T\-I\-O\-N}\label{Debug_8h_DESCRIPTION}
+Conjunto de funções para debug. 
+
+\subsection{Definições e macros}
+\hypertarget{Debug_8h_a4b86784c25c7fd1b5ae95ddf5831254a}{\index{Debug.\-h@{Debug.\-h}!Reset\-\_\-\-A\-V\-R@{Reset\-\_\-\-A\-V\-R}}
+\index{Reset\-\_\-\-A\-V\-R@{Reset\-\_\-\-A\-V\-R}!Debug.h@{Debug.\-h}}
+\subsubsection[{Reset\-\_\-\-A\-V\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define Reset\-\_\-\-A\-V\-R(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~wdt\-\_\-enable(W\-D\-T\-O\-\_\-30\-M\-S); while(1) \{\}}}\label{Debug_8h_a4b86784c25c7fd1b5ae95ddf5831254a}
+
+
+Reseta o microcontrolador;. 
+
+
+
+\subsection{Funções}
+\hypertarget{Debug_8h_a39ad5f2cf0013ae6eca89f0c8ebfcbb6}{\index{Debug.\-h@{Debug.\-h}!blink@{blink}}
+\index{blink@{blink}!Debug.h@{Debug.\-h}}
+\subsubsection[{blink}]{\setlength{\rightskip}{0pt plus 5cm}void blink (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{int}]{pulse\-\_\-time}
+\end{DoxyParamCaption}
+)}}\label{Debug_8h_a39ad5f2cf0013ae6eca89f0c8ebfcbb6}
+
+
+Pisca o \hyperlink{classLED}{L\-E\-D} de debug {\ttfamily n} vezes por {\ttfamily pulse\-\_\-time} ms. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em n} & Número de vezes que o \hyperlink{classLED}{L\-E\-D} deverá piscar. \\
+\hline
+{\em pulse\-\_\-time} & Tempo em ms de cada pulso do \hyperlink{classLED}{L\-E\-D}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{Debug_8h_a44004265ee55099761200d8956b600e8}{\index{Debug.\-h@{Debug.\-h}!check@{check}}
+\index{check@{check}!Debug.h@{Debug.\-h}}
+\subsubsection[{check}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ check (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{p}
+\end{DoxyParamCaption}
+)}}\label{Debug_8h_a44004265ee55099761200d8956b600e8}
+
+
+Verifica de o ponteiro {\ttfamily p} é válido, caso contrário executa {\ttfamily kill}. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em p} & Um ponteiro qualquer. \\
+\hline
+\end{DoxyParams}
+\hypertarget{Debug_8h_aac7b29dc45caaaca67299571f6a2dcc0}{\index{Debug.\-h@{Debug.\-h}!free\-Ram@{free\-Ram}}
+\index{free\-Ram@{free\-Ram}!Debug.h@{Debug.\-h}}
+\subsubsection[{free\-Ram}]{\setlength{\rightskip}{0pt plus 5cm}int free\-Ram (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{Debug_8h_aac7b29dc45caaaca67299571f6a2dcc0}
+
+
+Retorna a quantidade de memoria R\-A\-M disponível. 
+
+\begin{DoxyReturn}{Retorna}
+o número de bytes disponíveis. 
+\end{DoxyReturn}
+\hypertarget{Debug_8h_aae9d52caad9fb2892deeb25596cfd2ab}{\index{Debug.\-h@{Debug.\-h}!kill@{kill}}
+\index{kill@{kill}!Debug.h@{Debug.\-h}}
+\subsubsection[{kill}]{\setlength{\rightskip}{0pt plus 5cm}void kill (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{Debug_8h_aae9d52caad9fb2892deeb25596cfd2ab}
+
+
+Desativa o robô enviando uma sequência predefinida para o \hyperlink{classLED}{L\-E\-D} de debug em um loop infinito. 
+

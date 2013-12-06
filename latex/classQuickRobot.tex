@@ -1,0 +1,114 @@
+\hypertarget{classQuickRobot}{\section{Referência da Classe Quick\-Robot}
+\label{classQuickRobot}\index{Quick\-Robot@{Quick\-Robot}}
+}
+
+
+A classe \hyperlink{classQuickRobot}{Quick\-Robot}.  
+
+
+
+
+{\ttfamily \#include $<$Robot.\-h$>$}
+
+Diagrama de Hierarquia para Quick\-Robot\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQuickRobot}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classQuickRobot_ab43c04a584a584f332119137f0b51c43}{Quick\-Robot} (void($\ast$\hyperlink{classQuickRobot_a936a04970e2fe8694256a70816b697f6}{think})(), void($\ast$dev\-Ready)(\hyperlink{classDevice}{Device} \&d), void($\ast$msg\-Rec)(const uint8\-\_\-t $\ast$, uint8\-\_\-t, \hyperlink{classConnection}{Connection} \&))
+\item 
+void \hyperlink{classQuickRobot_a936a04970e2fe8694256a70816b697f6}{think} ()
+\begin{DoxyCompactList}\small\item\em Função responsável por tomar novas decisões com base nos sensores e atuadores do robô, em um determinado ciclo. \end{DoxyCompactList}\item 
+void \hyperlink{classQuickRobot_a95d490eb2e580d362b99eb6c90927256}{device\-Ready} (\hyperlink{classDevice}{Device} \&d)
+\begin{DoxyCompactList}\small\item\em Função executada quando um dispositivo anteriormente ocupado torna-\/se disponível. \end{DoxyCompactList}\item 
+void \hyperlink{classQuickRobot_a96eda0e5288726364f4a02ef7912e21b}{message\-Received} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size, \hyperlink{classConnection}{Connection} \&connection)
+\begin{DoxyCompactList}\small\item\em Função executada quando uma mensagem é recebida por alguma conexão. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Descrição Detalhada}
+A classe \hyperlink{classQuickRobot}{Quick\-Robot}. 
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classQuickRobot_ab43c04a584a584f332119137f0b51c43}{\index{Quick\-Robot@{Quick\-Robot}!Quick\-Robot@{Quick\-Robot}}
+\index{Quick\-Robot@{Quick\-Robot}!QuickRobot@{Quick\-Robot}}
+\subsubsection[{Quick\-Robot}]{\setlength{\rightskip}{0pt plus 5cm}Quick\-Robot\-::\-Quick\-Robot (
+\begin{DoxyParamCaption}
+\item[{void($\ast$)()}]{think, }
+\item[{void($\ast$)({\bf Device} \&d)}]{dev\-Ready, }
+\item[{void($\ast$)(const uint8\-\_\-t $\ast$, uint8\-\_\-t, {\bf Connection} \&)}]{msg\-Rec}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classQuickRobot_ab43c04a584a584f332119137f0b51c43}
+
+
+\subsection{Métodos}
+\hypertarget{classQuickRobot_a95d490eb2e580d362b99eb6c90927256}{\index{Quick\-Robot@{Quick\-Robot}!device\-Ready@{device\-Ready}}
+\index{device\-Ready@{device\-Ready}!QuickRobot@{Quick\-Robot}}
+\subsubsection[{device\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}void Quick\-Robot\-::device\-Ready (
+\begin{DoxyParamCaption}
+\item[{{\bf Device} \&}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classQuickRobot_a95d490eb2e580d362b99eb6c90927256}
+
+
+Função executada quando um dispositivo anteriormente ocupado torna-\/se disponível. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em d} & Referência ao dispositivo em questão. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classRobot_aaa0c932d862aed7556b068ebb70a917a}{Robot}.
+
+\hypertarget{classQuickRobot_a96eda0e5288726364f4a02ef7912e21b}{\index{Quick\-Robot@{Quick\-Robot}!message\-Received@{message\-Received}}
+\index{message\-Received@{message\-Received}!QuickRobot@{Quick\-Robot}}
+\subsubsection[{message\-Received}]{\setlength{\rightskip}{0pt plus 5cm}void Quick\-Robot\-::message\-Received (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size, }
+\item[{{\bf Connection} \&}]{connection}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classQuickRobot_a96eda0e5288726364f4a02ef7912e21b}
+
+
+Função executada quando uma mensagem é recebida por alguma conexão. 
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Um vetor de constantes de 8bits (byte) contendo a mensagem. \\
+\hline
+ & {\em size} & O tamanho da mensagem em bytes. \\
+\hline
+ & {\em connection} & O I\-D da conexão que recebeu a mensagem. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classRobot_ab02c09bdea244d38bcfd0010b9554b6f}{Robot}.
+
+\hypertarget{classQuickRobot_a936a04970e2fe8694256a70816b697f6}{\index{Quick\-Robot@{Quick\-Robot}!think@{think}}
+\index{think@{think}!QuickRobot@{Quick\-Robot}}
+\subsubsection[{think}]{\setlength{\rightskip}{0pt plus 5cm}void Quick\-Robot\-::think (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classQuickRobot_a936a04970e2fe8694256a70816b697f6}
+
+
+Função responsável por tomar novas decisões com base nos sensores e atuadores do robô, em um determinado ciclo. 
+
+É executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classRobot_a75cfdd8e35e007abe24ffae66a8ecf1d}{Robot}.
+
+
+
+A documentação para esta classe foi gerada a partir do seguinte arquivo\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Robot_8h}{Robot.\-h}\end{DoxyCompactItemize}

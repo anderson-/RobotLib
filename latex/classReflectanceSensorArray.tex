@@ -1,0 +1,183 @@
+\hypertarget{classReflectanceSensorArray}{\section{Referência da Classe Reflectance\-Sensor\-Array}
+\label{classReflectanceSensorArray}\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}}
+}
+
+
+{\ttfamily \#include $<$Reflectance\-Sensor\-Array.\-h$>$}
+
+Diagrama de Hierarquia para Reflectance\-Sensor\-Array\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classReflectanceSensorArray}
+\end{center}
+\end{figure}
+\subsection*{Métodos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classReflectanceSensorArray_a4e1aebfbf34f73ac86628213dfa106e7}{Reflectance\-Sensor\-Array} (uint8\-\_\-t pin\-\_\-out, const uint8\-\_\-t pins\-\_\-sel\mbox{[}$\,$\mbox{]}, uint16\-\_\-t thld)
+\item 
+\hyperlink{classReflectanceSensorArray_a8597647e8737a1a868dc8240e12774f1}{Reflectance\-Sensor\-Array} (const uint8\-\_\-t pins\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{classReflectanceSensorArray_a11602e4c9b93577608b07088f9c0fd3c}{begin} ()
+\begin{DoxyCompactList}\small\item\em Inicializa o dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classReflectanceSensorArray_ae83ddbd02df0b879bf67c99a02341f2b}{stop} ()
+\begin{DoxyCompactList}\small\item\em Interrompe o funcionamento do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classReflectanceSensorArray_aed9eaebad7add3ac016ea8af942261a5}{reset} ()
+\begin{DoxyCompactList}\small\item\em Redefine o estado do dispositivo. \end{DoxyCompactList}\item 
+void \hyperlink{classReflectanceSensorArray_a3a5f7c29c3a72026365df9cf9791e3e5}{update} ()
+\begin{DoxyCompactList}\small\item\em Atualiza o estado atual do dispositivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classReflectanceSensorArray_a7781688e68d77cce4f7c70bbe242113b}{is\-Ready} ()
+\begin{DoxyCompactList}\small\item\em Verifica se o dispositivo está pronto para receber novos comandos ou leituras. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{classReflectanceSensorArray_ad608c5f45ea98fe65162d8c24722bc15}{get} (uint8\-\_\-t $\ast$buffer, uint8\-\_\-t size)
+\item 
+void \hyperlink{classReflectanceSensorArray_a023408b8b40cea4a74c5c1837a39d701}{set} (const uint8\-\_\-t $\ast$data, uint8\-\_\-t size=1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Construtores \& Destrutores}
+\hypertarget{classReflectanceSensorArray_a4e1aebfbf34f73ac86628213dfa106e7}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}}
+\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{Reflectance\-Sensor\-Array}]{\setlength{\rightskip}{0pt plus 5cm}Reflectance\-Sensor\-Array\-::\-Reflectance\-Sensor\-Array (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{pin\-\_\-out, }
+\item[{const uint8\-\_\-t}]{pins\-\_\-sel\mbox{[}$\,$\mbox{]}, }
+\item[{uint16\-\_\-t}]{thld}
+\end{DoxyParamCaption}
+)}}\label{classReflectanceSensorArray_a4e1aebfbf34f73ac86628213dfa106e7}
+\hypertarget{classReflectanceSensorArray_a8597647e8737a1a868dc8240e12774f1}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}}
+\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{Reflectance\-Sensor\-Array}]{\setlength{\rightskip}{0pt plus 5cm}Reflectance\-Sensor\-Array\-::\-Reflectance\-Sensor\-Array (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t}]{pins\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{classReflectanceSensorArray_a8597647e8737a1a868dc8240e12774f1}
+
+
+\subsection{Métodos}
+\hypertarget{classReflectanceSensorArray_a11602e4c9b93577608b07088f9c0fd3c}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!begin@{begin}}
+\index{begin@{begin}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Reflectance\-Sensor\-Array\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_a11602e4c9b93577608b07088f9c0fd3c}
+
+
+Inicializa o dispositivo. 
+
+Esta função é executada apenas uma vez em \hyperlink{classRobot_a6c7ee2437ae5427a19f2de4903ca0df9}{Robot\-::begin()}. 
+
+Implementa \hyperlink{classDevice_a0dc99b16a220489d787a1cbcef4875d9}{Device}.
+
+\hypertarget{classReflectanceSensorArray_ad608c5f45ea98fe65162d8c24722bc15}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!get@{get}}
+\index{get@{get}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Reflectance\-Sensor\-Array\-::get (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{buffer, }
+\item[{uint8\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_ad608c5f45ea98fe65162d8c24722bc15}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt out}  & {\em buffer} & Array de bytes com tamanho suficiente para armazenar a resposta. \\
+\hline
+ & {\em size} & Tamanho do {\ttfamily buffer}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+O numero de bytes escritos em {\ttfamily buffer}. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a0057af09515609c289d5da3be19dcc8d}{Device}.
+
+\hypertarget{classReflectanceSensorArray_a7781688e68d77cce4f7c70bbe242113b}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!is\-Ready@{is\-Ready}}
+\index{is\-Ready@{is\-Ready}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{is\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}bool Reflectance\-Sensor\-Array\-::is\-Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_a7781688e68d77cce4f7c70bbe242113b}
+
+
+Verifica se o dispositivo está pronto para receber novos comandos ou leituras. 
+
+É importante para \hyperlink{classRobot}{Robot} definir se uma ação de maior grau de abstração foi concluída ou não.
+
+\begin{DoxyReturn}{Retorna}
+{\ttfamily T\-R\-U\-E} se o dispositivo está ocioso. 
+\end{DoxyReturn}
+
+
+Implementa \hyperlink{classDevice_a30065df084d450dbaae9d68215e01e6f}{Device}.
+
+\hypertarget{classReflectanceSensorArray_aed9eaebad7add3ac016ea8af942261a5}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!reset@{reset}}
+\index{reset@{reset}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Reflectance\-Sensor\-Array\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_aed9eaebad7add3ac016ea8af942261a5}
+
+
+Redefine o estado do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a6e43162e890cb40eafb923b0c94d167a}{Device}.
+
+\hypertarget{classReflectanceSensorArray_a023408b8b40cea4a74c5c1837a39d701}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!set@{set}}
+\index{set@{set}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void Reflectance\-Sensor\-Array\-::set (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{data, }
+\item[{uint8\-\_\-t}]{size = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_a023408b8b40cea4a74c5c1837a39d701}
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Mensagem a ser processada pelo dispositivo. \\
+\hline
+ & {\em size} & Tamanho do vetor data. \\
+\hline
+\end{DoxyParams}
+
+
+Implementa \hyperlink{classDevice_a3b4bf3ff761f93c024675548755586d8}{Device}.
+
+\hypertarget{classReflectanceSensorArray_ae83ddbd02df0b879bf67c99a02341f2b}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!stop@{stop}}
+\index{stop@{stop}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void Reflectance\-Sensor\-Array\-::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_ae83ddbd02df0b879bf67c99a02341f2b}
+
+
+Interrompe o funcionamento do dispositivo. 
+
+
+
+Implementa \hyperlink{classDevice_a22430f274658b04c280b5cc2d53aa1e4}{Device}.
+
+\hypertarget{classReflectanceSensorArray_a3a5f7c29c3a72026365df9cf9791e3e5}{\index{Reflectance\-Sensor\-Array@{Reflectance\-Sensor\-Array}!update@{update}}
+\index{update@{update}!ReflectanceSensorArray@{Reflectance\-Sensor\-Array}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Reflectance\-Sensor\-Array\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classReflectanceSensorArray_a3a5f7c29c3a72026365df9cf9791e3e5}
+
+
+Atualiza o estado atual do dispositivo. 
+
+Esta função é executada uma vez a cada \hyperlink{classRobot_aa50d73cd1109a70133af442674ed3a1a}{Robot\-::step()}. 
+
+Implementa \hyperlink{classDevice_a7e5226b6341b1cf2ec04a5913b97becc}{Device}.
+
+
+
+A documentação para esta classe foi gerada a partir dos seguintes arquivos\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ReflectanceSensorArray_8h}{Reflectance\-Sensor\-Array.\-h}\item 
+\hyperlink{ReflectanceSensorArray_8cpp}{Reflectance\-Sensor\-Array.\-cpp}\end{DoxyCompactItemize}

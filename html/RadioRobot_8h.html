@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Robot: Referência do Arquivo RadioRobot.h</title>
+<title>Robot F: Referência do Arquivo RadioRobot.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Robot
+   <div id="projectname">Robot F
+   &#160;<span id="projectnumber">1.0</span>
    </div>
   </td>
  </tr>
@@ -81,6 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Componentes</a> &#124;
+<a href="#typedef-members">Definições de Tipos</a> &#124;
 <a href="#enum-members">Enumerações</a>  </div>
   <div class="headertitle">
 <div class="title">Referência do Arquivo RadioRobot.h</div>  </div>
@@ -93,8 +95,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Componentes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structActionParam.html">ActionParam</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRadioRobot.html">RadioRobot</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Definições de Tipos</h2></td></tr>
+<tr class="memitem:a3541f6ba20932adb767c7e0d8bdc6940"><td class="memItemLeft" align="right" valign="top">typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="RadioRobot_8h.html#a3541f6ba20932adb767c7e0d8bdc6940">ActionFunc</a> )(<a class="el" href="classDevice.html">Device</a> **, uint8_t, <a class="el" href="classConnection.html">Connection</a> &amp;, const uint8_t *, uint8_t)</td></tr>
+<tr class="separator:a3541f6ba20932adb767c7e0d8bdc6940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerações</h2></td></tr>
@@ -109,9 +118,15 @@ Enumerações</h2></td></tr>
 <a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a589b7d94a3d91d145720e2fed0eb3a05">RESET</a>, 
 <a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a9c954bcf443428c80b0f107b3bc48749">DONE</a>, 
 <br/>
-&#160;&#160;<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665ae76c941d2316666913c673a032deb9ba">NO_OP</a>, 
+&#160;&#160;<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a439c688a4e9ed31638d5922a50680a8e">RUN</a>, 
+<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665ae76c941d2316666913c673a032deb9ba">NO_OP</a>, 
+<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a936c4a5547a9360243178f726f6b2715">FAIL</a>, 
 <a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665ab1d5eac4b1dca480c8056eaea7663b7a">ALL</a> = 222, 
-<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a54dbffa2d33d22e4696c0895b7696e58">FREE_RAM</a>
+<br/>
+&#160;&#160;<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a54dbffa2d33d22e4696c0895b7696e58">FREE_RAM</a>, 
+<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a57cc238145ec1361c72c327674c0d754">SYSTEM</a>, 
+<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665a368db50032da622d4c456ef7eaf9cb67">BEGIN</a>, 
+<a class="el" href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665adc6f24fd6915a3f2786a1b7045406924">END</a>
 <br/>
  }</td></tr>
 <tr class="memdesc:a04887de32e1f60f8dc157312b8f27665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comandos possíveis do protocolo de comunicação.  <a href="RadioRobot_8h.html#a04887de32e1f60f8dc157312b8f27665">Mais...</a><br/></td></tr>
@@ -126,7 +141,20 @@ LICENSE</h1>
 <p>RobotLib is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 <p>RobotLib is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along with RobotLib. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. </p>
-</div><h2 class="groupheader">Enumerações</h2>
+</div><h2 class="groupheader">Definições dos tipos</h2>
+<a class="anchor" id="a3541f6ba20932adb767c7e0d8bdc6940"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef bool(* ActionFunc)(<a class="el" href="classDevice.html">Device</a> **, uint8_t, <a class="el" href="classConnection.html">Connection</a> &amp;, const uint8_t *, uint8_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumerações</h2>
 <a class="anchor" id="a04887de32e1f60f8dc157312b8f27665"></a>
 <div class="memitem">
 <div class="memproto">
@@ -140,37 +168,59 @@ LICENSE</h1>
 <p>Comandos possíveis do protocolo de comunicação. </p>
 <dl><dt><b>Valores enumerados: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a679ee5320d66c8322e310daeb2ee99b8"></a>STOP</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;1&gt; &lt;ID/ALL&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a6e074abc1ec6368da315a331ad35c00b"></a>ECHO</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;2&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... </p>
+<p>&lt;DATA_LEN-1&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665ab107229d44d042caa8ab8df4c8acaa1f"></a>PRINT</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;3&gt; &lt;CONN_ID/ALL&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... </p>
+<p>&lt;DATA_LEN-1&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a12a8dcf59c16b5aadfda3a08ba67d529"></a>GET</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;4&gt; &lt;DEV_ID/ALL/FREE_RAM&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... </p>
+<p>&lt;DATA_LEN-1&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665ab44c8101cc294c074709ec1b14211792"></a>SET</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;5&gt; &lt;DEV_ID&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... </p>
+<p>&lt;DATA_LEN-1&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665acfcf145f2788bf340ff3f3098bc54909"></a>ADD</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;6&gt; &lt;DEV_SID&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... </p>
+<p>&lt;DATA_LEN-1&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a589b7d94a3d91d145720e2fed0eb3a05"></a>RESET</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;7&gt; &lt;ID/ALL/SYSTEM&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a9c954bcf443428c80b0f107b3bc48749"></a>DONE</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;8&gt; &lt;CMD&gt; &lt;ID&gt; &lt;LENGTH&gt; || &lt;DONE&gt; &lt;RUN&gt; &lt;ID&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... </p>
+<p>&lt;DATA_LEN-1&gt; </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a439c688a4e9ed31638d5922a50680a8e"></a>RUN</em>&nbsp;</td><td>
+<p>&lt;9&gt; &lt;N_DEVICES&gt; &lt;DEVICE_ID_0&gt; ... </p>
+<p>&lt;DEVICE_ID_N-1&gt; &lt;LENGTH&gt; &lt;DATA_0&gt; ... &lt;DATA_LEN-1&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665ae76c941d2316666913c673a032deb9ba"></a>NO_OP</em>&nbsp;</td><td>
-<p>Comando. </p>
+<p>&lt;10&gt; </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a936c4a5547a9360243178f726f6b2715"></a>FAIL</em>&nbsp;</td><td>
+<p>&lt;11&gt; &lt;CMD&gt; &lt;ID&gt; &lt;LENGTH&gt; </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665ab1d5eac4b1dca480c8056eaea7663b7a"></a>ALL</em>&nbsp;</td><td>
-<p>ID. </p>
+<p>Command &lt;STOP/PRINT/GET/RESET&gt; arg. </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a54dbffa2d33d22e4696c0895b7696e58"></a>FREE_RAM</em>&nbsp;</td><td>
-<p>ID. </p>
+<p>Command &lt;GET&gt; arg. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a57cc238145ec1361c72c327674c0d754"></a>SYSTEM</em>&nbsp;</td><td>
+<p>Command &lt;RESET&gt; arg. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665a368db50032da622d4c456ef7eaf9cb67"></a>BEGIN</em>&nbsp;</td><td>
+<p>Command &lt;RUN&gt; arg. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a04887de32e1f60f8dc157312b8f27665adc6f24fd6915a3f2786a1b7045406924"></a>END</em>&nbsp;</td><td>
+<p>Command &lt;RUN&gt; arg. </p>
 </td></tr>
 </table>
 </dd>
@@ -181,7 +231,7 @@ LICENSE</h1>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Sábado, 24 de Agosto de 2013 03:07:44 para Robot por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quarta, 27 de Novembro de 2013 04:14:44 para Robot F por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>

@@ -98,7 +98,8 @@ void Robot::step(){
     */
     if (connections[i]->available()){
       uint8_t size = connections[i]->receiveMessage(buffer, BUFFER_SIZE);
-      messageReceived(buffer, size, *connections[i]);
+      if (size > 0)
+        messageReceived(buffer, size, *connections[i]);
     }
   }
 }

@@ -41,6 +41,7 @@ public:
   bool isReady();
   uint8_t get(uint8_t * buffer, uint8_t size);
   void set (const uint8_t * data, uint8_t size = 1);
+  int getAngle();
 private:
   HMC5883L compass;
   int angleInt;
