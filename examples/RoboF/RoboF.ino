@@ -22,7 +22,8 @@
 #include <IRProximitySensor.h>
 #include <ReflectanceSensorArray.h>
 
-#define ROBOT_ID  10
+#define ROBOT_ID  1
+#define RADIO_ID  127
 
 
 /**
@@ -34,7 +35,7 @@ const uint8_t pin_sel[] = {4, 3, 16};
 
 class RoboF : public GenericRobot {
 public:
-  RoboF() : radio(7,8,ROBOT_ID,false),
+  RoboF() : radio(7,8,ROBOT_ID,RADIO_ID,false),
             hbridge(5,6,9,10),
             compass(),
             irsensor(17),

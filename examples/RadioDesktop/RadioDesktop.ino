@@ -18,7 +18,8 @@
 #include <SerialConnection.h>
 #include <Robot.h>
 
-#define ROBOT_ID  10
+#define ROBOT_ID  1
+#define RADIO_ID  127
 
 /**
  * Sketch para comunicaçao PC-Robo via radio.
@@ -28,7 +29,7 @@
 
 class MyRobot : public Robot {
 public:
-  MyRobot() : radio(9,10,ROBOT_ID,true),  // Arduino: 9,10
+  MyRobot() : radio(9,10,ROBOT_ID,RADIO_ID,true),  // Arduino: 9,10
                                           // MEGA2560: 9,53
                                           // ROBOF: 7,8
               serial(Serial,57600) {

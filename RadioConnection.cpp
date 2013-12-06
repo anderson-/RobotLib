@@ -27,12 +27,10 @@
 #include "RadioConnection.h"
 #include "Debug.h"
 
-#define PAYLOAD 16
-#define PIPE_A 0xF0F0F0F000LL
-#define PIPE_B 0xF0F0F0F100LL
 
-RadioConnection::RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t id, bool isMaster) :
-	id(id),
+RadioConnection::RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t slave_id, uint8_t master_id, bool isMaster) :
+	slave_id(slave_id),
+	master_id(master_id),
   #ifdef LIBRARY_RF24
 		radio(pin_ce,pin_ss),
 #else
@@ -56,25 +54,27 @@ void RadioConnection::printDetails() {
 void RadioConnection::begin() {
 #ifdef LIBRARY_RF24
   radio.begin();
+
   // delay de (3+1)x250us = 1ms X 15 tentativas = 15 ms
   radio.setRetries(3,15);
+
   // define o numero de bytes enviados/recebidos (max 32)
   radio.setPayloadSize(PAYLOAD);
+
+  // define o canal a ser utilizado (0-127)
+  radio.setChannel(master_id);
+
   // abre os canais de escrita e leitura
-  uint64_t u64_id = (uint64_t)id;
+	uint64_t u64_mid = (uint64_t) master_id;
+	uint64_t u64_sid = (uint64_t) slave_id;
   if (master){
-    radio.openWritingPipe(PIPE_A | u64_id);
-    radio.openReadingPipe(1,PIPE_B | u64_id);
+    radio.openWritingPipe(pipe_a | u64_sid);
+    radio.openReadingPipe(1,pipe_b | u64_mid);
   } else {
-    radio.openWritingPipe(PIPE_B | u64_id);
-    radio.openReadingPipe(1,PIPE_A | u64_id);
+    radio.openWritingPipe(pipe_b | u64_mid);
+    radio.openReadingPipe(1,pipe_a | u64_sid);
   }
-   /* 
-   * Start listening on the pipes opened for reading.
-   * Be sure to call openReadingPipe() first.  Do not call write() while
-   * in this mode, without first calling stopListening().  Call
-   * isAvailable() to check for incoming traffic, and read() to get it.
-   */
+
   radio.startListening();
 #else
   Mirf.cePin = pin_ce;
@@ -82,18 +82,17 @@ void RadioConnection::begin() {
 
 	Mirf.spi = &MirfHardwareSpi;
 	Mirf.init();
+	Mirf.payload = PAYLOAD;
+	Mirf.config();
+	Mirf.configRegister(RF_CH, master_id);
 
 	if (master){
-		Mirf.setRADDR((byte *)"pipe1");
+		pipe_a = (uint8_t *)"pipe0";
+		Mirf.setRADDR(pipe_a);
 	} else {
-		char addr[8];
-		snprintf(addr, 8, "pipe%hhu", id);
+		snprintf(pipe_b, 8, "pipe%hhu", id);
 		Mirf.setRADDR(addr);
 	}
-
-	Mirf.payload = PAYLOAD;
-
-	Mirf.config();
 #endif
 }
 
@@ -139,17 +138,12 @@ bool RadioConnection::sendMessage(const uint8_t * data, uint8_t size) {
 	}
 
 	if (master){
-		Mirf.setTADDR((byte *)"pipe2");
+		Mirf.setTADDR(pipe_b);
 	} else {
-		Mirf.setTADDR((byte *)"pipe1");
+		Mirf.setTADDR(pipe_a);
 	}
 
 	Mirf.send((uint8_t *)data);
-
-	//while (Mirf.getStatus() & (1 << MAX_RT)){
-		////Envia novamente..
-		//Mirf.send((uint8_t *)data);
-	//}
 
 	while(Mirf.isSending()){
 	 //Wait.

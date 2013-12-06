@@ -39,10 +39,12 @@
 	#include <MirfHardwareSpiDriver.h>
 #endif
 
+#define PAYLOAD 16
+
 class RadioConnection : public Connection {
 
 public:
-  RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t id, bool isMaster = false);
+  RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t slave_id, uint8_t master_id = 127, bool isMaster = false);
   bool isMaster();
   
   void begin();
@@ -56,11 +58,16 @@ public:
 private:
 #ifdef LIBRARY_RF24
   RF24 radio;
+  const uint64_t pipe_a = 0xF0F0F0F000LL;
+  const uint64_t pipe_b = 0xF0F0F0F100LL;
 #else
   uint8_t pin_ce;
   uint8_t pin_ss;
+  uint8_t pipe_a[8];
+  uint8_t pipe_b[8];
 #endif
-  uint8_t id;
+  uint8_t master_id;
+  uint8_t slave_id;
   bool master;
 
 };

@@ -1,11 +1,24 @@
+
+// Descomente a linha abaixo para utilizar a biblioteca RF_24
+// #define LIBRARY_RF24
+
 #include <SPI.h>
-#include <RF24_config.h>
-#include <Robot.h>
+
+#if LIBRARY_RF24
+  #include <RF24_config.h>
+#else
+  #include <Mirf.h>
+  #include <nRF24L01.h>
+  #include <MirfHardwareSpiDriver.h>
+#endif
+
 #include <Wire.h>
 #include <HMC5883L.h>
-#include <SerialConnection.h>
+#include <RadioConnection.h>
+#include <Robot.h>
 
-#define ROBOT_ID  10
+#define ROBOT_ID  1
+#define RADIO_ID  127
 
 /**
  * Sketch para teste da comunicaçao via radio entre PC-Robo.
@@ -15,7 +28,7 @@
 
 class MyRobot : public Robot {
 public:
-  MyRobot() : radio(7,8,ROBOT_ID,true) {
+  MyRobot() : radio(7,8,ROBOT_ID,RADIO_ID,true) {
     addConnection(radio);
   }
 
