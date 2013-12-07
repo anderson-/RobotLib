@@ -1,4 +1,3 @@
-
 // Descomente a linha abaixo para utilizar a biblioteca RF_24
 // #define LIBRARY_RF24
 
@@ -110,9 +109,9 @@ bool head (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
       // senao, calcula uma velocidade e direcao de giro proporcional ao erro
       int8_t speed;
       if (error > thld) {
-        speed = (int8_t) max(30, min(127, error*0.515));
+        speed = (int8_t) max(30, min(127, error*0.515)); // error > thld -> error > 0
       } else {
-        speed = (int8_t) min(-30, max(-127, -error*0.515));
+        speed = (int8_t) min(-30, max(-127, error*0.515)); // error < -thld -> error > 0
       }
       hbridge->setMotorState(0, speed);
       hbridge->setMotorState(1,-speed);
@@ -180,9 +179,9 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
       // senao, calcula uma velocidade e direcao de giro proporcional ao erro
       int8_t speed;
       if (turnRemaining > thld) {
-        speed = (int8_t) max(40, min(127, turnRemaining*0.71));
+        speed = (int8_t) max(30, min(127, turnRemaining*0.515)); // turnRemaining > thld -> turnRemaining > 0
       } else {
-        speed = (int8_t) min(-40, max(-127, -turnRemaining*0.71));
+        speed = (int8_t) min(-30, max(-127, turnRemaining*0.515)); // turnRemaining < -thld -> turnRemaining < 0
       }
       hbridge->setMotorState(0, speed);
       hbridge->setMotorState(1,-speed);
