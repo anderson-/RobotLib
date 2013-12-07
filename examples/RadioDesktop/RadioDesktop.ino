@@ -4,7 +4,7 @@
 
 #include <SPI.h>
 
-#if LIBRARY_RF24
+#ifdef LIBRARY_RF24
   #include <RF24_config.h>
 #else
   #include <Mirf.h>
@@ -19,7 +19,7 @@
 #include <Robot.h>
 
 #define ROBOT_ID  1
-#define RADIO_ID  127
+#define RADIO_ID  120
 
 /**
  * Sketch para comunicaçao PC-Robo via radio.

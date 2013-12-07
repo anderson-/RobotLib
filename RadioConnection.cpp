@@ -34,7 +34,7 @@ RadioConnection::RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t slave_i
   #ifdef LIBRARY_RF24
 		radio(pin_ce,pin_ss),
 #else
-		pin(pin_ce),
+		pin_ce(pin_ce),
 		pin_ss(pin_ss),
 #endif
     master(isMaster) {
@@ -79,19 +79,20 @@ void RadioConnection::begin() {
 #else
   Mirf.cePin = pin_ce;
 	Mirf.csnPin = pin_ss;
-
 	Mirf.spi = &MirfHardwareSpi;
 	Mirf.init();
+
 	Mirf.payload = PAYLOAD;
+	Mirf.channel = master_id;
 	Mirf.config();
-	Mirf.configRegister(RF_CH, master_id);
+
+	strcpy ((char *) pipe_a, "serv1");
+	snprintf((char *) pipe_b, 8, "robo%hu", slave_id);
 
 	if (master){
-		pipe_a = (uint8_t *)"pipe0";
 		Mirf.setRADDR(pipe_a);
 	} else {
-		snprintf(pipe_b, 8, "pipe%hhu", id);
-		Mirf.setRADDR(addr);
+		Mirf.setRADDR(pipe_b);
 	}
 #endif
 }

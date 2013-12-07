@@ -4,7 +4,7 @@
 
 #include <SPI.h>
 
-#if LIBRARY_RF24
+#ifdef LIBRARY_RF24
   #include <RF24_config.h>
 #else
   #include <Mirf.h>
@@ -18,7 +18,7 @@
 #include <Robot.h>
 
 #define ROBOT_ID  1
-#define RADIO_ID  127
+#define RADIO_ID  120
 
 /**
  * Sketch para teste da comunicaçao via radio entre PC-Robo.
@@ -28,7 +28,7 @@
 
 class MyRobot : public Robot {
 public:
-  MyRobot() : radio(7,8,ROBOT_ID,RADIO_ID,true) {
+  MyRobot() : radio(7,8,ROBOT_ID,RADIO_ID,false) {
     addConnection(radio);
   }
 

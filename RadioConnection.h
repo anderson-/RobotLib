@@ -44,7 +44,7 @@
 class RadioConnection : public Connection {
 
 public:
-  RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t slave_id, uint8_t master_id = 127, bool isMaster = false);
+  RadioConnection(uint8_t pin_ce, uint8_t pin_ss, uint8_t slave_id, uint8_t master_id = 120, bool isMaster = false);
   bool isMaster();
   
   void begin();
