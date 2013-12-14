@@ -1,6 +1,7 @@
 // Descomente a linha abaixo para utilizar a biblioteca RF_24
 // #define LIBRARY_RF24
 
+#include <float.h>
 #include <SPI.h>
 
 #ifdef LIBRARY_RF24
@@ -22,7 +23,7 @@
 #include <ReflectanceSensorArray.h>
 
 #define ROBOT_ID  1
-#define RADIO_ID  120
+#define RADIO_ID  110
 
 
 /**
@@ -60,6 +61,9 @@ private:
   ReflectanceSensorArray reflectance;
 };
 
+
+RoboF robot;
+
 /**
  * Posiciona o robo em um determinado angulo da bussola.
  *
@@ -85,7 +89,9 @@ bool head (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
 
   if (hbridge && compass && angle < 360) {
     // erro entre o angulo desejado e o atual
-    int16_t error = angle - compass->getAngle();
+  	int16_t newAngle;
+  	compass->getAngle(newAngle);
+    int16_t error = angle - newAngle;
 
     // ajuste para o menor angulo
     if(error > 180)       error -= 360; // (180,360) -> (-180,0)
@@ -142,65 +148,116 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
   static uint8_t    iterations;
 
   //inicializa a funçao
-  if (data != NULL){
+  if (data != NULL) {
     hbridge = (HBridge *) deviceList[0]; // posiçao 0!
     compass = (Compass *) deviceList[1]; // posiçao 1!
     turnRemaining = ((int16_t *)data)[0];
     thld = data[2];
     iterations = 0;
-    lastAngle = compass->getAngle();
+    compass->getAngle(lastAngle);
   }
 
   if (hbridge && compass) {
     // mede a rotacao feita nessa iteracao e subtrai da rotacao total
-    int16_t currAngle = compass->getAngle();
-    int16_t currTurn = currAngle - lastAngle;
-    // ajuste para o menor angulo
-    if (currTurn > 180)       currTurn -= 360;
-    else if (currTurn < -180) currTurn += 360;
-    turnRemaining -= currTurn;
-    lastAngle = currAngle;
+    int16_t currAngle;
+    if (compass->getAngle(currAngle)) {
 
-    // verifica se esta dentro do erro limite
-    if ((turnRemaining >= -thld) && (turnRemaining <= thld )) {
-      // se esta dentro do limite, para
-      hbridge->setMotorState(1,0);
-      hbridge->setMotorState(0,0);
-      
-      // conta 5 iteracoes no angulo desejado,
-      // para evitar que ele desvie do angulo pela inercia
-      if (iterations >= 5) {
-        return true; //termina
-      } else {
-        iterations++;
-        return false; //repete
-      }
+    	int16_t currTurn = currAngle - lastAngle;
+			// ajuste para o menor angulo
+			if (currTurn > 180)       currTurn -= 360;
+			else if (currTurn < -180) currTurn += 360;
+			turnRemaining -= currTurn;
+			lastAngle = currAngle;
 
-    } else {
-      // senao, calcula uma velocidade e direcao de giro proporcional ao erro
-      int8_t speed;
-      if (turnRemaining > thld) {
-        speed = (int8_t) max(30, min(127, turnRemaining*0.515)); // turnRemaining > thld -> turnRemaining > 0
-      } else {
-        speed = (int8_t) min(-30, max(-127, turnRemaining*0.515)); // turnRemaining < -thld -> turnRemaining < 0
-      }
-      hbridge->setMotorState(0, speed);
-      hbridge->setMotorState(1,-speed);
-      iterations = 0;
+			// verifica se esta dentro do erro limite
+			if ((turnRemaining >= -thld) && (turnRemaining <= thld )) {
+				// se esta dentro do limite, para
+				hbridge->setMotorState(1,0);
+				hbridge->setMotorState(0,0);
 
-      return false; //repete
+				// conta 5 iteracoes no angulo desejado,
+				// para evitar que ele desvie do angulo pela inercia
+				if (iterations >= 5) {
+					return true; //termina
+				} else {
+					iterations++;
+				}
+
+			} else {
+				// senao, calcula uma velocidade e direcao de giro proporcional ao erro
+				int8_t speed;
+				if (turnRemaining > thld) {
+					speed = (int8_t) max(30, min(127, turnRemaining*0.515)); // turnRemaining > thld -> turnRemaining > 0
+				} else {
+					speed = (int8_t) min(-30, max(-127, turnRemaining*0.515)); // turnRemaining < -thld -> turnRemaining < 0
+				}
+				hbridge->setMotorState(0, speed);
+				hbridge->setMotorState(1,-speed);
+				iterations = 0;
+
+			}
     }
+    return false; //repete
   }
   
   return true; //termina
 }
 
-RoboF robot;
+
+bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
+
+	static HBridge *  hbridge   = NULL;
+	static Compass *  compass   = NULL;
+	static HMC5883L * hmc5883		= NULL;
+	static Clock & 		clock			= NULL;
+	static Timer 			timer			= 0;
+	static float 			xmin, xmax, ymin, ymax;
+
+	// inicializa a funcao
+	if (data != NULL) {
+		hbridge = (HBridge *) deviceList[0]; // posiçao 0!
+		compass = (Compass *) deviceList[1]; // posiçao 1!
+		hmc5883 = compass->getCompass();
+		clock = robot.getClock();
+		clock.add(timer);
+		timer = 10000;
+		xmin = FLT_MAX;
+		xmax = FLT_MIN;
+		ymin = FLT_MAX;
+		ymax = FLT_MIN;
+		if (hbridge) {
+      hbridge->setMotorState(0, 50);
+      hbridge->setMotorState(1,-50);
+		}
+	}
+
+	if (hbridge && compass && hmc5883 && !t) {
+		if (compass->isReady()) {
+			MagnetometerScaled scaled = compass.ReadScaledAxis();
+			if (scaled.XAxis < xmin)
+				xmin = scaled.XAxis;
+			if (scaled.XAxis > xmax)
+				xmax = scaled.XAxis;
+			if (scaled.YAxis < ymin)
+				ymin = scaled.YAxis;
+			if (scaled.YAxis > ymax)
+				ymax = scaled.YAxis;
+		}
+		return false;
+	}
+
+	compass->calibrate(xmin, xmax, ymin, ymax);
+	clock.remove(timer);
+	return true;
+}
+
+
 
 void setup(){
   //adicionando funçoes... 
   robot.addAction(head);  // id = 0
   robot.addAction(turn);  // id = 1
+  robot.addAction(calibrateCompass);  // id = 2
   robot.begin();
 }
 
