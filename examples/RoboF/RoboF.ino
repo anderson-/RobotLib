@@ -5,11 +5,11 @@
 #include <SPI.h>
 
 #ifdef LIBRARY_RF24
-  #include <RF24_config.h>
+#include <RF24_config.h>
 #else
-  #include <Mirf.h>
-  #include <nRF24L01.h>
-  #include <MirfHardwareSpiDriver.h>
+#include <Mirf.h>
+#include <nRF24L01.h>
+#include <MirfHardwareSpiDriver.h>
 #endif
 
 #include <Wire.h>
@@ -31,16 +31,19 @@
  * sem serial, com funçoes complexas, e suporte a adiçao de 
  * novos dispositivos *dinamicamente*
  */
-const uint8_t pin_sel[] = {4, 3, 16};
+const uint8_t pin_sel[] = {
+  4, 3, 16};
 
-class RoboF : public GenericRobot {
+class RoboF : 
+public GenericRobot {
 public:
-  RoboF() : radio(7,8,ROBOT_ID,RADIO_ID,false),
-            hbridge(5,6,9,10),
-            compass(),
-            irsensor(17),
-            reflectance(A0, pin_sel, 200)
-            {
+  RoboF() : 
+  radio(7,8,ROBOT_ID,RADIO_ID,false),
+  hbridge(5,6,9,10),
+  compass(),
+  irsensor(17),
+  reflectance(A0, pin_sel, 200)
+  {
     addConnection(radio);  //connID = 0
     //adicionado por padrao: 
     //addDevice(clock)      //devID = 0
@@ -51,10 +54,10 @@ public:
     // para adicionar novo sensor
     // <ADD> <SENSOR_ID> <TAMANHO1BYTE> <PINO>
   }
-  
+
 private:
   RadioConnection radio;
-  
+
   HBridge hbridge;
   Compass compass;
   IRProximitySensor irsensor;
@@ -89,40 +92,44 @@ bool head (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
 
   if (hbridge && compass && angle < 360) {
     // erro entre o angulo desejado e o atual
-  	int16_t newAngle;
-  	compass->getAngle(newAngle);
-    int16_t error = angle - newAngle;
+    if (compass->available()) {
 
-    // ajuste para o menor angulo
-    if(error > 180)       error -= 360; // (180,360) -> (-180,0)
-    else if(error < -180) error += 360; // (-360,-180) -> (0,180)
+      int16_t newAngle = compass->getAngle();
+      int16_t error = angle - newAngle;
 
-    // verifica se esta dentro do erro limite
-    if ((error >= -thld) && (error <= thld )) {
-      // se esta dentro do limite, para
-      hbridge->setMotorState(1,0);
-      hbridge->setMotorState(0,0);
+      // ajuste para o menor angulo
+      if(error > 180)       error -= 360; // (180,360) -> (-180,0)
+      else if(error < -180) error += 360; // (-360,-180) -> (0,180)
 
-      // conta 5 iteracoes no angulo desejado,
-      // para evitar que ele desvie do angulo pela inercia
-      if (iterations >= 5) {
-        return true; //termina
-      } else {
-        iterations++;
-        return false; //repete
+      // verifica se esta dentro do erro limite
+      if ((error >= -thld) && (error <= thld )) {
+        // se esta dentro do limite, para
+        hbridge->setMotorState(1,0);
+        hbridge->setMotorState(0,0);
+
+        // conta 5 iteracoes no angulo desejado,
+        // para evitar que ele desvie do angulo pela inercia
+        if (iterations >= 5) {
+          return true; //termina
+        }
+        else {
+          iterations++;
+        }
+
+      } 
+      else {
+        // senao, calcula uma velocidade e direcao de giro proporcional ao erro
+        int8_t speed;
+        if (error > thld) {
+          speed = (int8_t) max(30, min(127, error*0.515)); // error > thld -> error > 0
+        }
+        else {
+          speed = (int8_t) min(-30, max(-127, error*0.515)); // error < -thld -> error > 0
+        }
+        hbridge->setMotorState(0, speed);
+        hbridge->setMotorState(1,-speed);
+        iterations = 0;
       }
-
-    } else {
-      // senao, calcula uma velocidade e direcao de giro proporcional ao erro
-      int8_t speed;
-      if (error > thld) {
-        speed = (int8_t) max(30, min(127, error*0.515)); // error > thld -> error > 0
-      } else {
-        speed = (int8_t) min(-30, max(-127, error*0.515)); // error < -thld -> error > 0
-      }
-      hbridge->setMotorState(0, speed);
-      hbridge->setMotorState(1,-speed);
-      iterations = 0;
 
       return false; //repete
     }
@@ -154,101 +161,104 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
     turnRemaining = ((int16_t *)data)[0];
     thld = data[2];
     iterations = 0;
-    compass->getAngle(lastAngle);
+    lastAngle = compass->getAngle();
   }
 
   if (hbridge && compass) {
     // mede a rotacao feita nessa iteracao e subtrai da rotacao total
-    int16_t currAngle;
-    if (compass->getAngle(currAngle)) {
+    if (compass->available()) {
 
-    	int16_t currTurn = currAngle - lastAngle;
-			// ajuste para o menor angulo
-			if (currTurn > 180)       currTurn -= 360;
-			else if (currTurn < -180) currTurn += 360;
-			turnRemaining -= currTurn;
-			lastAngle = currAngle;
+      int16_t currAngle = compass->getAngle();
+      int16_t currTurn = currAngle - lastAngle;
+      // ajuste para o menor angulo
+      if (currTurn > 180)       currTurn -= 360;
+      else if (currTurn < -180) currTurn += 360;
+      turnRemaining -= currTurn;
+      lastAngle = currAngle;
 
-			// verifica se esta dentro do erro limite
-			if ((turnRemaining >= -thld) && (turnRemaining <= thld )) {
-				// se esta dentro do limite, para
-				hbridge->setMotorState(1,0);
-				hbridge->setMotorState(0,0);
+      // verifica se esta dentro do erro limite
+      if ((turnRemaining >= -thld) && (turnRemaining <= thld )) {
+        // se esta dentro do limite, para
+        hbridge->setMotorState(1,0);
+        hbridge->setMotorState(0,0);
 
-				// conta 5 iteracoes no angulo desejado,
-				// para evitar que ele desvie do angulo pela inercia
-				if (iterations >= 5) {
-					return true; //termina
-				} else {
-					iterations++;
-				}
+        // conta 5 iteracoes no angulo desejado,
+        // para evitar que ele desvie do angulo pela inercia
+        if (iterations >= 5) {
+          return true; //termina
+        } 
+        else {
+          iterations++;
+        }
 
-			} else {
-				// senao, calcula uma velocidade e direcao de giro proporcional ao erro
-				int8_t speed;
-				if (turnRemaining > thld) {
-					speed = (int8_t) max(30, min(127, turnRemaining*0.515)); // turnRemaining > thld -> turnRemaining > 0
-				} else {
-					speed = (int8_t) min(-30, max(-127, turnRemaining*0.515)); // turnRemaining < -thld -> turnRemaining < 0
-				}
-				hbridge->setMotorState(0, speed);
-				hbridge->setMotorState(1,-speed);
-				iterations = 0;
+      } 
+      else {
+        // senao, calcula uma velocidade e direcao de giro proporcional ao erro
+        int8_t speed;
+        if (turnRemaining > thld) {
+          speed = (int8_t) max(30, min(127, turnRemaining*0.515)); // turnRemaining > thld -> turnRemaining > 0
+        } 
+        else {
+          speed = (int8_t) min(-30, max(-127, turnRemaining*0.515)); // turnRemaining < -thld -> turnRemaining < 0
+        }
+        hbridge->setMotorState(0, speed);
+        hbridge->setMotorState(1,-speed);
+        iterations = 0;
 
-			}
+      }
     }
     return false; //repete
   }
-  
+
   return true; //termina
 }
 
 
 bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
 
-	static HBridge *  hbridge   = NULL;
-	static Compass *  compass   = NULL;
-	static HMC5883L * hmc5883		= NULL;
-	static Clock & 		clock			= NULL;
-	static Timer 			timer			= 0;
-	static float 			xmin, xmax, ymin, ymax;
+  static HBridge *  hbridge    = NULL;
+  static Compass *  compass    = NULL;
+  static HMC5883L * hmc5883    = NULL;
+  static Clock &    clock      = robot.getClock();
+  static Timer 	    timer      = 0;
+  static float 	    xmin, xmax, ymin, ymax;
 
-	// inicializa a funcao
-	if (data != NULL) {
-		hbridge = (HBridge *) deviceList[0]; // posiçao 0!
-		compass = (Compass *) deviceList[1]; // posiçao 1!
-		hmc5883 = compass->getCompass();
-		clock = robot.getClock();
-		clock.add(timer);
-		timer = 10000;
-		xmin = FLT_MAX;
-		xmax = FLT_MIN;
-		ymin = FLT_MAX;
-		ymax = FLT_MIN;
-		if (hbridge) {
-      hbridge->setMotorState(0, 50);
-      hbridge->setMotorState(1,-50);
-		}
-	}
+  // inicializa a funcao
+  if (data != NULL) {
+    hbridge = (HBridge *) deviceList[0]; // posiçao 0!
+    compass = (Compass *) deviceList[1]; // posiçao 1!
+    hmc5883 = compass->getCompass();
+    clock = robot.getClock();
+    clock.add(timer);
+    timer = 10000;
+    xmin = FLT_MAX;
+    xmax = FLT_MIN;
+    ymin = FLT_MAX;
+    ymax = FLT_MIN;
+    hbridge->setMotorState(0, 40);
+    hbridge->setMotorState(1,-40);
+  }
 
-	if (hbridge && compass && hmc5883 && !t) {
-		if (compass->isReady()) {
-			MagnetometerScaled scaled = compass.ReadScaledAxis();
-			if (scaled.XAxis < xmin)
-				xmin = scaled.XAxis;
-			if (scaled.XAxis > xmax)
-				xmax = scaled.XAxis;
-			if (scaled.YAxis < ymin)
-				ymin = scaled.YAxis;
-			if (scaled.YAxis > ymax)
-				ymax = scaled.YAxis;
-		}
-		return false;
-	}
+  if (hbridge && compass && hmc5883 && !timer) {
+    if (compass->available()) {
+      MagnetometerScaled scaled = hmc5883->ReadScaledAxis();
+      if (scaled.XAxis < xmin)
+        xmin = scaled.XAxis;
+      if (scaled.XAxis > xmax)
+        xmax = scaled.XAxis;
+      if (scaled.YAxis < ymin)
+        ymin = scaled.YAxis;
+      if (scaled.YAxis > ymax)
+        ymax = scaled.YAxis;
+    }
+    return false;
+  }
 
-	compass->calibrate(xmin, xmax, ymin, ymax);
-	clock.remove(timer);
-	return true;
+  hbridge->setMotorState(0,0);
+  hbridge->setMotorState(1,0);
+  compass->calibrate(xmin, xmax, ymin, ymax);
+  clock.remove(timer);
+  return true;
 }
 
 

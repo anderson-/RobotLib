@@ -97,6 +97,10 @@ bool Compass::isReady(){
 	}
 }
 
+bool Compass::available() {
+	return newValue;
+}
+
 uint8_t Compass::get(uint8_t * buffer, uint8_t size){
     memcpy(buffer,&angleInt,sizeof(int));
     return 2;
@@ -112,14 +116,9 @@ void Compass::calibrate(float xmin, float xmax, float ymin, float ymax) {
 		Ymax = ymax;
 }
 
-bool Compass::getAngle(int & var) {
-	if (newValue) {
-		newValue = false;
-		var = angleInt;
-		return true;
-	} else {
-		return false;
-	}
+int Compass::getAngle() {
+	newValue = false;
+	return angleInt;
 }
 
 HMC5883L * Compass::getCompass() {

@@ -40,9 +40,10 @@ public:
   void reset();
   void update();
   bool isReady();
+  bool available();
   uint8_t get(uint8_t * buffer, uint8_t size);
   void set(const uint8_t * data, uint8_t size = 1);
-  bool getAngle(int & var);
+  int getAngle();
   void calibrate(float xmin, float xmax, float ymin, float ymax);
   HMC5883L * getCompass();
 private:
