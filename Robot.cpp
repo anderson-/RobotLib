@@ -24,8 +24,8 @@
 
 #include "Robot.h"
 
-Clock _gClock;// = Clock();
-Clock & Robot::clock = _gClock;
+//Clock _gClock;// = Clock();
+Clock & Robot::clock = *(new Clock()); //
 
 void Robot::addConnection(Connection & c){
   connections = (Connection**)check(realloc(connections,(nConnections+1)*sizeof(Connection*)));
@@ -74,7 +74,7 @@ void Robot::step(){
   uint8_t i;
   bool s;
   for (i = 0; i < nDevices; i++){
-    devices[i]->update();
+    /*devices[i]->update();
 	s = devices[i]->isReady();
 	if (s){ 
 		if (s != state[i]){
@@ -83,6 +83,9 @@ void Robot::step(){
 		}
 	} else {
 		busy = true;
+	}*/
+	if (devices[i]->isReady()) {
+		devices[i]->update();
 	}
   }
   // pensa

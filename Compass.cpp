@@ -85,16 +85,16 @@ void Compass::update() {
   angleInt = (int) (heading * RAD_TO_DEG);
 
   newValue = true;
+  timer = 66;
 
 }
 
 bool Compass::isReady(){
-	//if (!timer) {
-	//	timer = 66;
+	if (!timer) {
 		return true;
-	//}	else {
-	//	return false;
-	//}
+	}	else {
+		return false;
+	}
 }
 
 uint8_t Compass::get(uint8_t * buffer, uint8_t size){
