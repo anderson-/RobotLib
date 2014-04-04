@@ -35,6 +35,7 @@
 class Compass : public TimedDevice {
 public:
   Compass();
+  Compass(float xmin, float xmax, float ymin, float ymax);
   void begin();
   void stop();
   void reset();

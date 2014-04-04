@@ -29,22 +29,28 @@
 #include <HMC5883L.h>
 #include "Compass.h"
 
-Compass::Compass() : TimedDevice(false, true),
+Compass::Compass() {
+	Compass(0, 1.0, 0, 1.0);
+}
+
+Compass::Compass(float xmin, float xmax, float ymin, float ymax) :
+	TimedDevice(false, true),
 	compass(),
 	angleInt(0),
 	newValue(false),
-	timer(0) {
+	timer(0)
+{
+  Xmin = xmin;
+  Xmax = xmax;
+  Ymin = ymin;
+  Ymax = ymax;
 }
 
-void Compass::begin(){
+void Compass::begin() {
 
     Wire.begin(); // Start the I2C interface.
     //compass.SetScale(1.3); // Set the scale of the compass.
     compass.SetMeasurementMode(Measurement_Continuous); // Set the measurement mode to Continuous
-    Xmin = -189.0;
-    Xmax =  225.0;
-    Ymin = -291.0;
-    Ymax =  103.0;
     clock.add(timer);
     timer = 66; // 15 Hz
 
@@ -68,9 +74,9 @@ void Compass::update() {
 
   // Once you have your heading, you must then add your 'Declination Angle', which is the 'Error' of the magnetic field in your location.
   // Find yours here: http://www.magnetic-declination.com/
-  // CURITIBA-PR is: -19̣̣º 3' W, which is -19.05 Degrees, or (which we need) −0,332485223 radians
+  // CURITIBA-PR is: -19̣̣º 5' W, which is -19.083 Degrees, or (which we need) −0,333061181 radians
   // If you cannot find your Declination, comment out these two lines, your compass will be slightly off.
-  const float declinationAngle = -0.332485223;
+  const float declinationAngle = -0.333061181;
   heading += declinationAngle;
 
   // Correct for when signs are reversed.

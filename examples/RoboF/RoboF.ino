@@ -1,38 +1,12 @@
-// Descomente a linha abaixo para utilizar a biblioteca RF_24
-// #define LIBRARY_RF24
 
-#include <float.h>
-#include <SPI.h>
-
-#ifdef LIBRARY_RF24
-#include <RF24_config.h>
-#else
-#include <Mirf.h>
-#include <nRF24L01.h>
-#include <MirfHardwareSpiDriver.h>
-#endif
-
-#include <Wire.h>
-#include <HMC5883L.h>
-#include <GenericRobot.h>
-#include <SerialConnection.h>
-#include <RadioConnection.h>
-#include <HBridge.h>
-#include <Compass.h>
-#include <IRProximitySensor.h>
-#include <ReflectanceSensorArray.h>
-
-#define ROBOT_ID  1
-#define RADIO_ID  110
-
+#include "config.h"
 
 /**
  * Sketch para ser usado no RoboF, com radio, dispositivos basicos,
  * sem serial, com funçoes complexas, e suporte a adiçao de 
  * novos dispositivos *dinamicamente*
  */
-const uint8_t pin_sel[] = {
-  4, 3, 16};
+const uint8_t pin_sel[] = {4, 3, 16};
 
 class RoboF : 
 public GenericRobot {
@@ -40,10 +14,19 @@ public:
   RoboF() : 
   radio(7,8,ROBOT_ID,RADIO_ID,false),
   hbridge(5,6,9,10),
-  compass(),
   irsensor(17),
   reflectance(A0, pin_sel, 200)
   {
+  	if (EEPROM.read(0) == (byte)ROBOT_ID) {
+  		// bussola calibrada
+			EEPROM_readAnything(0,configuration);
+			compass = Compass(configuration.xmin, configuration.xmax,
+												configuration.ymin, configuration.ymax);
+		} else {
+			// sem calibracao
+			compass = Compass();
+		}
+
     addConnection(radio);  //connID = 0
     //adicionado por padrao: 
     //addDevice(clock)      //devID = 0
@@ -184,7 +167,7 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
 
         // conta 5 iteracoes no angulo desejado,
         // para evitar que ele desvie do angulo pela inercia
-        if (iterations >= 5) {
+        if (iterations >= 10) {
           return true; //termina
         } 
         else {
@@ -214,14 +197,14 @@ bool turn (Device ** deviceList, uint8_t deviceListSize, Connection & c, const u
 }
 
 
-bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize, Connection & c, const uint8_t * data, uint8_t length) {
+bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize,
+		Connection & c, const uint8_t * data, uint8_t length) {
 
   static HBridge *  hbridge    = NULL;
   static Compass *  compass    = NULL;
   static HMC5883L * hmc5883    = NULL;
   static Clock &    clock      = robot.getClock();
   static Timer 	    timer      = 0;
-  static float 	    xmin, xmax, ymin, ymax;
 
   // inicializa a funcao
   if (data != NULL) {
@@ -231,32 +214,39 @@ bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize, Connection 
     clock = robot.getClock();
     clock.add(timer);
     timer = 10000;
-    xmin = FLT_MAX;
-    xmax = FLT_MIN;
-    ymin = FLT_MAX;
-    ymax = FLT_MIN;
+    configuration.robotNumber = (byte)ROBOT_ID;
+    configuration.xmin = FLT_MAX;
+    configuration.xmax = FLT_MIN;
+    configuration.ymin = FLT_MAX;
+    configuration.ymax = FLT_MIN;
     hbridge->setMotorState(0, 40);
     hbridge->setMotorState(1,-40);
   }
 
   if (hbridge && compass && hmc5883 && !timer) {
     if (compass->available()) {
+    	// le os valores XYZ da bussola
       MagnetometerScaled scaled = hmc5883->ReadScaledAxis();
-      if (scaled.XAxis < xmin)
-        xmin = scaled.XAxis;
-      if (scaled.XAxis > xmax)
-        xmax = scaled.XAxis;
-      if (scaled.YAxis < ymin)
-        ymin = scaled.YAxis;
-      if (scaled.YAxis > ymax)
-        ymax = scaled.YAxis;
+      // salva os valores maximos e minimos de X e Y
+      if (scaled.XAxis < configuration.xmin && scaled.XAxis > -400)
+				configuration.xmin = scaled.XAxis;
+			if (scaled.XAxis > configuration.xmax && scaled.XAxis < 400)
+				configuration.xmax = scaled.XAxis;
+			if (scaled.YAxis < configuration.ymin && scaled.YAxis > -400)
+				configuration.ymin = scaled.YAxis;
+			if (scaled.YAxis > configuration.ymax && scaled.YAxis < 400)
+				configuration.ymax = scaled.YAxis;
     }
     return false;
   }
 
   hbridge->setMotorState(0,0);
   hbridge->setMotorState(1,0);
-  compass->calibrate(xmin, xmax, ymin, ymax);
+  // salva as configurações na EEPROM
+  EEPROM_writeAnything(0,configuration);
+  // calibra a bussola
+  compass->calibrate(configuration.xmin, configuration.xmax,
+										configuration.ymin, configuration.ymax);
   clock.remove(timer);
   return true;
 }
