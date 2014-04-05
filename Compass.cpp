@@ -29,7 +29,9 @@
 #include <HMC5883L.h>
 #include "Compass.h"
 
-Compass::Compass() {
+Compass::Compass() :
+	TimedDevice(false, true)
+{
 	Compass(0, 1.0, 0, 1.0);
 }
 

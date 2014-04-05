@@ -8,8 +8,8 @@
  */
 const uint8_t pin_sel[] = {4, 3, 16};
 
-class RoboF : 
-public GenericRobot {
+class RoboF : public GenericRobot {
+
 public:
   RoboF() : 
   radio(7,8,ROBOT_ID,RADIO_ID,false),
