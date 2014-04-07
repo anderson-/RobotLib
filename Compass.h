@@ -34,6 +34,7 @@
 class Compass : public Device {
 public:
   Compass();
+  Compass(float xmin, float xmax, float ymin, float ymax);
   void begin();
   void stop();
   void reset();
@@ -41,11 +42,13 @@ public:
   bool isReady();
   uint8_t get(uint8_t * buffer, uint8_t size);
   void set (const uint8_t * data, uint8_t size = 1);
+  void calibrate(float xmin, float xmax, float ymin, float ymax);
   int getAngle();
 private:
   HMC5883L compass;
   int angleInt;
   int error;
+  float Xmin, Xmax, Ymin, Ymax;
 };
 
 #endif  /* COMPASS_H */

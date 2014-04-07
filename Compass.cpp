@@ -35,6 +35,18 @@ Compass::Compass() : Device(false, true),
 	error(0){
 }
 
+Compass::Compass(float xmin, float xmax, float ymin, float ymax) : Device(false, true),
+	compass(),
+	angleInt(0),
+	error(0){
+	Xmin = xmin;
+	Xmax = xmax;
+	Ymin = ymin;
+	Ymax = ymax;
+}
+
+
+
 void Compass::begin(){
 
     Wire.begin(); // Start the I2C interface.
@@ -66,23 +78,23 @@ void Compass::reset(){}
 
 void Compass::update(){
   // Retrive the raw values from the compass (not scaled).
-  MagnetometerRaw raw = compass.ReadRawAxis();
+  //MagnetometerRaw raw = compass.ReadRawAxis();
   // Retrived the scaled values from the compass (scaled to the configured scale).
   MagnetometerScaled scaled = compass.ReadScaledAxis();
 
   // Values are accessed like so:
-  int MilliGauss_OnThe_XAxis = scaled.XAxis;// (or YAxis, or ZAxis)
+  //int MilliGauss_OnThe_XAxis = scaled.XAxis;// (or YAxis, or ZAxis)
 
   // Calculate heading when the magnetometer is level, then correct for signs of axis.
-  float xcal = (scaled.XAxis+189.0)/(225.0+189.0) - 0.5;
-  float ycal = (scaled.YAxis+291.0)/(103.0+291.0) - 0.5;
+  float xcal = (scaled.XAxis-Xmin)/(Xmax-Xmin) - 0.5;
+  float ycal = (scaled.YAxis-Ymin)/(Ymax-Ymin) - 0.5;
   float heading = atan2(ycal, xcal);
 
   // Once you have your heading, you must then add your 'Declination Angle', which is the 'Error' of the magnetic field in your location.
   // Find yours here: http://www.magnetic-declination.com/
   // Mine is: 2� 37' W, which is 2.617 Degrees, or (which we need) 0.0456752665 radians, I will use 0.0457
   // If you cannot find your Declination, comment out these two lines, your compass will be slightly off.
-  float declinationAngle = 0.0457;
+  float declinationAngle = -0.333061181;
   heading += declinationAngle;
 
   // Correct for when signs are reversed.
