@@ -24,8 +24,8 @@
 
 #include "Robot.h"
 
-//Clock _gClock;// = Clock();
-Clock & Robot::clock = *(new Clock()); //
+Clock _gClock;// = Clock();
+Clock & Robot::clock = _gClock;//*(new Clock()); //
 
 void Robot::addConnection(Connection & c){
   connections = (Connection**)check(realloc(connections,(nConnections+1)*sizeof(Connection*)));

@@ -38,7 +38,7 @@ void Clock::stop(){
 void Clock::reset(){
   dt = 0;
   lastTime = millis();
-  wait = 0;
+  wait = 1;
 }
 
 void Clock::update(){

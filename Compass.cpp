@@ -64,8 +64,6 @@ void Compass::reset(){}
 
 void Compass::update() {
 
-  // Retrive the raw values from the compass (not scaled).
-  //MagnetometerRaw raw = compass.ReadRawAxis();
   // Retrived the scaled values from the compass (scaled to the configured scale).
   MagnetometerScaled scaled = compass.ReadScaledAxis();
 
@@ -98,10 +96,10 @@ void Compass::update() {
 }
 
 bool Compass::isReady(){
-	if (!timer) {
-		return true;
-	}	else {
+	if (timer > 0) {
 		return false;
+	}	else {
+		return true;
 	}
 }
 

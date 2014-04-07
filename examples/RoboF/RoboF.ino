@@ -1,5 +1,42 @@
 
-#include "config.h"
+// Descomente a linha abaixo para utilizar a biblioteca RF_24
+// #define LIBRARY_RF24
+
+#include <float.h>
+#include <SPI.h>
+
+#ifdef LIBRARY_RF24
+#include <RF24_config.h>
+#else
+#include <Mirf.h>
+#include <nRF24L01.h>
+#include <MirfHardwareSpiDriver.h>
+#endif
+
+#include <Wire.h>
+#include <HMC5883L.h>
+#include <GenericRobot.h>
+#include <SerialConnection.h>
+#include <RadioConnection.h>
+#include <HBridge.h>
+#include <Compass.h>
+#include <IRProximitySensor.h>
+#include <ReflectanceSensorArray.h>
+#include <EEPROM.h>
+#include "EEPROMAnything.h"
+
+#define ROBOT_ID  1
+#define RADIO_ID  (108+2*ROBOT_ID)
+
+
+struct config_t {
+  byte robotNumber;
+  float xmin;
+  float xmax;
+  float ymin;
+  float ymax;
+} configuration;
+
 
 /**
  * Sketch para ser usado no RoboF, com radio, dispositivos basicos,
@@ -41,8 +78,8 @@ public:
 private:
   RadioConnection radio;
 
-  HBridge hbridge;
   Compass compass;
+  HBridge hbridge;
   IRProximitySensor irsensor;
   ReflectanceSensorArray reflectance;
 };
@@ -203,7 +240,6 @@ bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize,
   static HBridge *  hbridge    = NULL;
   static Compass *  compass    = NULL;
   static HMC5883L * hmc5883    = NULL;
-  static Clock &    clock      = robot.getClock();
   static Timer 	    timer      = 0;
 
   // inicializa a funcao
@@ -211,8 +247,7 @@ bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize,
     hbridge = (HBridge *) deviceList[0]; // posiçao 0!
     compass = (Compass *) deviceList[1]; // posiçao 1!
     hmc5883 = compass->getCompass();
-    clock = robot.getClock();
-    clock.add(timer);
+    robot.getClock().add(timer);
     timer = 10000;
     configuration.robotNumber = (byte)ROBOT_ID;
     configuration.xmin = FLT_MAX;
@@ -247,10 +282,9 @@ bool calibrateCompass (Device ** deviceList, uint8_t deviceListSize,
   // calibra a bussola
   compass->calibrate(configuration.xmin, configuration.xmax,
 										configuration.ymin, configuration.ymax);
-  clock.remove(timer);
+  robot.getClock().remove(timer);
   return true;
 }
-
 
 
 void setup(){
