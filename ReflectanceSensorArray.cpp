@@ -37,6 +37,8 @@ ReflectanceSensorArray::ReflectanceSensorArray(uint8_t pin_out, const uint8_t pi
 }
 
 ReflectanceSensorArray::ReflectanceSensorArray(const uint8_t pins[]) : Device(true),
+            pin_out(pin_out),
+            thld(thld),
             value(0) {
   uint8_t i;
   for (i = 0; i < NUM_SENSORS; i++) {
@@ -76,7 +78,6 @@ void ReflectanceSensorArray::update(){
 		digitalWrite(pins_sel[0], (i & 1));
 		digitalWrite(pins_sel[1], ((i >> 1) & 1));
 		digitalWrite(pins_sel[2], ((i >> 2) & 1));
-		delayMicroseconds(100);
 		value |= ((analogRead(pin_out) > thld) << i);
 	} else {
 		value |= (digitalRead(pins[i]) << i);
