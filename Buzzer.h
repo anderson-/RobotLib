@@ -42,8 +42,8 @@ public:
     void set (const uint8_t * data, uint8_t size = 1);
 
     void playMelody(int numNotes, int melody[], int noteDurations[]);
-    void playMelodyU(int numNotes, int melody[], int noteDurations[]);
     void playTone(int note, long duration = 0);
+    bool isFinished();
 
 private:
     uint8_t pin_out;

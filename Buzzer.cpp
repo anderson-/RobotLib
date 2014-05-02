@@ -40,72 +40,55 @@ void Buzzer::stop() {
   digitalWrite(pin_out, LOW);
   clock.remove(timer);
   timer = -1;
+  thisNote = 0;
+  numNotes = 0;
 }
 
 void Buzzer::reset() {}
 
 void Buzzer::update() {
-  if (timer == 0) {
-    digitalWrite(pin_out, LOW);
+  if(thisNote < numNotes) {
+    // para calcular a duracao da nota, pegue um segundo dividido pelo tipo da nota
+    // e.g. nota em quarta = 1000 / 4, nota em oitava = 1000/8, etc.
+    int noteDuration = 1000/noteDurations[thisNote];
+    tone(pin_out, melody[thisNote], noteDuration);
 
-    if(thisNote < numNotes) {
-      // para calcular a duracao da nota, pegue um segundo dividido pelo tipo da nota
-      // e.g. nota em quarta = 1000 / 4, nota em oitava = 1000/8, etc.
-      int noteDuration = 1000/noteDurations[thisNote];
-      tone(pin_out, melody[thisNote], noteDuration);
+    // para distinguir entre as notas, coloque um espaco minimo entre elas
+    // a duracao da nota + 30% parece funcionar bem:
+    int pauseBetweenNotes = noteDuration * 1.30;
+    timer = pauseBetweenNotes;
 
-      // para distinguir entre as notas, coloque um espaco minimo entre elas
-      // a duracao da nota + 30% parece funcionar bem:
-      int pauseBetweenNotes = noteDuration * 1.30;
-      timer = pauseBetweenNotes;
-
-      thisNote++;
-    } else {
-      clock.remove(timer);
-      timer = -1;
-    }
+    thisNote++;
+  } else {
+    stop();
   }
 }
 
 bool Buzzer::isReady() {
-  return true;
+  if (timer != 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 uint8_t Buzzer::get(uint8_t * buffer, uint8_t size) {
-  return 0;
+  buffer[0] = (uint8_t) isFinished(); // indica o fim da melodia
+  return 1;
 }
 
 void Buzzer::set(const uint8_t * data, uint8_t size) {
   if(data[0] == 0) { // apenas a nota
     int note = *((int *)(data+1));
     playTone(note);
-  } else { // nota + duracao
+  }  else { // nota + duracao
     int note = *((int *)(data+1));
     long duration = *((long *)(data+3));
     playTone(note, duration);
   }
 }
 
-void Buzzer::playMelody(int numNotes, int melody[], int noteDurations[]) {
-  // itera pelas notas da melodia
-  for(int thisNote = 0; thisNote < numNotes; thisNote++) {
-
-    // para calcular a duracao da nota, pegue um segundo dividido pelo tipo da nota
-    // e.g. nota em quarta = 1000 / 4, nota em oitava = 1000/8, etc.
-    int noteDuration = 1000/noteDurations[thisNote];
-    tone(pin_out, melody[thisNote],noteDuration);
-
-    // para distinguir entre as notas, coloque um espaco minimo entre elas
-    // a duracao da nota + 30% parece funcionar bem:
-    int pauseBetweenNotes = noteDuration * 1.30;
-    delay(pauseBetweenNotes);
-
-    // pare de tocar a nota
-    noTone(pin_out);
-  }
-}
-
-void Buzzer::playMelodyU(int _numNotes, int _melody[], int _noteDurations[]) {
+void Buzzer::playMelody(int _numNotes, int _melody[], int _noteDurations[]) {
   thisNote      = 0;
   numNotes      = _numNotes;
   melody        = _melody;
@@ -124,6 +107,7 @@ void Buzzer::playMelodyU(int _numNotes, int _melody[], int _noteDurations[]) {
 }
 
 void Buzzer::playTone(int note, long duration) {
+  stop();
   if(note) {
     if(duration) {
       tone(pin_out, note, duration);
@@ -139,3 +123,6 @@ void Buzzer::playTone(int note, long duration) {
   }
 }
 
+bool Buzzer::isFinished() {
+  return (timer == 0 && thisNote == numNotes); // Fim da melodia
+}

@@ -75,18 +75,18 @@ void Robot::step(){
   bool s;
   for (i = 0; i < nDevices; i++){
     /*devices[i]->update();
-	s = devices[i]->isReady();
-	if (s){ 
-		if (s != state[i]){
-		  deviceReady(*devices[i]);
-		  state[i] = s;
-		}
-	} else {
-		busy = true;
-	}*/
-	if (devices[i]->isReady()) {
-		devices[i]->update();
-	}
+    s = devices[i]->isReady();
+    if (s){
+      if (s != state[i]){
+        deviceReady(*devices[i]);
+        state[i] = s;
+      }
+    } else {
+      busy = true;
+    }*/
+    if (devices[i]->isReady()) {
+      devices[i]->update();
+    }
   }
   // pensa
   think();
