@@ -29,46 +29,32 @@
 #include <HMC5883L.h>
 #include "Compass.h"
 
-Compass::Compass() : Device(false, true),
-	compass(),
-	angleInt(0),
-	error(0){
+Compass::Compass() :
+	TimedDevice(false, true)
+{
+	Compass(0, 1.0, 0, 1.0);
 }
 
-Compass::Compass(float xmin, float xmax, float ymin, float ymax) : Device(false, true),
+Compass::Compass(float xmin, float xmax, float ymin, float ymax) :
+	TimedDevice(false, true),
 	compass(),
 	angleInt(0),
-	error(0){
-	Xmin = xmin;
-	Xmax = xmax;
-	Ymin = ymin;
-	Ymax = ymax;
+	newValue(false),
+	timer(0)
+{
+  Xmin = xmin;
+  Xmax = xmax;
+  Ymin = ymin;
+  Ymax = ymax;
 }
 
-
-
-void Compass::begin(){
+void Compass::begin() {
 
     Wire.begin(); // Start the I2C interface.
-    error = 0;
-    //Serial.println("Setting scale to +/- 1.3 Ga");
-    error = compass.SetScale(1.30); // Set the scale of the compass.
-
-    //diz que tá dando erro na hora de escolher a escala e dar o modo de medição
-    //mas aparentemente funciona normalmente
-
-    if(error != 0) // If there is an error, print it out.
-    {
-        //Serial.println(compass.GetErrorText(error));
-    }
-
-    //Serial.println("Setting measurement mode to continous.");
-    error = compass.SetMeasurementMode(Measurement_Continuous); // Set the measurement mode to Continuous
-
-    if(error != 0) // If there is an error, print it out.
-    {
-        //Serial.println(compass.GetErrorText(error));
-    }
+    //compass.SetScale(1.3); // Set the scale of the compass.
+    compass.SetMeasurementMode(Measurement_Continuous); // Set the measurement mode to Continuous
+    clock.add(timer);
+    timer = 66; // 15 Hz
 
 }
 
@@ -76,14 +62,10 @@ void Compass::stop(){}
 
 void Compass::reset(){}
 
-void Compass::update(){
-  // Retrive the raw values from the compass (not scaled).
-  //MagnetometerRaw raw = compass.ReadRawAxis();
+void Compass::update() {
+
   // Retrived the scaled values from the compass (scaled to the configured scale).
   MagnetometerScaled scaled = compass.ReadScaledAxis();
-
-  // Values are accessed like so:
-  //int MilliGauss_OnThe_XAxis = scaled.XAxis;// (or YAxis, or ZAxis)
 
   // Calculate heading when the magnetometer is level, then correct for signs of axis.
   float xcal = (scaled.XAxis-Xmin)/(Xmax-Xmin) - 0.5;
@@ -92,9 +74,9 @@ void Compass::update(){
 
   // Once you have your heading, you must then add your 'Declination Angle', which is the 'Error' of the magnetic field in your location.
   // Find yours here: http://www.magnetic-declination.com/
-  // Mine is: 2� 37' W, which is 2.617 Degrees, or (which we need) 0.0456752665 radians, I will use 0.0457
+  // CURITIBA-PR is: -19̣̣º 5' W, which is -19.083 Degrees, or (which we need) −0,333061181 radians
   // If you cannot find your Declination, comment out these two lines, your compass will be slightly off.
-  float declinationAngle = -0.333061181;
+  const float declinationAngle = -0.333061181;
   heading += declinationAngle;
 
   // Correct for when signs are reversed.
@@ -106,21 +88,23 @@ void Compass::update(){
     heading -= 2*PI;
 
   // Convert radians to degrees for readability.
-  float headingDegrees = heading * 180/M_PI;
+  angleInt = (int) (heading * RAD_TO_DEG);
 
-  float angle = headingDegrees;
+  newValue = true;
+  timer = 66;
 
-  angleInt = (int) angle;
-
-  // Normally we would delay the application by 66ms to allow the loop
-  // to run at 15Hz (default bandwidth for the HMC5883L).
-  // However since we have a long serial out (104ms at 9600) we will let
-  // it run at its natural speed.
-  // delay(66);
 }
 
 bool Compass::isReady(){
-  return true;
+	if (timer > 0) {
+		return false;
+	}	else {
+		return true;
+	}
+}
+
+bool Compass::available() {
+	return newValue;
 }
 
 uint8_t Compass::get(uint8_t * buffer, uint8_t size){
@@ -129,9 +113,20 @@ uint8_t Compass::get(uint8_t * buffer, uint8_t size){
 }
 
 void Compass::set(const uint8_t * data, uint8_t size){
-
 }
 
-int Compass::getAngle(){
+void Compass::calibrate(float xmin, float xmax, float ymin, float ymax) {
+		Xmin = xmin;
+		Xmax = xmax;
+		Ymin = ymin;
+		Ymax = ymax;
+}
+
+int Compass::getAngle() {
+	newValue = false;
 	return angleInt;
+}
+
+HMC5883L * Compass::getCompass() {
+	return &compass;
 }

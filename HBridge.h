@@ -44,7 +44,7 @@ public:
   void setMotorState(uint8_t motor, int8_t speed);
 private:
     uint8_t leftMotor1,leftMotor2,rightMotor1,rightMotor2;
-    int8_t speedLeftMotor, speedRightMotor;
+    uint8_t speedLeftMotor1, speedLeftMotor2, speedRightMotor1, speedRightMotor2;
 
 
 };

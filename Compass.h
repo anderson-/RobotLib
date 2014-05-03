@@ -28,10 +28,11 @@
 #define COMPASS_H
 
 #include <stdint.h>
-#include "../HMC5883L/HMC5883L.h"
+#include <HMC5883L.h>
 #include "Device.h"
+#include "Clock.h"
 
-class Compass : public Device {
+class Compass : public TimedDevice {
 public:
   Compass();
   Compass(float xmin, float xmax, float ymin, float ymax);
@@ -40,14 +41,18 @@ public:
   void reset();
   void update();
   bool isReady();
+  bool available();
   uint8_t get(uint8_t * buffer, uint8_t size);
-  void set (const uint8_t * data, uint8_t size = 1);
-  void calibrate(float xmin, float xmax, float ymin, float ymax);
+  void set(const uint8_t * data, uint8_t size = 1);
+
   int getAngle();
+  void calibrate(float xmin, float xmax, float ymin, float ymax);
+  HMC5883L * getCompass();
 private:
   HMC5883L compass;
+  Timer timer;
   int angleInt;
-  int error;
+  bool newValue;
   float Xmin, Xmax, Ymin, Ymax;
 };
 

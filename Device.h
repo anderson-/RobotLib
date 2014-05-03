@@ -87,7 +87,7 @@ public:
    * É importante para Robot definir se uma ação de maior 
    * grau de abstração foi concluída ou não.
    * 
-   * @return \c TRUE se o dispositivo está ocioso.
+   * @return \c FALSE se o dispositivo está ocioso.
    */
   virtual bool isReady() = 0;
   
