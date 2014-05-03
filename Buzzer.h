@@ -43,7 +43,7 @@ public:
 
     void playMelody(int numNotes, int melody[], int noteDurations[]);
     void playTone(int note, long duration = 0);
-    bool isFinished();
+    bool isPlaying();
 
 private:
     uint8_t pin_out;

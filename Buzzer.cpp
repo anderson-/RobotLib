@@ -73,7 +73,7 @@ bool Buzzer::isReady() {
 }
 
 uint8_t Buzzer::get(uint8_t * buffer, uint8_t size) {
-  buffer[0] = (uint8_t) isFinished(); // indica o fim da melodia
+  buffer[0] = (uint8_t) isPlaying(); // indica o fim da melodia
   return 1;
 }
 
@@ -123,6 +123,6 @@ void Buzzer::playTone(int note, long duration) {
   }
 }
 
-bool Buzzer::isFinished() {
-  return (timer == 0 && thisNote == numNotes); // Fim da melodia
+bool Buzzer::isPlaying() {
+  return (timer > 0 || thisNote != numNotes); // Fim da melodia
 }
