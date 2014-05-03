@@ -1,11 +1,9 @@
 /**
- * @file Button.h
- * @author Fernando Padilha <fpf.padilha@gmail.com>
- * @version 1.0
+ * @file EEPROMAnything.h
  *
  * @section LICENSE
  *
- * Copyright (C) 2014 by Fernando Ferreira <fpf.padilha@gmail.com>
+ * Copyright (C) 2013 by Arduino
  *
  * RobotLib is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,31 +20,23 @@
  *
  */
 
-#ifndef BUTTON_H_
-#define BUTTON_H_
+#include <EEPROM.h>
+#include <Arduino.h>  // for type definitions
 
-#include <Arduino.h>
+template <class T> int EEPROM_writeAnything(int ee, const T& value)
+{
+    const byte* p = (const byte*)(const void*)&value;
+    unsigned int i;
+    for (i = 0; i < sizeof(value); i++)
+	  EEPROM.write(ee++, *p++);
+    return i;
+}
 
-#include "Device.h"
-
-class Button: public Device {
-public:
-    Button(uint8_t pin_in);
-    Button(uint8_t pin_in, int8_t pos, const uint8_t pins_sel[]);
-    void begin();
-    void stop();
-    void reset();
-    void update();
-    bool isReady();
-    uint8_t get(uint8_t * buffer, uint8_t size);
-    void set (const uint8_t * data, uint8_t size = 1);
-
-private:
-    uint8_t pin_in;
-    uint8_t pins_sel[3];
-    int8_t pos;
-    uint8_t value;
-};
-
-
-#endif /* BUTTON_H_ */
+template <class T> int EEPROM_readAnything(int ee, T& value)
+{
+    byte* p = (byte*)(void*)&value;
+    unsigned int i;
+    for (i = 0; i < sizeof(value); i++)
+	  *p++ = EEPROM.read(ee++);
+    return i;
+}

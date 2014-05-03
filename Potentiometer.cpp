@@ -52,7 +52,7 @@ void Potentiometer::stop() {}
 void Potentiometer::reset() {}
 
 void Potentiometer::update() {
-  if (pos > 0) {
+  if (pos >= 0) {
     digitalWrite(pins_sel[0], (pos & 1));
     digitalWrite(pins_sel[1], ((pos >> 1) & 1));
     digitalWrite(pins_sel[2], ((pos >> 2) & 1));
@@ -65,14 +65,14 @@ bool Potentiometer::isReady() {
 }
 
 uint8_t Potentiometer::get(uint8_t * buffer, uint8_t size) {
-
-    uint8_t *temp = (uint8_t*)&value;
-    uint8_t i;
-    for(i = 0; i<sizeof(value);i++) {
-        buffer[i] = temp[i];
+    if(size>1) {
+      uint8_t *temp = (uint8_t*)&value;
+      buffer[0] = temp[0];
+      buffer[1] = temp[1];
+      return 2;
+    } else {
+      return 0;
     }
-    return 2;
-
 }
 
 void Potentiometer::set(const uint8_t * data, uint8_t size) {}
