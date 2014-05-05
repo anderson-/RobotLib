@@ -28,11 +28,11 @@
 #include <Arduino.h>
 
 #include "Device.h"
+#include "MuxedFunctions.h"
 
 class Potentiometer: public Device {
 public:
-    Potentiometer(uint8_t pin_in);
-    Potentiometer(uint8_t pin_in, int8_t pos, const uint8_t pins_sel[]);
+    Potentiometer(uint8_t pin_in, int8_t addr = -1);
     void begin();
     void stop();
     void reset();
@@ -43,8 +43,7 @@ public:
 
 private:
     uint8_t pin_in;
-    uint8_t pins_sel[3];
-    int8_t pos;
+    int8_t addr;
     int value;
 };
 

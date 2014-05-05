@@ -25,38 +25,30 @@
 #include "ReflectanceSensorArray.h"
 #include "Debug.h"
 
-ReflectanceSensorArray::ReflectanceSensorArray(uint8_t pin_out, const uint8_t pins_sel[], uint16_t thld) : Device(true),
-            pin_out(pin_out),
+ReflectanceSensorArray::ReflectanceSensorArray(uint8_t pin_in, const uint8_t addr[], uint16_t thld) : Device(true),
+            pin_in(pin_in),
             thld(thld),
             value(0) {
-  uint8_t i;
-  this->pins_sel[0] = pins_sel[0];
-  this->pins_sel[1] = pins_sel[1];
-  this->pins_sel[2] = pins_sel[2];
-  analog = 1;
+  memcpy(pins, addr, NUM_SENSORS);
+  muxed = 1;
 }
 
-ReflectanceSensorArray::ReflectanceSensorArray(const uint8_t pins[]) : Device(true),
-            pin_out(pin_out),
+ReflectanceSensorArray::ReflectanceSensorArray(const uint8_t _pins[], uint16_t thld) : Device(true),
+            pin_in(0),
             thld(thld),
             value(0) {
-  uint8_t i;
-  for (i = 0; i < NUM_SENSORS; i++) {
-    this->pins[i] = pins[i];
-  }
-  analog = 0;
+  memcpy(pins, _pins, NUM_SENSORS);
+  muxed = 0;
 }
 
 void ReflectanceSensorArray::begin() {
   uint8_t i;
-  if (analog) {
-	  pinMode(pin_out, INPUT);
-	  pinMode(pins_sel[0], OUTPUT);
-	  pinMode(pins_sel[1], OUTPUT);
-	  pinMode(pins_sel[2], OUTPUT);
+  if (muxed) {
+	  pinMode(pin_in, INPUT);
+	  mux_begin();
   } else {
 	  for (i = 0; i < NUM_SENSORS; i++) {
-		pinMode(pins[i],INPUT);
+	    pinMode(pins[i],INPUT);
 	  }
   }
 }
@@ -72,16 +64,11 @@ void ReflectanceSensorArray::reset() {
 
 void ReflectanceSensorArray::update(){
   uint8_t i;
+  int pinValue;
   value = 0;
   for (i = 0; i < NUM_SENSORS; i++) {
-	if (analog) {
-		digitalWrite(pins_sel[0], (i & 1));
-		digitalWrite(pins_sel[1], ((i >> 1) & 1));
-		digitalWrite(pins_sel[2], ((i >> 2) & 1));
-		value |= ((analogRead(pin_out) > thld) << i);
-	} else {
-		value |= (digitalRead(pins[i]) << i);
-	}
+    pinValue = (muxed) ? analogReadMux(pin_in, pins[i]) : analogRead(pins[i]);
+    value |= ((pinValue > thld) << i);
   }
 }
 

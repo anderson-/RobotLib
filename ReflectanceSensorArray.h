@@ -27,16 +27,15 @@
 
 #include <stdint.h>
 #include "Device.h"
+#include "MuxedFunctions.h"
 
-#define ANALOG		1
 #define NUM_SENSORS	5
 
 class ReflectanceSensorArray : public Device {
   
 public:
-  ReflectanceSensorArray(uint8_t pin_out, const uint8_t pins_sel[], uint16_t thld);
-
-  ReflectanceSensorArray(const uint8_t pins[]);
+  ReflectanceSensorArray(uint8_t pin_in, const uint8_t addr[], uint16_t thld);
+  ReflectanceSensorArray(const uint8_t _pins[], uint16_t thld);
 
   void begin();
   void stop();
@@ -46,13 +45,12 @@ public:
   uint8_t get(uint8_t * buffer, uint8_t size);
   void set (const uint8_t * data, uint8_t size = 1);
 
-  private:
+private:
   uint8_t value;
-  uint8_t pin_out;
-  uint8_t pins_sel[3];
+  uint8_t pin_in;
   uint16_t thld;
   uint8_t pins[NUM_SENSORS];
-  uint8_t analog;
+  uint8_t muxed;
 
 };
 

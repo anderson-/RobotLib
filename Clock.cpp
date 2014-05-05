@@ -38,7 +38,7 @@ void Clock::stop(){
 void Clock::reset(){
   dt = 0;
   lastTime = millis();
-  wait = 0;
+  wait = 1;
 }
 
 void Clock::update(){
@@ -50,9 +50,9 @@ void Clock::update(){
     if (timers[i] && *timers[i]){
       if (*timers[i] <= dt){
         *timers[i] = 0;  
-	  } else {
-		  *timers[i] -= dt;  
-	  }
+      } else {
+        *timers[i] -= dt;
+      }
     }
   }
 }

@@ -24,40 +24,25 @@
 
 #include "Potentiometer.h"
 
-Potentiometer::Potentiometer(uint8_t pin_in) : Device(false, true),
+Potentiometer::Potentiometer(uint8_t pin_in, int8_t addr) : Device(false, true),
     pin_in(pin_in),
     value(0),
-    pos(-1) {}
-
-Potentiometer::Potentiometer(uint8_t pin_in, int8_t pos, const uint8_t pins_sel[]) : Device(false, true),
-    pin_in(pin_in),
-    value(0),
-    pos(pos) {
-  this->pins_sel[0] = pins_sel[0];
-  this->pins_sel[1] = pins_sel[1];
-  this->pins_sel[2] = pins_sel[2];
+    addr(addr) {
 }
 
 void Potentiometer::begin() {
   pinMode(pin_in, INPUT);
-  if (pos >= 0) {
-    pinMode(pins_sel[0], OUTPUT);
-    pinMode(pins_sel[1], OUTPUT);
-    pinMode(pins_sel[2], OUTPUT);
-  }
+  mux_begin();
 }
 
 void Potentiometer::stop() {}
 
-void Potentiometer::reset() {}
+void Potentiometer::reset() {
+  begin();
+}
 
 void Potentiometer::update() {
-  if (pos >= 0) {
-    digitalWrite(pins_sel[0], (pos & 1));
-    digitalWrite(pins_sel[1], ((pos >> 1) & 1));
-    digitalWrite(pins_sel[2], ((pos >> 2) & 1));
-  }
-  value = analogRead(pin_in);
+  value = analogReadMux(pin_in, addr);
 }
 
 bool Potentiometer::isReady() {

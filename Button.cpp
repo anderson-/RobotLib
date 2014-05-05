@@ -24,40 +24,25 @@
 
 #include "Button.h"
 
-Button::Button(uint8_t pin_in) : Device(false, true),
+Button::Button(uint8_t pin_in, int8_t pos) : Device(false, true),
     pin_in(pin_in),
     value(0),
-    pos(-1) {}
-
-Button::Button(uint8_t pin_in, int8_t pos, const uint8_t pins_sel[]) : Device(false, true),
-    pin_in(pin_in),
-    value(0),
-    pos(pos) {
-  this->pins_sel[0] = pins_sel[0];
-  this->pins_sel[1] = pins_sel[1];
-  this->pins_sel[2] = pins_sel[2];
+    addr(pos) {
 }
 
 void Button::begin() {
   pinMode(pin_in, INPUT);
-  if (pos >= 0) {
-    pinMode(pins_sel[0], OUTPUT);
-    pinMode(pins_sel[1], OUTPUT);
-    pinMode(pins_sel[2], OUTPUT);
-  }
+  mux_begin();
 }
 
 void Button::stop() {}
 
-void Button::reset() {}
+void Button::reset() {
+  begin();
+}
 
 void Button::update() {
-  if (pos >= 0) {
-    digitalWrite(pins_sel[0], (pos & 1));
-    digitalWrite(pins_sel[1], ((pos >> 1) & 1));
-    digitalWrite(pins_sel[2], ((pos >> 2) & 1));
-  }
-  value = (uint8_t) digitalRead(pin_in);
+  value = (uint8_t) digitalReadMux(pin_in, addr);
 }
 
 bool Button::isReady() {

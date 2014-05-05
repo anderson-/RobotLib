@@ -28,11 +28,11 @@
 #include <Arduino.h>
 
 #include "Device.h"
+#include "MuxedFunctions.h"
 
 class Button: public Device {
 public:
-    Button(uint8_t pin_in);
-    Button(uint8_t pin_in, int8_t pos, const uint8_t pins_sel[]);
+    Button(uint8_t pin_in, int8_t pos = -1);
     void begin();
     void stop();
     void reset();
@@ -43,8 +43,7 @@ public:
 
 private:
     uint8_t pin_in;
-    uint8_t pins_sel[3];
-    int8_t pos;
+    int8_t addr;
     uint8_t value;
 };
 
