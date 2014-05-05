@@ -14,7 +14,7 @@
 
 #include <Wire.h>
 #include <HMC5883L.h>
-#include <GenericRobot.h>
+#include <Robot.h>
 #include <SerialConnection.h>
 #include <RadioConnection.h>
 #include <Clock.h>
@@ -45,19 +45,24 @@ struct config_t {
 } configuration;
 
 
-
 /**
  * Sketch para ser usado no RoboF, com radio, dispositivos basicos,
  * sem serial, com funçoes complexas, e suporte a adiçao de 
  * novos dispositivos *dinamicamente*
  */
-const uint8_t pin_sel[] = {
-  4, 15, 16};
+const uint8_t reflectance_addr[] = {0,1,2,3,4};
 
-class RoboF : 
-public GenericRobot {
+int state = 0;
+char v, msg_recv;
+int valor;
+long time_sent, time_recv;
+Timer timer = 0;
+
+
+class RoboF : public Robot {
 
 public:
+  RadioConnection radio;
   Buzzer buzzer;
   LED led;
   Button button;
@@ -73,9 +78,9 @@ public:
   irsensor(A3),
   buzzer(1),
   led(0),
-  button(A0, 5, pin_sel),
-  potentiometer(A0, 6, pin_sel),
-  reflectance(A0, pin_sel, 200)
+  button(A0, 5),
+  potentiometer(A0, 6),
+  reflectance(A0, reflectance_addr, 200)
   {
     if (EEPROM.read(0) == (byte)ROBOT_ID) {
       // bussola calibrada
@@ -103,32 +108,38 @@ public:
     // <ADD> <SENSOR_ID> <TAMANHO1BYTE> <PINO>
   }
 
+  void messageReceived(const uint8_t * data, uint8_t size, Connection & connection){
+    if (&connection == &radio){
+      // recebe de radio e envia para serial
+      time_recv = millis();
+      msg_recv = 1;
+    }
+  }
+
+  void deviceReady (Device & d){
+
+  }
+
+  void think(){
+
+  }
+
 private:
-  RadioConnection radio;
 
 };
 
-extern Clock _gClock;
 RoboF robot;
-int this_melody = 1;
-int state = 0;
-char v;
-int valor;
-Timer timer = 0;
 
 void setup(){
   Serial.begin(9600);
   printf_begin();
   
-  printf("### ROBO F -- PROGRAMA DE TESTE ###\n");
-  printf("Inicializando dispositivos...\n");  
+  printf("######## ROBO F #########\n");
+  printf("### PROGRAMA DE TESTE ###\n\n");
+  printf("Inicializando...");
   
-  //adicionando funçoes... 
-  robot.addAction(head);  // id = 0
-  robot.addAction(turn);  // id = 1
-  robot.addAction(calibrateCompass);  // id = 2
   robot.begin();
-  _gClock.add(timer);
+  robot.getClock().add(timer);
   
   printf("Pronto!\n\n");  
 }
@@ -141,78 +152,123 @@ void loop(){
   if(!timer) {
   
     switch(state) {
+
+      // radio
+      case 0:
+        time_sent = millis();
+        msg_recv = 0;
+        robot.radio.sendMessage((const uint8_t *)&time_sent, sizeof(long));
+        printf("1 - RADIO\n\tsent %lu...", time_sent);
+        timer = 500;
+        state++;
+        break;
+
+      case 1:
+        if(msg_recv) {
+          long delay = time_recv - time_sent;
+          printf("ok...delay = %lu ms\n", delay);
+        } else {
+          printf("fail\n");
+        }
+        timer = 2500;
+        state++;
+        break;
+
       // motores
-      case 0: robot.hbridge.setMotorState(1, 50);
-              robot.hbridge.setMotorState(0,-50);
-              printf("1 - MOTORES\n\tME = 50\n\tMD = -50\n");
-              timer = 5000;
-              state++;
-              break;
-      case 1: robot.hbridge.setMotorState(1,0);
-              robot.hbridge.setMotorState(0,0);
-              state++;
-              break;
+      case 2:
+        robot.hbridge.setMotorState(1, 50);
+        robot.hbridge.setMotorState(0,-50);
+        printf("2 - MOTORES\n\tME = 50\n\tMD = -50\n");
+        timer = 3000;
+        state++;
+        break;
+
+      case 3:
+        robot.hbridge.setMotorState(1,0);
+        robot.hbridge.setMotorState(0,0);
+        state++;
+        break;
+
       // bussola
-      case 2: valor = robot.compass.getAngle();
-              printf("2 - BUSSOLA\n\tangulo = %d graus\n", valor);
-              timer = 5000;
-              state++;
-              break;
+      case 4:
+        valor = robot.compass.getAngle();
+        printf("3 - BUSSOLA\n\tangulo = %d graus\n", valor);
+        timer = 3000;
+        state++;
+        break;
+
       // sensor de distancia
-      case 3: valor = robot.irsensor.getDistance();
-              printf("3 - SENSOR DE DISTANCIA\n\tdistancia = %d cm\n", valor);
-              timer = 5000;
-              state++;
-              break;
+      case 5:
+        valor = robot.irsensor.getDistance();
+        printf("4 - SENSOR DE DISTANCIA\n\tdistancia = %d cm\n", valor);
+        timer = 3000;
+        state++;
+        break;
+
       // sensor de refletancia
-      case 4: robot.reflectance.get((uint8_t *)&v, 1);
-              valor = (v&1) + ((v>>1)&1)*10 + ((v>>2)&1)*100 + ((v>>3)&1)*1000 + ((v>>4)&1)*10000;
-              printf("4 - SENSOR DE REFLETANCIA\n\trefletancia = %d\n", valor);
-              timer = 5000;
-              state++;
-              break;
+      case 6:
+        robot.reflectance.get((uint8_t *)&v, 1);
+        valor = (v&1) + ((v>>1)&1)*10 + ((v>>2)&1)*100 + ((v>>3)&1)*1000 + ((v>>4)&1)*10000;
+        printf("5 - SENSOR DE REFLETANCIA\n\trefletancia = %05d\n", valor);
+        timer = 3000;
+        state++;
+        break;
+
       // buzzer
-      case 5: printf("5 - BUZZER\n\ttocando: ");
-              Serial.end();
-              play();
-              timer = 1000;
-              state++;
-              break;
-      case 6: if(!robot.buzzer.isPlaying()) {
-                Serial.begin(9600);
-                state++;
-              } else {
-                timer = 1000;
-              }
-              break;
+      case 7:
+        printf("6 - BUZZER\n\ttocando: ");
+        Serial.end();
+        play();
+        timer = 1000;
+        state++;
+        break;
+
+      case 8:
+        if(!robot.buzzer.isPlaying()) {
+          Serial.begin(9600);
+          state++;
+        } else {
+          timer = 1000;
+        }
+        break;
+
       // led
-      case 7: printf("6 - LED\n\tpisca 4 vezes, periodo de 500ms\n");
-              Serial.end();
-              robot.led.blink(500,4);
-              timer = 5000;
-              state++;
-              break;
+      case 9:
+        printf("7 - LED\n\tperiodo = 500ms\n");
+        Serial.end();
+        robot.led.blink(500,3);
+        timer = 3000;
+        state++;
+        break;
+
       // potenciometro
-      case 8: Serial.begin(9600);
-              robot.potentiometer.get((uint8_t *)&valor, 2);
-              printf("7 - POTENCIOMETRO\n\tpotenciometro = %d\n", valor);
-              timer = 5000;
-              state++;
-              break;
+      case 10:
+        Serial.begin(9600);
+        robot.potentiometer.get((uint8_t *)&valor, 2);
+        printf("8 - POTENCIOMETRO\n\tpotenciometro = %d\n", valor);
+        timer = 3000;
+        state++;
+        break;
+
       // botao
-      case 9: printf("8 - BOTAO\n\taperte para continuar...\n");
-              timer = 200;
-              state++;
-              break;
-      case 10: robot.button.get((uint8_t *)&v, 1);
-              if(!v) {
-                state++;
-              } else {
-                timer = 200;
-              }
-              break;
-      default: printf("\n\n", valor);
-               state = 0;
+      case 11:
+        printf("9 - BOTAO\n\taperte para continuar...\n\n");
+        timer = 200;
+        state++;
+        break;
+
+      case 12:
+        robot.button.get((uint8_t *)&v, 1);
+        if(!v) {
+          state++;
+        } else {
+          timer = 200;
+        }
+        break;
+
+      default:
+        printf("### PROGRAMA DE TESTE ###\n\n");
+        state = 0;
     }
   } 
     
@@ -224,5 +280,3 @@ void play() {
     robot.buzzer.playMelody((sizeof(melody)/sizeof(int)), melody, noteDurations);
   }
 }
-
-
