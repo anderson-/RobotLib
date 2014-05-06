@@ -30,7 +30,19 @@
 #include <stdint.h>
 #include "Device.h"
 
+// Tamanho da janela de media movel
+#define SPEED_MEAN_WINDOW 5
+#define SPEED_KP          0.5
+#define SPEED_KI          0.1
+/**
+ * Velocidade (mm/s) = 2*PI*R * RPM * SCALA / 60
+ * Velocidade maxima = 2*PI*(50/2) * 10.000 * (1/223) / 60 = 117,398828609
+ */
+#define MAX_SPEED         117
+
+
 class HBridge : public Device {
+
 public:
   HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4);
   void begin();
@@ -42,10 +54,23 @@ public:
   void set (const uint8_t * data, uint8_t size = 1);
   // particular functions
   void setMotorState(uint8_t motor, int8_t speed);
-private:
-    uint8_t leftMotor1,leftMotor2,rightMotor1,rightMotor2;
-    uint8_t speedLeftMotor1, speedLeftMotor2, speedRightMotor1, speedRightMotor2;
+  void attachEncoder(uint8_t enc1, uint8_t enc2);
+  // encoder counter
+  //static volatile uint16_t leftEncCounter, rightEncCounter;
 
+private:
+  // pins
+  uint8_t leftMotor1,leftMotor2,rightMotor1,rightMotor2;
+  // speed
+  uint8_t speedLeftMotor1, speedLeftMotor2, speedRightMotor1, speedRightMotor2;
+  // dt window
+  uint8_t currIndex;
+  uint16_t dt[SPEED_MEAN_WINDOW];
+  long lastUpdate;
+  // encoder counter
+  uint16_t lastLeftEncCounter, lastRightEncCounter;
+  // integral control
+  int16_t errorSumLM, errorSumRM;
 
 };
 

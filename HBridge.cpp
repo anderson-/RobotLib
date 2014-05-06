@@ -24,19 +24,29 @@
  *
  */
 
-#include "HBridge.h"
 #include "Debug.h"
+#include "HBridge.h"
 
-HBridge::HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4) : Device(true, false),
-                                                                        leftMotor1(pin1),
-                                                                        leftMotor2(pin2),
-                                                                        rightMotor1(pin3),
-                                                                        rightMotor2(pin4),
-                                                                        speedLeftMotor1(0),
-                                                                        speedLeftMotor2(0),
-                                                                        speedRightMotor1(0),
-                                                                        speedRightMotor2(0) {
+
+void ISR_leftEncoder(void);
+void ISR_rightEncoder(void);
+
+volatile uint16_t leftEncCounter = 0;
+volatile uint16_t rightEncCounter = 0;
+
+
+HBridge::HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4) :
+  Device(true, false),
+  leftMotor1(pin1),
+  leftMotor2(pin2),
+  rightMotor1(pin3),
+  rightMotor2(pin4),
+  speedLeftMotor1(0),
+  speedLeftMotor2(0),
+  speedRightMotor1(0),
+  speedRightMotor2(0) {
 }
+
 
 void HBridge::setMotorState(uint8_t motor, int8_t speed){ //speed de -128 até 127
 	if (motor == 1){
@@ -45,7 +55,7 @@ void HBridge::setMotorState(uint8_t motor, int8_t speed){ //speed de -128 até 1
       speedLeftMotor2  = 0;
     } else {
       speedLeftMotor1  = 0;
-      speedLeftMotor2  = (uint8_t)speed*2;
+      speedLeftMotor2  = (255-(uint8_t)speed)*2;
     }
 	} else {
 	  if (speed >= 0){
@@ -53,7 +63,7 @@ void HBridge::setMotorState(uint8_t motor, int8_t speed){ //speed de -128 até 1
 	    speedRightMotor2 = 0;
     } else {
       speedRightMotor1 = 0;
-      speedRightMotor2 = (uint8_t)speed*2;
+      speedRightMotor2 = (255-(uint8_t)speed)*2;
     }
 	}
 }
@@ -78,14 +88,104 @@ void HBridge::begin(){
 }
 
 void HBridge::update(){
-  analogWrite( leftMotor1, speedLeftMotor1 );
-  analogWrite( leftMotor2, speedLeftMotor2 );
+  uint8_t i;
+  uint16_t totalDt = 0;
+  uint16_t speedLM = 0, speedRM = 0;
+  int16_t errorLM = 0, errorRM = 0;
+  int16_t pidLM = 0, pidRM = 0;
+  long currTime;
+
+  currTime = millis();
+  dt[currIndex] = (uint16_t)(currTime - lastUpdate);
+  lastUpdate = currTime;
+  currIndex++;
+
+  if(currIndex == SPEED_MEAN_WINDOW)
+    currIndex = 0;
+
+  for(i=0; i<SPEED_MEAN_WINDOW; i++) {
+    totalDt += dt[i];
+  }
+
+  speedLM = (uint16_t)(leftEncCounter - lastLeftEncCounter) / totalDt;
+  lastLeftEncCounter = leftEncCounter;
+  speedRM = (uint16_t)(rightEncCounter - lastRightEncCounter) / totalDt;
+  lastRightEncCounter = rightEncCounter;
+
+  Serial.print("\nlEC = ");
+  Serial.print(leftEncCounter);
+  Serial.print("; rEC = ");
+  Serial.print(rightEncCounter);
+  Serial.print("; sLM = ");
+  Serial.print(speedLM);
+  Serial.print("; sRM = ");
+  Serial.println(speedRM);
+
+  errorLM = (int16_t)(speedLeftMotor1 + speedLeftMotor2) - speedLM;
+  errorRM = (int16_t)(speedRightMotor1 + speedRightMotor2) - speedRM;
+
+  errorSumLM += errorLM;
+  errorSumRM += errorRM;
+
+  if(errorSumLM > 511)
+    errorSumLM = 511;
+  if(errorSumRM > 511)
+    errorSumRM = 511;
+
+  Serial.print("eLM = ");
+  Serial.print(errorLM);
+  Serial.print("; eRM = ");
+  Serial.print(errorRM);
+  Serial.print("; eSLM = ");
+  Serial.print(errorSumLM);
+  Serial.print("; eSRM = ");
+  Serial.println(errorSumRM);
+
+  pidLM = errorLM*SPEED_KP + errorSumLM*SPEED_KI;
+  pidRM = errorRM*SPEED_KP + errorSumRM*SPEED_KI;
+  //pidLM = (speedLeftMotor1 + speedLeftMotor2);
+  //pidRM = (speedRightMotor1 + speedRightMotor2);
+
+  Serial.print("pidLM = ");
+  Serial.print(pidLM);
+  Serial.print("; pidRM = ");
+  Serial.println(pidRM);
+
+  if(pidLM > 255)
+    pidLM = 255;
+  else if(pidLM < 0)
+    pidLM = 0;
+
+  if(pidRM > 255)
+    pidRM = 255;
+  else if(pidRM < 0)
+    pidRM = 0;
+
+  if(speedLeftMotor1 > 0) {
+    analogWrite(leftMotor1, pidLM);
+    digitalWrite(leftMotor2, LOW);
+  } else {
+    digitalWrite(leftMotor1, LOW);
+    analogWrite(leftMotor2, pidLM);
+  }
+
+  if(speedRightMotor1 > 0) {
+    analogWrite(rightMotor1, pidRM);
+    digitalWrite(rightMotor2, LOW);
+  } else {
+    digitalWrite(rightMotor1, LOW);
+    analogWrite(rightMotor2, pidRM);
+  }
+
+
+  /*analogWrite(leftMotor1,  speedLeftMotor1);
+  analogWrite(leftMotor2,  speedLeftMotor2);
   analogWrite(rightMotor1, speedRightMotor1);
-  analogWrite(rightMotor2, speedRightMotor2);
+  analogWrite(rightMotor2, speedRightMotor2);*/
 }
 
 bool HBridge::isReady(){
-return true;
+  return true;
 }
 
 uint8_t HBridge::get(uint8_t * buffer, uint8_t size){
@@ -97,3 +197,26 @@ uint8_t HBridge::get(uint8_t * buffer, uint8_t size){
 void HBridge::set(const uint8_t * data, uint8_t size){
 	setMotorState(data[0], data[1]);
 }
+
+void HBridge::attachEncoder(uint8_t enc1, uint8_t enc2) {
+  attachInterrupt(enc1, ISR_leftEncoder, RISING);
+  attachInterrupt(enc1, ISR_rightEncoder, RISING);
+  leftEncCounter = 0;
+  rightEncCounter = 0;
+  lastLeftEncCounter = 0;
+  lastRightEncCounter= 0;
+  lastUpdate = millis();
+  errorSumLM = 0;
+  errorSumRM = 0;
+  currIndex = 0;
+  memset(dt, 0, SPEED_MEAN_WINDOW);
+}
+
+void ISR_leftEncoder(void) {
+  leftEncCounter++;
+}
+
+void ISR_rightEncoder(void) {
+  rightEncCounter++;
+}
+
