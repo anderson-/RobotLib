@@ -36,7 +36,7 @@
 #define SPEED_KI          0.1
 /**
  * Velocidade (mm/s) = 2*PI*R * RPM * SCALA / 60
- * Velocidade maxima = 2*PI*(50/2) * 10.000 * (1/223) / 60 = 117,398828609
+ * Velocidade maxima = 2*PI*(50/2) * 12.300 * (1/203) / 60 = 158,627215267
  */
 #define MAX_SPEED         117
 
@@ -57,6 +57,8 @@ public:
   void attachEncoder(uint8_t enc1, uint8_t enc2);
   // encoder counter
   //static volatile uint16_t leftEncCounter, rightEncCounter;
+
+  static const float RPS2SPEED = PI*50 / 3.5 ; // rps to mm/s
 
 private:
   // pins

@@ -33,6 +33,7 @@ void ISR_rightEncoder(void);
 
 volatile uint16_t leftEncCounter = 0;
 volatile uint16_t rightEncCounter = 0;
+volatile long tStartLE, tEndLE, tStartRE, tEndRE;
 
 
 HBridge::HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4) :
@@ -51,19 +52,19 @@ HBridge::HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4) :
 void HBridge::setMotorState(uint8_t motor, int8_t speed){ //speed de -128 até 127
 	if (motor == 1){
 		if (speed >= 0){
-      speedLeftMotor1  = (uint8_t)speed*2;
+      speedLeftMotor1  = (uint8_t)speed;
       speedLeftMotor2  = 0;
     } else {
       speedLeftMotor1  = 0;
-      speedLeftMotor2  = (255-(uint8_t)speed)*2;
+      speedLeftMotor2  = (255-(uint8_t)speed);
     }
 	} else {
 	  if (speed >= 0){
-	    speedRightMotor1 = (uint8_t)speed*2;
+	    speedRightMotor1 = (uint8_t)speed;
 	    speedRightMotor2 = 0;
     } else {
       speedRightMotor1 = 0;
-      speedRightMotor2 = (255-(uint8_t)speed)*2;
+      speedRightMotor2 = (255-(uint8_t)speed);
     }
 	}
 }
@@ -90,8 +91,8 @@ void HBridge::begin(){
 void HBridge::update(){
   uint8_t i;
   uint16_t totalDt = 0;
-  uint16_t speedLM = 0, speedRM = 0;
-  int16_t errorLM = 0, errorRM = 0;
+  float speedLM = 0, speedRM = 0;
+  float errorLM = 0, errorRM = 0;
   int16_t pidLM = 0, pidRM = 0;
   long currTime;
 
@@ -107,9 +108,11 @@ void HBridge::update(){
     totalDt += dt[i];
   }
 
-  speedLM = (uint16_t)(leftEncCounter - lastLeftEncCounter) / totalDt;
+  speedLM = (float)(leftEncCounter - lastLeftEncCounter) * 1000.0 / totalDt; // rps
+  speedLM *= RPS2SPEED; //  mm/s
   lastLeftEncCounter = leftEncCounter;
-  speedRM = (uint16_t)(rightEncCounter - lastRightEncCounter) / totalDt;
+  speedRM = (float)(rightEncCounter - lastRightEncCounter) * 1000.0 / totalDt; // rps
+  speedRM *= RPS2SPEED; // mm/s
   lastRightEncCounter = rightEncCounter;
 
   Serial.print("\nlEC = ");
@@ -121,16 +124,21 @@ void HBridge::update(){
   Serial.print("; sRM = ");
   Serial.println(speedRM);
 
-  errorLM = (int16_t)(speedLeftMotor1 + speedLeftMotor2) - speedLM;
-  errorRM = (int16_t)(speedRightMotor1 + speedRightMotor2) - speedRM;
+  errorLM = (float)(speedLeftMotor1 + speedLeftMotor2) - speedLM;
+  errorRM = (float)(speedRightMotor1 + speedRightMotor2) - speedRM;
 
   errorSumLM += errorLM;
   errorSumRM += errorRM;
 
   if(errorSumLM > 511)
     errorSumLM = 511;
+  else if(errorSumLM < -511)
+    errorSumLM = -511;
+
   if(errorSumRM > 511)
     errorSumRM = 511;
+  else if(errorSumRM < -511)
+    errorSumRM = -511;
 
   Serial.print("eLM = ");
   Serial.print(errorLM);
@@ -141,15 +149,10 @@ void HBridge::update(){
   Serial.print("; eSRM = ");
   Serial.println(errorSumRM);
 
-  pidLM = errorLM*SPEED_KP + errorSumLM*SPEED_KI;
-  pidRM = errorRM*SPEED_KP + errorSumRM*SPEED_KI;
+  pidLM = (int16_t)(errorLM*SPEED_KP + errorSumLM*SPEED_KI);
+  pidRM = (int16_t)(errorRM*SPEED_KP + errorSumRM*SPEED_KI);
   //pidLM = (speedLeftMotor1 + speedLeftMotor2);
   //pidRM = (speedRightMotor1 + speedRightMotor2);
-
-  Serial.print("pidLM = ");
-  Serial.print(pidLM);
-  Serial.print("; pidRM = ");
-  Serial.println(pidRM);
 
   if(pidLM > 255)
     pidLM = 255;
@@ -160,6 +163,11 @@ void HBridge::update(){
     pidRM = 255;
   else if(pidRM < 0)
     pidRM = 0;
+
+  Serial.print("pidLM = ");
+  Serial.print(pidLM);
+  Serial.print("; pidRM = ");
+  Serial.println(pidRM);
 
   if(speedLeftMotor1 > 0) {
     analogWrite(leftMotor1, pidLM);
@@ -200,7 +208,7 @@ void HBridge::set(const uint8_t * data, uint8_t size){
 
 void HBridge::attachEncoder(uint8_t enc1, uint8_t enc2) {
   attachInterrupt(enc1, ISR_leftEncoder, RISING);
-  attachInterrupt(enc1, ISR_rightEncoder, RISING);
+  attachInterrupt(enc2, ISR_rightEncoder, RISING);
   leftEncCounter = 0;
   rightEncCounter = 0;
   lastLeftEncCounter = 0;
@@ -209,14 +217,26 @@ void HBridge::attachEncoder(uint8_t enc1, uint8_t enc2) {
   errorSumLM = 0;
   errorSumRM = 0;
   currIndex = 0;
+  tStartLE = millis();
+  tStartRE = tStartLE;
+  tEndLE = tStartLE;
+  tEndRE = tStartLE;
   memset(dt, 0, SPEED_MEAN_WINDOW);
 }
 
 void ISR_leftEncoder(void) {
-  leftEncCounter++;
+  tEndLE = millis();
+  if (tEndLE - tStartLE > 200) {
+    leftEncCounter++;
+    tStartLE = tEndLE;
+  }
 }
 
 void ISR_rightEncoder(void) {
-  rightEncCounter++;
+  tEndRE = millis();
+  if (tEndRE - tStartRE > 200) {
+    rightEncCounter++;
+    tStartRE = tEndRE;
+  }
 }
 
