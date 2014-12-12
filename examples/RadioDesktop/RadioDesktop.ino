@@ -19,7 +19,7 @@
 #include <Robot.h>
 
 #define ROBOT_ID  1
-#define RADIO_ID  (108+2*ROBOT_ID)
+#define RADIO_ID  (100+ROBOT_ID)
 
 /**
  * Sketch para comunicaçao PC-Robo via radio.

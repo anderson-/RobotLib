@@ -62,7 +62,8 @@ void RadioConnection::begin() {
   radio.setPayloadSize(PAYLOAD);
 
   // define o canal a ser utilizado (0-127)
-  radio.setChannel(master_id);
+  //radio.setChannel(master_id);
+  radio.setChannel(2*slave_id);
 
   // abre os canais de escrita e leitura
 	uint64_t u64_mid = (uint64_t) master_id;
@@ -74,7 +75,6 @@ void RadioConnection::begin() {
     radio.openWritingPipe(pipe_b | u64_mid);
     radio.openReadingPipe(1,pipe_a | u64_sid);
   }
-
   radio.startListening();
 #else
   Mirf.cePin = pin_ce;
@@ -83,11 +83,12 @@ void RadioConnection::begin() {
 	Mirf.init();
 
 	Mirf.payload = PAYLOAD;
-	Mirf.channel = master_id;
+	//Mirf.channel = master_id;
+  Mirf.channel = 2*slave_id;
 	Mirf.config();
 
-	strcpy ((char *) pipe_a, "serv1");
-	snprintf((char *) pipe_b, 8, "robo%hu", slave_id);
+	snprintf((char *) pipe_a, 8, "serv%04hu", master_id);
+	snprintf((char *) pipe_b, 8, "robo%04hu", slave_id);
 
 	if (master){
 		Mirf.setRADDR(pipe_a);
