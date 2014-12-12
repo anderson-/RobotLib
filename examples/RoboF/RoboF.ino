@@ -42,7 +42,7 @@ struct config_t {
  * sem serial, com funçoes complexas, e suporte a adiçao de 
  * novos dispositivos *dinamicamente*
  */
-const uint8_t pin_sel[] = {4, 3, 16};
+const uint8_t pin_sel[] = {4, 15, 16};
 
 class RoboF : public GenericRobot {
 

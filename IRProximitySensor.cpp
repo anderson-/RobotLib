@@ -35,9 +35,10 @@ void IRProximitySensor::reset(){}
 
 void IRProximitySensor::update(){
     int leitura = analogRead(pin);
-    float tensao = (float)leitura*(5.0 / 1024.0);
-    distance = (int)(16.2537*tensao*tensao*tensao*tensao - 129.893*tensao*tensao*tensao
-                    + 382.268*tensao*tensao- 512.611*tensao + 306.439);
+    //float tensao = (float)leitura*(5.0 / 1024.0);
+    //distance = (int)(16.2537*tensao*tensao*tensao*tensao - 129.893*tensao*tensao*tensao
+    //                + 382.268*tensao*tensao- 512.611*tensao + 306.439);
+    distance = 4800/(leitura-20);
 }
 
 bool IRProximitySensor::isReady(){

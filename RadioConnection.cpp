@@ -83,7 +83,7 @@ void RadioConnection::begin() {
 	Mirf.init();
 
 	Mirf.payload = PAYLOAD;
-	Mirf.channel = master_id;
+	//Mirf.channel = master_id;
 	Mirf.config();
 
 	strcpy ((char *) pipe_a, "serv1");
