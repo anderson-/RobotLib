@@ -95,6 +95,7 @@ void RadioConnection::begin() {
 		Mirf.setRADDR(pipe_b);
 	}
 #endif
+  digitalWrite(10,LOW); //Set SPI SS pin to LOW
 }
 
 uint8_t RadioConnection::available() {

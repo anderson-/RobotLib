@@ -42,6 +42,22 @@ void HBridge::setMotorState(uint8_t motor, int8_t speed){ //speed de -128 até 1
 	} else {
 		speedRightMotor = speed;
 	}
+	if (speedLeftMotor >= 0){
+		analogWrite(leftMotor1,((uint8_t)speedLeftMotor)*2);
+		analogWrite(leftMotor2,0);
+	} else {
+		analogWrite(leftMotor1,0);
+		analogWrite(leftMotor2,(255-(uint8_t)speedLeftMotor)*2);
+	}
+
+	if (speedRightMotor >= 0){
+		analogWrite(rightMotor1,((uint8_t)speedRightMotor)*2);
+		analogWrite(rightMotor2,0);
+	} else {
+		analogWrite(rightMotor1,0);
+		analogWrite(rightMotor2,(255-(uint8_t)speedRightMotor)*2);
+	}
+
 }
 
 void HBridge::stop(){
@@ -53,40 +69,26 @@ void HBridge::reset(){
 }
 
 void HBridge::begin(){
-  pinMode(leftMotor1,OUTPUT);
-  pinMode(leftMotor2,OUTPUT);
-  pinMode(rightMotor1,OUTPUT);
-  pinMode(rightMotor2,OUTPUT);
-  speedLeftMotor = 0;
-  speedRightMotor = 0;
+	pinMode(leftMotor1,OUTPUT);
+	pinMode(leftMotor2,OUTPUT);
+	pinMode(rightMotor1,OUTPUT);
+	pinMode(rightMotor2,OUTPUT);
+	speedLeftMotor = 0;
+	speedRightMotor = 0;
+	setMotorState(0, 0);
 }
 
 void HBridge::update(){
-  if (speedLeftMotor >= 0){
-    analogWrite(leftMotor1,((uint8_t)speedLeftMotor)*2);
-    analogWrite(leftMotor2,0);
-  } else {
-    analogWrite(leftMotor1,0);
-    analogWrite(leftMotor2,(255-(uint8_t)speedLeftMotor)*2);
-  }
-
-  if (speedRightMotor >= 0){
-    analogWrite(rightMotor1,((uint8_t)speedRightMotor)*2);
-    analogWrite(rightMotor2,0);
-  } else {
-    analogWrite(rightMotor1,0);
-    analogWrite(rightMotor2,(255-(uint8_t)speedRightMotor)*2);
-  }
 }
 
 bool HBridge::isReady(){
-return true;
+	return true;
 }
 
 uint8_t HBridge::get(uint8_t * buffer, uint8_t size){
-  buffer[0]=speedLeftMotor;
-  buffer[1]=speedRightMotor;
-  return 2;
+	buffer[0]=speedLeftMotor;
+	buffer[1]=speedRightMotor;
+	return 2;
 }
 
 void HBridge::set(const uint8_t * data, uint8_t size){
