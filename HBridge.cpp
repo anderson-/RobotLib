@@ -27,7 +27,7 @@
 #include "HBridge.h"
 #include "Debug.h"
 
-HBridge::HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4) : Device(true, false),
+HBridge::HBridge(uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t pin4) : Device(true, false, 2),
                                                                         leftMotor1(pin1),
                                                                         leftMotor2(pin2),
                                                                         rightMotor1(pin3),

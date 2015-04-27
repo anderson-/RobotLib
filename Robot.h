@@ -84,6 +84,13 @@ public:
   void addDevice(Device & d);
   
   /**
+   * Remove um dispositivo.
+   *
+   * @param id indice do dispositivo.
+   */
+  void removeDevice(uint8_t id);
+  
+  /**
    * Verifica se existe algum dispositivo ocupado.
    *
    * @return \c true se existe algum dispositivo ocupado.

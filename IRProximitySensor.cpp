@@ -24,7 +24,7 @@
 
 #include "IRProximitySensor.h"
 
-IRProximitySensor::IRProximitySensor(uint8_t pin) : Device(false, true),
+IRProximitySensor::IRProximitySensor(uint8_t pin) : Device(false, true, 5),
                                   pin(pin){}
 
 void IRProximitySensor::begin(){}

@@ -25,7 +25,7 @@
 #include "LED.h"
 #include "Debug.h"
 
-LED::LED(uint8_t pin) : TimedDevice(false, true),
+LED::LED(uint8_t pin) : TimedDevice(false, true, 1),
                         _pin(pin), 
                         _period(0), 
                         _timer(0),

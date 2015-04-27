@@ -7,7 +7,7 @@
 
 #include "Distance.h"
 
-Distance::Distance(uint8_t pin) : Device(false, true),
+Distance::Distance(uint8_t pin) : Device(false, true, 5),
                                   pin(pin){}
 
 void Distance::begin(){}

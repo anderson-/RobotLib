@@ -29,13 +29,13 @@
 #include <HMC5883L.h>
 #include "Compass.h"
 
-Compass::Compass() : Device(false, true),
+Compass::Compass() : Device(false, true, 3),
 	compass(),
 	angleInt(0),
 	error(0){
 }
 
-Compass::Compass(float xmin, float xmax, float ymin, float ymax) : Device(false, true),
+Compass::Compass(float xmin, float xmax, float ymin, float ymax) : Device(false, true, 3),
 	compass(),
 	angleInt(0),
 	error(0){

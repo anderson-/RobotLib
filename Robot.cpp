@@ -46,11 +46,31 @@ Connection * Robot::getConnection(uint8_t index){
 }
 
 void Robot::addDevice(Device & d){
-  devices = (Device**)check(realloc(devices,(nDevices+1)*sizeof(Device*)));
-  state = (bool*)check(realloc(state,(nDevices+1)*sizeof(bool)));
-  devices[nDevices] = &d;
-  state[nDevices] = true;
-  nDevices++;
+  uint8_t i;
+  bool ok = false;
+  for (i = 0; i < nDevices; i++){
+	  if (!devices[i]){
+		  devices[i] = &d;
+		  state[i] = true;
+		  ok = true;
+		  break;
+	  }
+  }
+  if (!ok){
+	  devices = (Device**)check(realloc(devices,(nDevices+1)*sizeof(Device*)));
+	  state = (bool*)check(realloc(state,(nDevices+1)*sizeof(bool)));
+	  devices[nDevices] = &d;
+	  state[nDevices] = true;
+	  nDevices++;
+  }
+}
+
+void Robot::removeDevice(uint8_t id){
+	Device * device = devices[id];
+	if (device){
+		devices[id] = NULL;
+		free(device);
+	}
 }
 
 uint8_t Robot::getDeviceListSize(){
@@ -74,7 +94,8 @@ void Robot::step(){
   uint8_t i;
   bool s;
   for (i = 0; i < nDevices; i++){
-    devices[i]->update();
+	 if (devices[i] != NULL){
+		devices[i]->update();
 		s = devices[i]->isReady();
 		if (s){
 			if (s != state[i]){
@@ -84,6 +105,7 @@ void Robot::step(){
 		} else {
 			busy = true;
 		}
+	 }
   }
   // pensa
   think();
@@ -119,7 +141,9 @@ void Robot::begin(){
   }
   // inicializa os dispositivos
   for (i = 0; i < nDevices; i++){
-    devices[i]->begin();
+	if (devices[i] != NULL){
+		devices[i]->begin();
+	}
   }
   // nenhum dispositivo pode estar ocupado antes de ser usado
   if (isBusy()){

@@ -40,7 +40,9 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
           offset++;
           if (id == ALL){
             for (i = 0; i < getDeviceListSize(); i++){
-              getDevice(i)->stop();
+				if (getDevice(i)){
+					getDevice(i)->stop();
+				}
             }
             for (i = 0; i < nRunning; i++){
               if (running[i]){
@@ -118,18 +120,18 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
             memcpy(tmpBuffer+3, &free, sizeof(int));
             connection.sendMessage(tmpBuffer,3+sizeof(int));
           } else if (id == ALL){
-            for (i = 0; i < getDeviceListSize(); i++){
-              device = getDevice(i);
-              if (device){
-                //device.get(...)
-                uint8_t tmpLen = device->get(tmpBuffer +3, BUFFER_SIZE -size -3);
-                //envia set
-                tmpBuffer[0] = SET;
-                tmpBuffer[1] = id;
-                tmpBuffer[2] = tmpLen;
-                connection.sendMessage(tmpBuffer,tmpLen +3);
-              }
-            }
+			tmpBuffer[0] = SET;
+			tmpBuffer[1] = ALL;
+			tmpBuffer[2] = getDeviceListSize();
+			for (i = 0; i < getDeviceListSize(); i++){
+				device = getDevice(i);
+				if (device){
+					tmpBuffer[3 + i] = device->getID();
+				} else {
+					tmpBuffer[3 + i] = 255;
+				}
+			}
+			connection.sendMessage(tmpBuffer,getDeviceListSize() + 3);
           } else {
             device = getDevice(id);
             if (device){
@@ -170,20 +172,24 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
         {
           id = data[offset];
           offset++;
+		  uint8_t classID = data[offset];
+		  offset++;
           length = data[offset];
           offset++;
-          Device * device = createNew(id, data+offset, length);
-          if (device){
-            addDevice(*device);
-            //DONE
-            uint8_t * tmpBuffer = buffer +size;
-            tmpBuffer[0] = DONE;
-            tmpBuffer[1] = ADD;
-            tmpBuffer[2] = id;
-            tmpBuffer[3] = length;
-            connection.sendMessage(tmpBuffer,4);
-            device->begin();
+          if (getDevice(id) == NULL){
+			  Device * device = createNew(classID, data+offset, length);
+			  if (device){
+				addDevice(*device);
+				//DONE
+				device->begin();
+			  }
           }
+				uint8_t * tmpBuffer = buffer +size;
+				tmpBuffer[0] = DONE;
+				tmpBuffer[1] = ADD;
+				tmpBuffer[2] = classID;
+				tmpBuffer[3] = length;
+				connection.sendMessage(tmpBuffer,4);
           offset+=length;
         }
         break;
@@ -192,14 +198,19 @@ void RadioRobot::messageReceived(const uint8_t * data, uint8_t size, Connection 
           id = data[offset];
           offset++;
           if (id == ALL){
-            for (i = 0; i < getDeviceListSize(); i++){
-              getDevice(i)->reset();
+            for (i = 1; i < getDeviceListSize(); i++){
+				if (getDevice(i)){
+				  getDevice(i)->reset();
+				}
             }
             for (i = 0; i < nRunning; i++){
               if (running[i]){
                 freeParam(&running[i]);
               }
             }
+			for (i = 1; i < getDeviceListSize(); i++){
+				removeDevice(i);
+			}
           } else if (id == SYSTEM) {
             uint8_t * tmpBuffer = buffer +size;
             tmpBuffer[0] = DONE;

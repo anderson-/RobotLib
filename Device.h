@@ -39,7 +39,7 @@ public:
    * @param isEffector Define que o dispositivo é um atuador.
    * @param isSensor Define que o dispositivo é um sensor.
    */
-  Device(bool isEffector, bool isSensor = false);
+  Device(bool isEffector, bool isSensor, uint8_t staticID);
   
   /**
    * @return \c TRUE se o dispositivo é um atuador.
@@ -109,7 +109,6 @@ public:
   virtual void set (const uint8_t * data, uint8_t size = 1) = 0;
   
 private:
-  static uint8_t ID;
   uint8_t id;
   bool effector;
   bool sensor;

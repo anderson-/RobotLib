@@ -24,14 +24,8 @@
 
 #include "Device.h"
 
-uint8_t Device::ID = 0; // static member variable initialization
-
-Device::Device(bool isSensor, bool isEffector) : effector(isEffector), sensor(isSensor) {
-  //if (!isSensor && !isEffector){
-    //???
-  //}
-  ID++;
-  id = ID;
+Device::Device(bool isSensor, bool isEffector, uint8_t staticID) : effector(isEffector), sensor(isSensor) {
+  id = staticID;
 }
 
 bool Device::isEffector(){

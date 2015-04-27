@@ -38,7 +38,7 @@ typedef int16_t Timer; // ~ 1m
 
 class Clock : public Device {
 public:
-  Clock() : Device(false,true), 
+  Clock() : Device(false,true,0), 
             timers(NULL), 
             nTimers(0),
             dt(0),
@@ -94,7 +94,7 @@ private:
 
 class TimedDevice : public Device {
 public:
-  TimedDevice(bool isEffector, bool isSensor = false) : Device(isEffector, isSensor){}
+  TimedDevice(bool isEffector, bool isSensor, uint8_t staticID) : Device(isEffector, isSensor, staticID){}
 protected:
   static Clock & clock;
 };

@@ -25,7 +25,7 @@
 #include "ReflectanceSensorArray.h"
 #include "Debug.h"
 
-ReflectanceSensorArray::ReflectanceSensorArray(uint8_t pin_out, const uint8_t pins_sel[], uint16_t thld) : Device(true),
+ReflectanceSensorArray::ReflectanceSensorArray(uint8_t pin_out, const uint8_t pins_sel[], uint16_t thld) : Device(false, true, 4),
             pin_out(pin_out),
             thld(thld),
             value(0) {
@@ -36,7 +36,7 @@ ReflectanceSensorArray::ReflectanceSensorArray(uint8_t pin_out, const uint8_t pi
   analog = 1;
 }
 
-ReflectanceSensorArray::ReflectanceSensorArray(const uint8_t pins[]) : Device(true),
+ReflectanceSensorArray::ReflectanceSensorArray(const uint8_t pins[]) : Device(false, true, 4),
             value(0) {
   uint8_t i;
   for (i = 0; i < NUM_SENSORS; i++) {
